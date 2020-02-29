@@ -12,7 +12,7 @@ import matplotlib.mlab as mlab
 
 render = web.template.render('application/views/', base="master")
 
-class Index:
+class CountPlot:
 
     app_version = "0.1.0"  # version de la webapp
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
@@ -20,18 +20,14 @@ class Index:
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
 
-    def GET(self):
+    def GET(self, column):
         try:
             dataframe = pd.read_csv(self.file)
-            cols = list(dataframe)
-            values = []
-            duplicates = []
-            nulls = []
-            for col in cols:
-                values.append(dataframe[col].iloc[0:5].tolist())
-                duplicates.append(sum(dataframe.duplicated(subset = col)) == 0)
-                nulls.append(round(100*(dataframe[col].isnull().sum()/len(dataframe.index)), 2))
-            return render.index(cols,values, duplicates,nulls)
+            ax = sn.countplot(dataframe[column])
+            image_name = "static/images/countplot.png"
+            print(image_name)
+            ax.figure.savefig(image_name)
+            return render.countplot(column)
         except Exception as e:
             print(e.args)
 

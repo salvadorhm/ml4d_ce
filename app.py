@@ -6,6 +6,7 @@ urls = (
     '/drop/(.+)','application.controllers.drop.Drop',
     '/impute/(.+)','application.controllers.impute.Impute',
     '/replace/(.+)','application.controllers.replace.Replace',
+    '/countplot/(.+)','application.controllers.countplot.CountPlot',
 )
 app = web.application(urls, globals())
 

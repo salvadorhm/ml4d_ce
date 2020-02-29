@@ -29,15 +29,29 @@ class Impute:
             nulls = dataframe[column].isnull().sum()
             dtypes = dataframe[column].dtypes
             unique = dataframe[column].unique().tolist()
+            #TODO revisar conteo de nan
+            # unique_counts = dataframe[column].value_counts().tolist()
+            # unique_counts = dataframe[column].value_counts(normalize=True).tolist()
+
+            # total_unique = []
+            # x=0
+            # for i in range(len(unique)):
+            #     print(i,x,unique[i],unique_counts[x],len(unique),len(unique_counts))
+            #     if str(unique[i]) == 'nan':
+            #         print("mmm")
+            #     else:
+            #         total_unique.append(str(unique[i]) + " : " + str(unique_counts[x]))
+            #         x+=1
+
             mode = None
             mean = None
 
             if dtypes == 'object':
-                print("Col:{} mode: {}".format(column,dataframe[column].mode()[0]))
+                # print("Col:{} mode: {}".format(column,dataframe[column].mode()[0]))
                 mode = dataframe[column].mode()[0]
                 mean = "None"
             else:
-                print("Col:{} mean: {}".format(column,dataframe[column].mean()))
+                # print("Col:{} mean: {}".format(column,dataframe[column].mean()))
                 mode = dataframe[column].mode()[0]
                 mean = dataframe[column].mean()
                 

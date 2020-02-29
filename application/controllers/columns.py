@@ -40,11 +40,11 @@ class Columns:
 
             for i in range(len(dtypes)):
                 if dtypes[i] == 'object':
-                    print("Col:{} mode: {}".format(cols[i],dataframe[cols[i]].mode()[0]))
+                    # print("Col:{} mode: {}".format(cols[i],dataframe[cols[i]].mode()[0]))
                     mode.append(dataframe[cols[i]].mode()[0])
                     mean.append("None")
                 else:
-                    print("Col:{} mean: {}".format(cols[i],dataframe[cols[i]].mean()))
+                    # print("Col:{} mean: {}".format(cols[i],dataframe[cols[i]].mean()))
                     mode.append(dataframe[cols[i]].mode()[0])
                     mean.append(dataframe[cols[i]].mean())
                 
