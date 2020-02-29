@@ -1,12 +1,14 @@
 $def with(cols,nulls,dtypes,unique,mode,mean)
-<h1>DataFrame Details</h1>
-<a href="/">Return</a>
+<h1>DataFrame Analysis</h1>
+<h3><a href="/">Return</a></h3>
 <br>
 <table border=1>
     <tr>
         <th>Columns</th>
         <th>Dtypes</th>
         <th>Nulls</th>
+        <th>Impute</th>
+        <th>Replace</th>
         <th>Unique values</th>
         <th>Mode</th>
         <th>Mean</th>
@@ -17,6 +19,8 @@ $def with(cols,nulls,dtypes,unique,mode,mean)
             <td>$cols[i]</td>
             <td>$dtypes[i]</td>
             <td>$nulls[i]</td>
+            <td><a href="/impute/$cols[i]">Impute</a></td>
+            <td><a href="/replace/$cols[i]">Replace</a></td>
             <td>$unique[i]</td>
             <td>$mode[i]</td>
             <td>$mean[i]</td>

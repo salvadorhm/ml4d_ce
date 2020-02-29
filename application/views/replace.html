@@ -1,0 +1,34 @@
+$def with(column,nulls,dtypes,unique,mode,mean)
+<h1>Column replace</h1>
+<h3><a href="/columns">Return</a></h3>
+<br>
+
+<table border=1>
+    <tr>
+        <th>Column</th>
+        <th>Dtypes</th>
+        <th>Nulls</th>
+        <th>Unique values</th>
+        <th>Mode</th>
+        <th>Mean</th>
+    </tr>
+
+    <tr>
+        <td>$column</td>
+        <td>$dtypes</td>
+        <td>$nulls</td>
+        <td>$unique</td>
+        <td>$mode</td>
+        <td>$mean</td>
+    </tr>
+</table>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <h3>Replace value</h3>
+    <input type="hidden" name="column" id="column" value="$column">
+    <label for="actual">Actual value</label>
+    <input type="text" required name="actual" id="actual">
+    <label for="new">New value</label>
+    <input type="text" required name="new" id="new">
+    <button id="replace" name="replace" class="form-control">Replace</button>
+</form>
