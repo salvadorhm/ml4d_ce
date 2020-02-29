@@ -1,0 +1,24 @@
+$def with(cols,nulls,dtypes,unique,mode,mean)
+<h1>DataFrame Details</h1>
+<a href="/">Return</a>
+<br>
+<table border=1>
+    <tr>
+        <th>Columns</th>
+        <th>Dtypes</th>
+        <th>Nulls</th>
+        <th>Unique</th>
+        <th>Mode</th>
+        <th>Mean</th>
+
+    </tr>
+    $for i in range(len(cols)):
+        <tr>
+            <td>$cols[i]</td>
+            <td>$dtypes[i]</td>
+            <td>$nulls[i]</td>
+            <td>$unique[i]</td>
+            <td>$mode[i]</td>
+            <td>$mean[i]</td>
+        </tr>
+</table>
