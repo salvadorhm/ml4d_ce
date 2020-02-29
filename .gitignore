@@ -1,3 +1,4 @@
 *.pyc
-venv/
-whl/
+__pycache__/
+*.png
+*.csv

@@ -1,5 +1,7 @@
 import web  # pip install web.py
 
+app_version = "0.1.0"  # version de la webapp
+
 urls = (
     '/','application.controllers.index.Index',
     '/columns', 'application.controllers.columns.Columns',
