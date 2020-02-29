@@ -12,7 +12,7 @@ import matplotlib.mlab as mlab
 
 render = web.template.render('application/views/', base="master")
 
-class Index:
+class Drop:
 
     app_version = "0.1.0"  # version de la webapp
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
@@ -20,14 +20,26 @@ class Index:
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
 
-    def GET(self):
+    def GET(self,column):
         try:
             dataframe = pd.read_csv(self.file)
-            cols = list(dataframe)
-            values = []
-            for col in cols:
-                values.append(dataframe[col].iloc[0:5].tolist())
-            return render.index(cols,values)
+            print(column)
+            # dataframe.drop(['Prospect ID'],axis=1,inplace=True)
+            # dataframe.drop(['Lead Number'],axis=1,inplace=True)
+            # dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            return render.drop(column)
+        except Exception as e:
+            print(e.args)
+    
+    def POST(self, column):
+        try:
+            form = web.input() # get form data
+            column = form['column']
+            dataframe = pd.read_csv(self.file)
+            dataframe.drop([column],axis=1,inplace=True)
+            dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            print("Borrado")
+            raise web.seeother('/') 
         except Exception as e:
             print(e.args)
 

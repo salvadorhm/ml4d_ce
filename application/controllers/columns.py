@@ -15,7 +15,7 @@ render = web.template.render('application/views/', base="master")
 class Columns:
 
     app_version = "0.1.0"  # version de la webapp
-    file = 'static/csv/dataset.csv'  # define el archivo donde se almacenan los datos
+    file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
 
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
@@ -23,9 +23,9 @@ class Columns:
     def GET(self):
         try:
             dataframe = pd.read_csv(self.file)
-            dataframe.drop(['Prospect ID'],axis=1,inplace=True)
-            dataframe.drop(['Lead Number'],axis=1,inplace=True)
-            dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            # dataframe.drop(['Prospect ID'],axis=1,inplace=True)
+            # dataframe.drop(['Lead Number'],axis=1,inplace=True)
+            # dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
             head = [dataframe.head()]
             cols = list(dataframe)
             nulls = list(dataframe.isnull().sum())
@@ -50,6 +50,6 @@ class Columns:
                 
             return render.columns(cols,nulls,dtypes,unique,mode,mean)
         except Exception as e:
-            print(e.args())
+            print(e.args)
 
   

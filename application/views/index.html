@@ -1,2 +1,18 @@
+$def with(cols,values)
+
 <a href="/columns">Columns</a>
 
+<table border=1>
+    <tr>
+        <th>Column</th>
+        <th>Drop column</th>
+        <th>Values</th>
+    </tr>
+    $for i in range(len(cols)):
+        <tr>
+            <td><a href="/drop/$cols[i]">Drop column</a></td>
+            <td>$cols[i]</td>
+            <td>$values[i]</td>
+        </tr>
+
+</table>
