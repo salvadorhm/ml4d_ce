@@ -4,6 +4,7 @@ app_version = "0.1.0"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
+    '/about','application.controllers.about.About',
     '/columns', 'application.controllers.columns.Columns',
     '/drop/(.+)','application.controllers.drop.Drop',
     '/impute/(.+)','application.controllers.impute.Impute',

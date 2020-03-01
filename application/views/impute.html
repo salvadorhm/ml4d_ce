@@ -24,10 +24,10 @@ $def with(column,nulls,dtypes,unique,mode,mean)
 <form action="" method="post" enctype="multipart/form-data">
     <input type="hidden" name="column" id="column" value="$column">
     <div class="form-group">
-        <label for="nan_value">New value for NaN values</label>
+        <label for="nan_value"><b>New value for NaN values</b></label>
         <input type="text" class="form-control" placeholder="New value for NaN" required name="nan_value" id="nan_value">
     </div>
     <div class="form-group">
-        <button id="impute" name="impute" class="btn btn-info">Impute</button>
+        <button id="impute" name="impute" class="btn btn-primary">Impute</button>
     </div>
 </form>
