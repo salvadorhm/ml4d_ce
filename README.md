@@ -17,14 +17,23 @@ Herramienta de apoyo para realizar minería de datos basada en:
 * scipy
 * web.py
 
-## Funciones
+## Changelog 
 
 ### Versión 0.1.0
 
-1. Carga de cualquier dataset de nombre temp.csv ubicado en static/csv/temp.csv
-2. Listado de columnas
-3. Columnas duplicadas
-4. Numero de valores nan
-5. Gráfica countplot por cada columna
-6. Head values por columna
-
+1. Dataset de prueba
+2. Quita columnas
+3. Listado de columnas
+4. Columnas duplicadas
+5. Número de valores nan
+6. Gráfica countplot por cada columna
+7. 5 primeros valores por columna
+8. Imputa valores a los Nan
+9. Reemplaza valores
+10. Muesta la moda de cada columna
+11. Muestra la mediana de cada columna
+12. Muesta la media de cada columna
+13. Descarga el dataset
+14. UX con Bootstrap
+15. Acerca de
+16. Protección de static/
