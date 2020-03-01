@@ -26,6 +26,21 @@ class Impute:
             # dataframe.drop(['Prospect ID'],axis=1,inplace=True)
             # dataframe.drop(['Lead Number'],axis=1,inplace=True)
             # dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+
+            # TODO revisar para guardar las instrucciones
+            '''
+                guardar el codigo generado
+        
+            code_lines = []
+            code_lines.append("dataframe["+column+"].isnull().sum()")
+            code_lines.append("dataframe["+column+"].dtypes()")
+            code_lines.append("dataframe["+column+"].unique().tolist()")
+            MyFile=open('code.csv','a+')
+            for element in code_lines:
+                MyFile.write(element)
+            MyFile.close()
+            '''
+
             nulls = dataframe[column].isnull().sum()
             dtypes = dataframe[column].dtypes
             unique = dataframe[column].unique().tolist()
