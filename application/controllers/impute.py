@@ -82,7 +82,7 @@ class Impute:
             dataframe = pd.read_csv(self.file)
             dataframe[column].fillna(nan_value, inplace=True)
             dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
-            raise web.seeother('/columns') 
+            raise web.seeother('/general') 
         except Exception as e:
             print(e.args)
 

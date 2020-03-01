@@ -12,7 +12,7 @@ import matplotlib.mlab as mlab
 
 render = web.template.render('application/views/', base="master")
 
-class Columns:
+class Detail:
 
     app_version = "0.1.0"  # version de la webapp
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
@@ -48,7 +48,7 @@ class Columns:
                     mode.append(dataframe[cols[i]].mode()[0])
                     mean.append(dataframe[cols[i]].mean())
                 
-            return render.columns(cols,nulls,dtypes,unique,mode,mean)
+            return render.detail(cols,nulls,dtypes,unique,mode,mean)
         except Exception as e:
             print(e.args)
 

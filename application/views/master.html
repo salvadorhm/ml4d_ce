@@ -7,7 +7,7 @@ $def with (page)
 <html lang="en">
 
 <head>
-    <title>Datamining v0.1.0</title>
+    <title>Web Datamining Tool v 0.3.0</title>
     <link rel="icon" type="image/png" href="/static/icon/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
@@ -16,17 +16,34 @@ $def with (page)
 
 <body>
     <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">DM-Home</a>
+        <a class="navbar-brand" href="/">WDMT-Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
             aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/columns">Dataset analysis</a>
-                <a class="nav-item nav-link" href="/static/csv/temp.csv">Dataset download</a>
-                <a class="nav-item nav-link" href="/about">About</a>
+        <div class="navbar-collapse">
+            <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="/general">Dataset general</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="/detail">Dataset detail</a>
+                    </li>
+                </ul>
             </div>
+            <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-item nav-link" href="/static/csv/temp.csv">Dataset download</a>
+                    </li>
+                    <li>
+                        <a class="nav-item nav-link" href="/about">About</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
     </nav>
     <br>
     <br>

@@ -1,38 +1,43 @@
 import web  # pip install web.py
-import csv  # CSV parser
-import json  # json parser
-import pandas as pd
-import numpy as np
-import statsmodels.api as sm
-import scipy.stats as st
-import matplotlib.pyplot as plt
-import seaborn as sn
-from sklearn.metrics import confusion_matrix
-import matplotlib.mlab as mlab
+import shutil # Maneja archivos y directorios.
+import cgi,os # Ejecuta un programa en el servidor y despliega su resultado hacia el cliente.
+import cgitb # Proporciona un controlador especial para scripts de Python. 
+import os, sys
+
+cgitb.enable
 
 render = web.template.render('application/views/', base="master")
 
 class Index:
-
-    app_version = "0.1.0"  # version de la webapp
-    file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
-
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
 
-    def GET(self):
+    def GET(self,**k):
         try:
-            dataframe = pd.read_csv(self.file)
-            cols = list(dataframe)
-            values = []
-            duplicates = []
-            nulls = []
-            for col in cols:
-                values.append(dataframe[col].iloc[0:5].tolist())
-                duplicates.append(sum(dataframe.duplicated(subset = col)) == 0)
-                nulls.append(round(100*(dataframe[col].isnull().sum()/len(dataframe.index)), 2))
-            return render.index(cols,values, duplicates,nulls)
+            message = None
+            return render.index(message)
         except Exception as e:
             print(e.args)
 
-  
+
+    def POST(self,**k):
+        csv_file_import = ""
+        form = cgi.FieldStorage
+        fileitem = form = web.input(csv_file={})
+        filedir = 'static/csv/' # change this to the directory you want to store the file in.
+        if form.csv_file.filename == "":
+            message= "Not file was selected!!"
+            return render.index(message) # render import.html
+        else: # to check if the file-object is created
+            filepath = form.csv_file.filename.replace('\\','/') # replaces the windows-style slashes with linux ones.
+            # TODO cambiar el nombre del archivo por el id de la respuesta a la cual pertenece.
+            filename = filepath.split('/')[-1] # splits the and chooses the last part (the filename with extension)
+            if os.path.splitext(filepath)[1] == ".csv":  # Extención del archivo
+                fn = os.path.basename(form.csv_file.filename)
+                file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
+                new_filename = "temp.csv"
+                shutil.copy('static/uploads/'+fn, filedir + new_filename)
+                raise web.seeother('/general') 
+            else: 
+                message ="The file it's not a CSV"
+                return render.index(message)
