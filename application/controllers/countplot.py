@@ -6,6 +6,7 @@ import numpy as np
 import statsmodels.api as sm
 import scipy.stats as st
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure, show
 import seaborn as sn
 from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
@@ -23,7 +24,15 @@ class CountPlot:
     def GET(self, column):
         try:
             dataframe = pd.read_csv(self.file)
-            ax = sn.countplot(dataframe[column])
+            figure()
+            width=20
+            height=8
+            figure(figsize=(width,height))
+            ax = sn.countplot(data=dataframe, y=column)
+            # plt.xticks(rotation=70)
+            # plt.rcParams['xtick.labelsize'] = 15
+            # plt.rcParams['axes.labelsize'] = 200
+            # ax = sn.countplot(dataframe[column])
             image_name = "static/images/countplot.png"
             print(image_name)
             ax.figure.savefig(image_name)

@@ -39,7 +39,7 @@ class Drop:
             dataframe.drop([column],axis=1,inplace=True)
             dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
             print("Borrado")
-            raise web.seeother('/') 
+            raise web.seeother('/general') 
         except Exception as e:
             print(e.args)
 
