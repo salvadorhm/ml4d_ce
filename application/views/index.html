@@ -1,24 +1,24 @@
 $def with(cols,values, duplicates,nulls)
-<h1>DataFrame Details</h1>
-<h3><a href="/columns">Columns analysis</a></h3>
-
-<table border=1>
-    <tr>
-        <th>Drop</th>
-        <th>Columns</th>
-        <th>Duplicates</th>
-        <th>Countplot</th>
-        <th>Nulls</th>
-        <th>Head values</th>
-    </tr>
-    $for i in range(len(cols)):
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
-            <td><a href="/drop/$cols[i]">Drop</a></td>
-            <td>$cols[i]</td>
-            <td>$duplicates[i]</td>
-            <td><a href="/countplot/$cols[i]">Countplot</a></td>
-            <td>$nulls[i]</td>
-            <td>$values[i]</td>
+            <th>Drop</th>
+            <th>Columns</th>
+            <th>Duplicates</th>
+            <th>Countplot</th>
+            <th>Nulls</th>
+            <th>Head values</th>
         </tr>
-
+    </thead>
+    <tbody>
+        $for i in range(len(cols)):
+            <tr>
+                <td><a href="/drop/$cols[i]">Drop</a></td>
+                <td>$cols[i]</td>
+                <td>$duplicates[i]</td>
+                <td><a href="/countplot/$cols[i]">Countplot</a></td>
+                <td>$nulls[i]</td>
+                <td>$values[i]</td>
+            </tr>
+    </tbody>
 </table>

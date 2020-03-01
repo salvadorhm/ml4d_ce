@@ -1,18 +1,15 @@
 $def with(column,nulls,dtypes,unique,mode,mean)
-<h1>Column replace</h1>
-<h3><a href="/columns">Return</a></h3>
-<br>
-
-<table border=1>
-    <tr>
-        <th>Column</th>
-        <th>Dtypes</th>
-        <th>Nulls</th>
-        <th>Unique values</th>
-        <th>Mode</th>
-        <th>Mean</th>
-    </tr>
-
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Column</th>
+            <th>Dtypes</th>
+            <th>Nulls</th>
+            <th>Unique values</th>
+            <th>Mode</th>
+            <th>Mean</th>
+        </tr>
+    </thead>
     <tr>
         <td>$column</td>
         <td>$dtypes</td>
@@ -24,11 +21,17 @@ $def with(column,nulls,dtypes,unique,mode,mean)
 </table>
 
 <form action="" method="post" enctype="multipart/form-data">
-    <h3>Replace value</h3>
+
     <input type="hidden" name="column" id="column" value="$column">
-    <label for="actual">Actual value</label>
-    <input type="text" required name="actual" id="actual">
-    <label for="new">New value</label>
-    <input type="text" required name="new" id="new">
-    <button id="replace" name="replace" class="form-control">Replace</button>
+    <div class="form-group">
+        <label for="actual">Actual value</label>
+        <input type="text" class="form-control" placeholder="Actual value" required name="actual" id="actual">
+    </div>
+    <div class="form-group">
+        <label for="new">New value</label>
+        <input type="text" class="form-control" placeholder="New value" required name="new" id="new">
+    </div>
+    <div class="form-group">
+        <button id="replace" name="replace" class="btn btn-info">Replace</button>
+    </div>
 </form>

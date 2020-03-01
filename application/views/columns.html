@@ -1,8 +1,6 @@
 $def with(cols,nulls,dtypes,unique,mode,mean)
-<h1>DataFrame Analysis</h1>
-<h3><a href="/">Return</a></h3>
-<br>
-<table border=1>
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
     <tr>
         <th>Columns</th>
         <th>Dtypes</th>
@@ -12,8 +10,8 @@ $def with(cols,nulls,dtypes,unique,mode,mean)
         <th>Unique values</th>
         <th>Mode</th>
         <th>Mean</th>
-
     </tr>
+    </thead>
     $for i in range(len(cols)):
         <tr>
             <td>$cols[i]</td>
