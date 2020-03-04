@@ -30,16 +30,16 @@ class Impute:
             # TODO revisar para guardar las instrucciones
             '''
                 guardar el codigo generado
-        
-            code_lines = []
-            code_lines.append("dataframe["+column+"].isnull().sum()")
-            code_lines.append("dataframe["+column+"].dtypes()")
-            code_lines.append("dataframe["+column+"].unique().tolist()")
-            MyFile=open('code.csv','a+')
-            for element in code_lines:
-                MyFile.write(element)
-            MyFile.close()
             '''
+            code_lines = []
+            code_lines.append("# Revisando si tiene NaN la columna '"+column+"'")
+            code_lines.append("dataframe['"+column+"'].isnull().sum()")
+            code_lines.append("dataframe['"+column+"'].dtypes()")
+            code_lines.append("dataframe['"+column+"'].unique().tolist()")
+            MyFile=open('static/csv/code.py','a+')
+            for element in code_lines:
+                MyFile.write(element+"\n")
+            MyFile.close()
 
             nulls = dataframe[column].isnull().sum()
             dtypes = dataframe[column].dtypes
@@ -81,8 +81,18 @@ class Impute:
             nan_value = form['nan_value']
             dataframe = pd.read_csv(self.file)
             dataframe[column].fillna(nan_value, inplace=True)
+
+            
+            code_lines = []
+            code_lines.append("# Imputando valor a los valores NaN de la columna '"+column+"'")
+            code_lines.append("dataframe['"+column+"'].fillna('"+nan_value+"', inplace=True)")
+            MyFile=open('static/csv/code.py','a+')
+            for element in code_lines:
+                MyFile.write(element+"\n")
+            MyFile.close()
+
             dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
-            raise web.seeother('/general') 
+            raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)
 

@@ -37,6 +37,23 @@ class Index:
                 file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
                 new_filename = "temp.csv"
                 shutil.copy('static/uploads/'+fn, filedir + new_filename)
+
+                code_lines = []
+                code_lines.append("# Librerias")
+                code_lines.append("import pandas as pd")
+                code_lines.append("import numpy as np")
+                code_lines.append("import statsmodels.api as sm")
+                code_lines.append("import scipy.stats as st")
+                code_lines.append("import matplotlib.pyplot as plt")
+                code_lines.append("import seaborn as sn")
+                code_lines.append("from sklearn.metrics import confusion_matrix")
+                code_lines.append("import matplotlib.mlab as mlab")
+                code_lines.append("# Creando el Dataframe para trabajar")
+                code_lines.append("dataframe = pd.read_csv('"+filename+"')")
+                MyFile=open('static/csv/code.py','a+')
+                for element in code_lines:
+                    MyFile.write(element+"\n")
+                MyFile.close()
                 raise web.seeother('/general') 
             else: 
                 message ="The file it's not a CSV"
