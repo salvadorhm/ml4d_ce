@@ -9,3 +9,27 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 # Creando el Dataframe para trabajar
 dataframe = pd.read_csv('Leads.csv')# Describe 'Lead Origin
+# Describe 'TotalVisits
+dataframe['TotalVisits'].describe()
+# Describe 'Converted
+dataframe['Converted'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'LotArea
+dataframe['LotArea'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()

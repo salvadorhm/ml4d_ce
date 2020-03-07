@@ -8,6 +8,7 @@ $def with(cols,values, duplicates,nulls)
             <th>Columns</th>
             <th>Duplicates</th>
             <th>Countplot</th>
+            <th>Histogram</th>
             <th>Nulls</th>
             <th>Head values</th>
         </tr>
@@ -21,6 +22,7 @@ $def with(cols,values, duplicates,nulls)
                 <td><a href="/field/$cols[i]">$cols[i]</a></td>
                 <td>$duplicates[i]</td>
                 <td><a href="/countplot/$cols[i]">Countplot</a></td>
+                <td><a href="/histogram/$cols[i]">Histogram</a></td>
                 <td>$nulls[i]</td>
                 <td>$values[i]</td>
             </tr>

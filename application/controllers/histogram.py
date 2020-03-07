@@ -13,7 +13,7 @@ import matplotlib.mlab as mlab
 
 render = web.template.render('application/views/', base="master")
 
-class Field:
+class Histogram:
 
     app_version = "0.1.0"  # version de la webapp
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
@@ -21,43 +21,17 @@ class Field:
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
 
-    def GET(self,field):
+    def GET(self, column):
         try:
             dataframe = pd.read_csv(self.file)
-            '''
-            # plot
             figure()
             width=20
             height=8
             figure(figsize=(width,height))
-            ax = sn.countplot(data=dataframe, y=field)
-            image_name = "static/images/countplot.png"
-            print(image_name)
-            ax.figure.savefig(image_name)
-            
-            figure()
-            width=20
-            height=8
-            figure(figsize=(width,height))
-            nor = sn.distplot(dataframe[field])
+            nor = sn.distplot(dataframe[column])
             image_name = "static/images/normal.png"
             nor.figure.savefig(image_name)
-            '''
-
-            #describe
-            result = dataframe[field].describe()
-            describe = result.to_dict()
-            
-
-            # save code
-            code_lines = []
-            code_lines.append("# Describe '" + field )
-            code_lines.append("dataframe['" + field + "'].describe()" )
-            MyFile=open('static/csv/code.py','a+')
-            for element in code_lines:
-                MyFile.write(element+"\n")
-            MyFile.close()
-            return render.field(describe,field)
+            return render.histogram(column)
         except Exception as e:
             print(e.args)
 

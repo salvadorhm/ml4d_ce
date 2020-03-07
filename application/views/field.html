@@ -1,4 +1,4 @@
-$def with(describe)
+$def with(describe,field)
 <h1>Describe</h1>
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
@@ -13,5 +13,5 @@ $def with(describe)
         </tr>
 </table>
 
-<h2>Countplot</h2>
-<img src="/static/images/countplot.png" class="img-fluid" alt="countplot">
+<a href="/countplot/$field" class="btn btn-info" role="button">Countplot</a>
+<a href="/histogram/$field" class="btn btn-info" role="button">Histogram</a>

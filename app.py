@@ -14,6 +14,7 @@ urls = (
     '/impute/(.+)','application.controllers.impute.Impute',
     '/replace/(.+)','application.controllers.replace.Replace',
     '/countplot/(.+)','application.controllers.countplot.CountPlot',
+    '/histogram/(.+)','application.controllers.histogram.Histogram',
 )
 app = web.application(urls, globals())
 
