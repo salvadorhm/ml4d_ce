@@ -32,6 +32,17 @@ class Replace:
             mode = None
             mean = None
 
+            '''
+                guardar el codigo generado
+            '''
+            code_lines = []
+            code_lines.append("# Describe columna '"+column+"'")
+            code_lines.append("dataframe['" + column + "'].describe()" )
+            MyFile=open('static/csv/code.py','a+')
+            for element in code_lines:
+                MyFile.write(element+"\n")
+            MyFile.close()
+
             if dtypes == 'object':
                 print("Col:{} mode: {}".format(column,dataframe[column].mode()[0]))
                 mode = dataframe[column].mode()[0]
@@ -54,7 +65,19 @@ class Replace:
             dataframe = pd.read_csv(self.file)
             dataframe[column].replace({actual : new}, inplace=True, regex=True)
             dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
-            raise web.seeother('/columns') 
+
+            '''
+                guardar el codigo generado
+            '''
+            code_lines = []
+            code_lines.append("# Remplazando '" +  actual + "' por '" + new + "' en la columna '" + column +"'")
+            code_lines.append("dataframe['" + column + "'].replace({'" + actual +"':'" + new +"'}, inplace=True, regex=True)")
+            MyFile=open('static/csv/code.py','a+')
+            for element in code_lines:
+                MyFile.write(element+"\n")
+            MyFile.close()
+
+            raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)
 

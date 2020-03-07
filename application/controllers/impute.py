@@ -34,8 +34,8 @@ class Impute:
             code_lines = []
             code_lines.append("# Revisando si tiene NaN la columna '"+column+"'")
             code_lines.append("dataframe['"+column+"'].isnull().sum()")
-            code_lines.append("dataframe['"+column+"'].dtypes()")
-            code_lines.append("dataframe['"+column+"'].unique().tolist()")
+            code_lines.append("# Describe columna '"+column+"'")
+            code_lines.append("dataframe['" + column + "'].describe()" )
             MyFile=open('static/csv/code.py','a+')
             for element in code_lines:
                 MyFile.write(element+"\n")

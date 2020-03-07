@@ -25,6 +25,13 @@ class Field:
             dataframe = pd.read_csv(self.file)
             result = dataframe[field].describe()
             describe = result.to_dict()
+            code_lines = []
+            code_lines.append("# Describe '" + field )
+            code_lines.append("dataframe['" + field + "'].describe()" )
+            MyFile=open('static/csv/code.py','a+')
+            for element in code_lines:
+                MyFile.write(element+"\n")
+            MyFile.close()
             return render.field(describe)
         except Exception as e:
             print(e.args)
