@@ -6,6 +6,7 @@ import numpy as np
 import statsmodels.api as sm
 import scipy.stats as st
 import matplotlib.pyplot as plt
+from matplotlib.pyplot import figure, show
 import seaborn as sn
 from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
@@ -23,8 +24,22 @@ class Field:
     def GET(self,field):
         try:
             dataframe = pd.read_csv(self.file)
+            # plot
+            figure()
+            width=20
+            height=8
+            figure(figsize=(width,height))
+            ax = sn.countplot(data=dataframe, y=field)
+            image_name = "static/images/countplot.png"
+            print(image_name)
+            ax.figure.savefig(image_name)
+
+            #describe
             result = dataframe[field].describe()
             describe = result.to_dict()
+            
+
+            # save code
             code_lines = []
             code_lines.append("# Describe '" + field )
             code_lines.append("dataframe['" + field + "'].describe()" )
