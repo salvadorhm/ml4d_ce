@@ -8,6 +8,7 @@ urls = (
     '/general', 'application.controllers.general.General',
     '/detail', 'application.controllers.detail.Detail',
     '/drop/(.+)','application.controllers.drop.Drop',
+    '/field/(.+)','application.controllers.field.Field',
     '/impute/(.+)','application.controllers.impute.Impute',
     '/replace/(.+)','application.controllers.replace.Replace',
     '/countplot/(.+)','application.controllers.countplot.CountPlot',

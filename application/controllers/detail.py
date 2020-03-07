@@ -33,6 +33,7 @@ class Detail:
             unique = []
             mode = []
             mean = []
+            median = []
             for col in cols:
                 unique.append(dataframe[col].unique().tolist())
                 # mode.append(dataframe[col].mode())
@@ -43,12 +44,14 @@ class Detail:
                     # print("Col:{} mode: {}".format(cols[i],dataframe[cols[i]].mode()[0]))
                     mode.append(dataframe[cols[i]].mode()[0])
                     mean.append("None")
+                    median.append("None")
                 else:
                     # print("Col:{} mean: {}".format(cols[i],dataframe[cols[i]].mean()))
                     mode.append(dataframe[cols[i]].mode()[0])
                     mean.append(dataframe[cols[i]].mean())
+                    median.append(dataframe[cols[i]].median())
                 
-            return render.detail(cols,nulls,dtypes,unique,mode,mean)
+            return render.detail(cols,nulls,dtypes,unique,mode,mean,median)
         except Exception as e:
             print(e.args)
 

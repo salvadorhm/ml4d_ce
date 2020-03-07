@@ -21,3 +21,7 @@ dataframe['Last Activity'].dtypes()
 dataframe['Last Activity'].unique().tolist()
 # Imputando valor a los valores NaN de la columna 'Last Activity'
 dataframe['Last Activity'].fillna('Other', inplace=True)
+# Revisando si tiene NaN la columna 'Lead Source'
+dataframe['Lead Source'].isnull().sum()
+dataframe['Lead Source'].dtypes()
+dataframe['Lead Source'].unique().tolist()

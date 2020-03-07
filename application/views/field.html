@@ -1,0 +1,14 @@
+$def with(describe)
+<h1>Describe</h1>
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in describe:
+        <tr>
+            <td>$row</td>
+            <td>$describe[row]</td>
+        </tr>
+</table>
