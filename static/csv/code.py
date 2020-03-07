@@ -33,3 +33,5 @@ dataframe['SalePrice'].describe()
 dataframe['SalePrice'].describe()
 # Describe 'SalePrice
 dataframe['SalePrice'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()

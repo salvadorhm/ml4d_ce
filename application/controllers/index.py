@@ -1,4 +1,5 @@
 import web  # pip install web.py
+import app  # Application
 import shutil # Maneja archivos y directorios.
 import cgi,os # Ejecuta un programa en el servidor y despliega su resultado hacia el cliente.
 import cgitb # Proporciona un controlador especial para scripts de Python. 
@@ -9,13 +10,15 @@ cgitb.enable
 render = web.template.render('application/views/', base="master")
 
 class Index:
+
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
 
     def GET(self,**k):
         try:
             message = None
-            return render.index(message)
+            app_version = app.app_version
+            return render.index(message, app_version)
         except Exception as e:
             print(e.args)
 
