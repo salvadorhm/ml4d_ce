@@ -1,4 +1,4 @@
-$def with(describe,field)
+$def with(describe,correlation, field)
 <h1>Describe</h1>
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
@@ -10,6 +10,20 @@ $def with(describe,field)
         <tr>
             <td>$row</td>
             <td>$describe[row]</td>
+        </tr>
+</table>
+
+<h1>Correlation</h1>
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in correlation:
+        <tr>
+            <td>$row</td>
+            <td>$correlation[row]</td>
         </tr>
 </table>
 

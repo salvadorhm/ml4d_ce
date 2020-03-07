@@ -47,6 +47,9 @@ class Field:
             #describe
             result = dataframe[field].describe()
             describe = result.to_dict()
+
+            result = dataframe.corr()[field]
+            correlation = result.to_dict()
             
 
             # save code
@@ -57,7 +60,7 @@ class Field:
             for element in code_lines:
                 MyFile.write(element+"\n")
             MyFile.close()
-            return render.field(describe,field)
+            return render.field(describe, correlation, field)
         except Exception as e:
             print(e.args)
 
