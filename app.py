@@ -8,6 +8,7 @@ urls = (
     '/notebook','application.controllers.notebook.Notebook',
     '/dataset','application.controllers.dataset.Dataset',
     '/general', 'application.controllers.general.General',
+    '/lineal', 'application.controllers.lineal.Lineal',
     '/detail', 'application.controllers.detail.Detail',
     '/drop/(.+)','application.controllers.drop.Drop',
     '/field/(.+)','application.controllers.field.Field',
