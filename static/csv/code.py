@@ -43,3 +43,5 @@ dataframe['SalePrice'].describe()
 dataframe['SalePrice'].describe()
 # Describe 'LotFrontage
 dataframe['LotFrontage'].describe()
+# Describe 'danceability
+dataframe['danceability'].describe()
