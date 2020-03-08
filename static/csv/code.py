@@ -64,3 +64,15 @@ dataframe['SalePrice'].describe()
 dataframe['SalePrice'].describe()
 # Describe 'OverallQual
 dataframe['OverallQual'].describe()
+# Describe 'YrSold
+dataframe['YrSold'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
+# Describe 'OverallQual
+dataframe['OverallQual'].describe()
+# Revisando si tiene NaN la columna 'LotFrontage'
+dataframe['LotFrontage'].isnull().sum()
+# Describe columna 'LotFrontage'
+dataframe['LotFrontage'].describe()
+# Describe 'MiscVal
+dataframe['MiscVal'].describe()

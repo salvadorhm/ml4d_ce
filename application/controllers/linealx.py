@@ -26,8 +26,9 @@ class LinealX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
+            types = list(dataframe.dtypes)
             cols.remove(y)
-            return render.linealx(cols)
+            return render.linealx(cols,types)
         except Exception as e:
             print(e.args)
 
