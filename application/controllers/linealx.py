@@ -26,18 +26,25 @@ class LinealX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
+            cols.remove(y)
             return render.linealx(cols)
         except Exception as e:
             print(e.args)
 
-    def POST(self,y_col):
+    def POST(self,y):
         try:
             form = web.input(column = [''])
+            columns = form.column
             x_cols = form.column
-            print(x_cols)
             dataframe = pd.read_csv(self.file)
-            x = dataframe[x_cols]
-            y = dataframe[y_col]
+            columns.append(y)
+            df = dataframe[columns]
+            # df_nom = (df - df.mean())/df.std()
+
+            df_nom = (df - df.min())/(df.max() - df.min())
+
+            x = df_nom[x_cols]
+            y = df_nom[y]
             lm = LinearRegression()
             lm.fit(x,y)
             predictions = lm.predict(x)
@@ -50,10 +57,7 @@ class LinealX:
             image_name = "static/images/lineal.png"
             print(image_name)
             ax.figure.savefig(image_name)
-            
-            # dataframe = pd.read_csv(self.file)
-            # cols = list(dataframe)
-            # return render.lineal(cols)
+
             raise web.seeother('/linealr')
         except Exception as e:
             print(e.args)
