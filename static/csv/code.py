@@ -76,3 +76,7 @@ dataframe['LotFrontage'].isnull().sum()
 dataframe['LotFrontage'].describe()
 # Describe 'MiscVal
 dataframe['MiscVal'].describe()
+# Describe 'LotFrontage
+dataframe['LotFrontage'].describe()
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()

@@ -26,12 +26,11 @@ class General:
             cols = list(dataframe)
             values = []
             duplicates = []
-            nulls = []
+            nulls = list(dataframe.isnull().sum())
             dtypes = list(dataframe.dtypes)
             for col in cols:
                 values.append(dataframe[col].iloc[0:5].tolist())
                 duplicates.append(sum(dataframe.duplicated(subset = col)) == 0)
-                nulls.append(round(100*(dataframe[col].isnull().sum()/len(dataframe.index)), 2))
             return render.general(cols,values, duplicates,nulls,dtypes)
         except Exception as e:
             print(e.args)

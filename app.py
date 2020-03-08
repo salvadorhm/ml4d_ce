@@ -21,6 +21,9 @@ urls = (
 )
 app = web.application(urls, globals())
 
+sessions ={"user":'guess'}
+
 if __name__ == "__main__":
     web.config.debug = False
+    print(sessions)
     app.run()

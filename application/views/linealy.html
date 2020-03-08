@@ -1,18 +1,23 @@
-$def with(cols)
+$def with(cols,types,nulls)
 <h1>Lineal Y</h1>
 <form action="" method="post" enctype="multipart/form-data">
     <table class="table table-hover scroll">
         <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
             <tr>
                 <th>Columns</th>
+                <th>Types</th>
+                <th>Nulls</th>
             </tr>
         </thead>
         <tbody>
             $ no = 0
-            $for row in cols:
-                <tr>
-                    <td><input type="checkbox" id="column" name="column" value="$row"> $row</td>
-                </tr>
+            $for i in range(len(cols)):
+                $if types[i] != "object" and nulls[i] == 0:
+                    <tr>
+                        <td><input type="checkbox" id="column" name="column" value="$cols[i]"> $cols[i]</td>
+                        <td>$types[i]</td>
+                        <td>$nulls[i]</td>
+                    </tr>
             $ no+=1
         </tbody>
     </table>

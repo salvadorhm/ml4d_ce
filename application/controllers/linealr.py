@@ -1,4 +1,5 @@
 import web  # pip install web.py
+import app
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -33,7 +34,7 @@ class LinealR:
             # image_name = "static/images/countplot.png"
             # print(image_name)
             # ax.figure.savefig(image_name)
-            return render.linealr()
+            return render.linealr(app.sessions)
         except Exception as e:
             print(e.args)
 

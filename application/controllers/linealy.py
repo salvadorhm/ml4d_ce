@@ -1,4 +1,5 @@
 import web  # pip install web.py
+import app
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -23,7 +24,9 @@ class LinealY:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            return render.linealy(cols)
+            types = list(dataframe.dtypes)
+            nulls = list(dataframe.isnull().sum())
+            return render.linealy(cols,types,nulls)
         except Exception as e:
             print(e.args)
 
@@ -31,7 +34,7 @@ class LinealY:
         try:
             form = web.input()
             y = form.column
-            print(y)
+            app.sessions['y']=y
             # dataframe = pd.read_csv(self.file)
             # cols = list(dataframe)
             # return render.lineal(cols)
