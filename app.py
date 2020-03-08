@@ -1,6 +1,6 @@
 import web  # pip install web.py
 
-app_version = "0.5.0"  # version de la webapp
+app_version = "0.5.1"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
