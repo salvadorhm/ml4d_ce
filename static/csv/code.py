@@ -80,3 +80,23 @@ dataframe['MiscVal'].describe()
 dataframe['LotFrontage'].describe()
 # Describe 'MSSubClass
 dataframe['MSSubClass'].describe()
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()
+# Describe 'LotFrontage
+dataframe['LotFrontage'].describe()
+# Describe 'MSZoning
+dataframe['MSZoning'].describe()
+# Describe 'MSZoning
+dataframe['MSZoning'].describe()
+# Describe 'MSZoning
+dataframe['MSZoning'].describe()
+# Describe 'LotFrontage
+dataframe['LotFrontage'].describe()
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()
+# Describe columna 'MSSubClass'
+dataframe['MSSubClass'].describe()
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()

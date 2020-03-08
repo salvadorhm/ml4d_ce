@@ -8,16 +8,17 @@ urls = (
     '/notebook','application.controllers.notebook.Notebook',
     '/dataset','application.controllers.dataset.Dataset',
     '/general', 'application.controllers.general.General',
-    '/linealy', 'application.controllers.linealy.LinealY',
-    '/linealx/(.+)', 'application.controllers.linealx.LinealX',
+    '/lineary', 'application.controllers.lineary.LinearY',
+    '/linearx/(.+)', 'application.controllers.linearx.LinearX',
     '/detail', 'application.controllers.detail.Detail',
     '/drop/(.+)','application.controllers.drop.Drop',
     '/field/(.+)','application.controllers.field.Field',
     '/impute/(.+)','application.controllers.impute.Impute',
     '/replace/(.+)','application.controllers.replace.Replace',
     '/countplot/(.+)','application.controllers.countplot.CountPlot',
-    '/linealr','application.controllers.linealr.LinealR',
+    '/linearr','application.controllers.linearr.LinearR',
     '/histogram/(.+)','application.controllers.histogram.Histogram',
+    '/correlation','application.controllers.correlation.Correlation',
 )
 app = web.application(urls, globals())
 

@@ -24,33 +24,18 @@ class Field:
     def GET(self,field):
         try:
             dataframe = pd.read_csv(self.file)
-            '''
-            # plot
-            figure()
-            width=20
-            height=8
-            figure(figsize=(width,height))
-            ax = sn.countplot(data=dataframe, y=field)
-            image_name = "static/images/countplot.png"
-            print(image_name)
-            ax.figure.savefig(image_name)
             
-            figure()
-            width=20
-            height=8
-            figure(figsize=(width,height))
-            nor = sn.distplot(dataframe[field])
-            image_name = "static/images/normal.png"
-            nor.figure.savefig(image_name)
-            '''
-
             #describe
+            dtypes = dataframe[field].dtypes
+
             result = dataframe[field].describe()
             describe = result.to_dict()
 
-            result = dataframe.corr()[field]
-            correlation = result.to_dict()
-            
+            if dtypes != 'object':
+                result = dataframe.corr()[field]
+                correlation = result.to_dict()
+            else:
+                correlation = {"dtype":'object'}
 
             # save code
             code_lines = []

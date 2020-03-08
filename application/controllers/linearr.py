@@ -14,7 +14,7 @@ import matplotlib.mlab as mlab
 
 render = web.template.render('application/views/', base="master")
 
-class LinealR:
+class LinearR:
 
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
@@ -34,7 +34,7 @@ class LinealR:
             # image_name = "static/images/countplot.png"
             # print(image_name)
             # ax.figure.savefig(image_name)
-            return render.linealr(app.sessions)
+            return render.linearr(app.sessions)
         except Exception as e:
             print(e.args)
 

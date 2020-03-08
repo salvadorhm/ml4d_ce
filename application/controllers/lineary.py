@@ -13,7 +13,7 @@ import matplotlib.mlab as mlab
 
 render = web.template.render('application/views/', base="master")
 
-class LinealY:
+class LinearY:
 
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
 
@@ -26,7 +26,7 @@ class LinealY:
             cols = list(dataframe)
             types = list(dataframe.dtypes)
             nulls = list(dataframe.isnull().sum())
-            return render.linealy(cols,types,nulls)
+            return render.lineary(cols,types,nulls)
         except Exception as e:
             print(e.args)
 
@@ -38,7 +38,7 @@ class LinealY:
             # dataframe = pd.read_csv(self.file)
             # cols = list(dataframe)
             # return render.lineal(cols)
-            raise web.seeother('/linealx/'+y)
+            raise web.seeother('/linearx/'+y)
         except Exception as e:
             print(e.args)
 

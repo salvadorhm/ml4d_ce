@@ -17,7 +17,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 
 render = web.template.render('application/views/', base="master")
 
-class LinealX:
+class LinearX:
 
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
 
@@ -31,7 +31,7 @@ class LinealX:
             types = list(dataframe.dtypes)
             nulls = list(dataframe.isnull().sum())
             cols.remove(y)
-            return render.linealx(cols,types,nulls)
+            return render.linearx(cols,types,nulls)
         except Exception as e:
             print(e.args)
 
@@ -77,7 +77,7 @@ class LinealX:
             # Puntaje de Varianza. El mejor puntaje es un 1.0
             print('Variance score: %.2f' % r2_score(y, predictions))
 
-            raise web.seeother('/linealr')
+            raise web.seeother('/linearr')
         except Exception as e:
             print(e.args)
 
