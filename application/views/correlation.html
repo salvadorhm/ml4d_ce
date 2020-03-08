@@ -13,6 +13,9 @@ $def with(correlation)
         <tr>
             <td>$row</td>
             $for r in correlation[row]:
-                <td>$correlation[row][r]</td>
+                $if correlation[row][r] > 0.5:
+                    <td><p class="text-danger">$correlation[row][r]</p></td>
+                $else:
+                    <td>$correlation[row][r]</td>
         </tr>
 </table>

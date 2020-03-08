@@ -23,7 +23,10 @@ $def with(describe,correlation,field)
     $for row in correlation:
         <tr>
             <td>$row</td>
-            <td>$correlation[row]</td>
+            $if correlation[row] > 0.5:
+                <td><p class="text-danger">$correlation[row]</p></td>
+            $else:
+                <td>$correlation[row]</td>
         </tr>
 </table>
 

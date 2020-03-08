@@ -100,3 +100,13 @@ dataframe['MSSubClass'].describe()
 dataframe['MSSubClass'].describe()
 # Describe 'MSSubClass
 dataframe['MSSubClass'].describe()
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()
+# Describe 'LotFrontage
+dataframe['LotFrontage'].describe()
+# Describe 'LotFrontage
+dataframe['LotFrontage'].describe()
+# Describe 'SalePrice
+dataframe['SalePrice'].describe()
