@@ -42,7 +42,7 @@ class Index:
                     new_filename = "temp.csv"
                     shutil.copy('static/uploads/'+fn, filedir + new_filename)
                 else:
-                    fout = open("static/uploads/" + form.csv_file.filename ,'w') # creates the file where the uploaded file should be stored
+                    fout = open('static/uploads/' +'/'+  form.csv_file.filename ,'w') # creates the file where the uploaded file should be stored
                     fout.write(form.csv_file.file.read()) # writes the uploaded file to the newly created file.
                     csv_file_import = "static/csv/temp.csv"
                     fout.close() # closes the file, upload complete.
