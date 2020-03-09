@@ -16,7 +16,7 @@ class Index:
 
     def GET(self,**k):
         try:
-            message = None
+            message = os.name
             app.sessions = {}
             app_version = app.app_version
             return render.index(message, app_version)
@@ -37,10 +37,16 @@ class Index:
             # TODO cambiar el nombre del archivo por el id de la respuesta a la cual pertenece.
             filename = filepath.split('/')[-1] # splits the and chooses the last part (the filename with extension)
             if os.path.splitext(filepath)[1] == ".csv":  # Extención del archivo
-                fn = os.path.basename(form.csv_file.filename)
-                file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
-                new_filename = "temp.csv"
-                shutil.copy('static/uploads/'+fn, filedir + new_filename)
+                if app.sessions.os == 'nt':
+                    fn = os.path.basename(form.csv_file.filename)
+                    file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
+                    new_filename = "temp.csv"
+                    shutil.copy('static/uploads/'+fn, filedir + new_filename)
+                else:
+                    fout = open("static/uploads/" + filename,'w') # creates the file where the uploaded file should be stored
+                    fout.write(form.csv_file.file.read()) # writes the uploaded file to the newly created file.
+                    csv_file_import = "static/csv/temp.csv"
+                    fout.close() # closes the file, upload complete.
 
                 code_lines = []
                 code_lines.append("# Librerias")

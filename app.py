@@ -1,4 +1,5 @@
 import web  # pip install web.py
+import os
 
 app_version = "0.5.3"  # version de la webapp
 
@@ -21,10 +22,10 @@ urls = (
     '/correlation','application.controllers.correlation.Correlation',
 )
 app = web.application(urls, globals())
-
-sessions ={}
+sessions = {'os':os.name}
 
 if __name__ == "__main__":
     web.config.debug = False
+    
     print(sessions)
     app.run()
