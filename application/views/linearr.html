@@ -1,11 +1,18 @@
 $def with(result)
-<h2>Lineal</h2>
+<h2>Linear regression</h2>
 
-<p>Y: $result['y']</p>
-<p>X: $result['x']</p>
-<p>Coefficients: $result['coefficients']</p>
-<p>Independent term: $result['independent_term']</p>
-<p>Mean squared error: $result['mean_squared_error']</p>
-<p>Variance score: $result['variance']</p>
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in result:
+        <tr>
+            <td>$row</td>
+            <td>$result[row]</td>
+        </tr>
+</table>
+
 
 <img src="/static/images/lineal.png" class="img-fluid" alt="Lineal">

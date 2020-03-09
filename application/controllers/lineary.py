@@ -22,6 +22,7 @@ class LinearY:
 
     def GET(self):
         try:
+            app.sessions = {}
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
             types = list(dataframe.dtypes)

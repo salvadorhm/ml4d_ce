@@ -17,6 +17,7 @@ class Index:
     def GET(self,**k):
         try:
             message = None
+            app.sessions = {}
             app_version = app.app_version
             return render.index(message, app_version)
         except Exception as e:
