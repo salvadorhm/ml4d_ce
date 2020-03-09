@@ -38,11 +38,11 @@ class Index:
             if os.path.splitext(filepath)[1] == ".csv":  # Extención del archivo
                 if os.name == 'nt':
                     fn = os.path.basename(form.csv_file.filename)
-                    file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
+                    file = open('static/csv/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
                     new_filename = "temp.csv"
-                    shutil.copy('static/uploads/'+fn, filedir + new_filename)
+                    shutil.copy('static/csv/'+fn, filedir + new_filename)
                 else:
-                    fout = open('static/uploads/' + form.csv_file.filename ,'w') # creates the file where the uploaded file should be stored
+                    fout = open('static/csv/' + form.csv_file.filename ,'w') # creates the file where the uploaded file should be stored
                     fout.write(form.csv_file.file.read()) # writes the uploaded file to the newly created file.
                     csv_file_import = "static/csv/temp.csv"
                     fout.close() # closes the file, upload complete.
