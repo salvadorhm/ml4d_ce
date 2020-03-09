@@ -22,8 +22,7 @@ urls = (
     '/correlation','application.controllers.correlation.Correlation',
 )
 app = web.application(urls, globals())
-sessions = {'os':os.name}
-
+sessions ={}
 if __name__ == "__main__":
     web.config.debug = False
     
