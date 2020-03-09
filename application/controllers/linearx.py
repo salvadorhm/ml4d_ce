@@ -37,7 +37,7 @@ class LinearX:
             print(e.args)
 
     def POST(self,y):
-        # try:
+        try:
             form = web.input(column = [''])
             # columns = form.column
             x_cols = form.column
@@ -49,6 +49,11 @@ class LinearX:
             df_x = dataframe[x_cols]
             df_y = dataframe[y]
 
+            df_nor_x = (df_x - df_x.mean())/df_x.std()
+            df_nor_y = (df_y - df_y.mean())/df_y.std()
+            
+
+            # x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.4,random_state=101)
             x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.4,random_state=101)
 
             # print(list(df_x))
@@ -100,8 +105,8 @@ class LinearX:
             # print('Variance score: %.2f' % r2_score(y, predictions))
 
             raise web.seeother('/linearr')
-        # except Exception as e:
-        #     print(e.args)
+        except Exception as e:
+            print(e.args)
 
 
   

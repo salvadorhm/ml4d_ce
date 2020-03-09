@@ -190,3 +190,75 @@ dataframe = pd.read_csv('train.csv')
 dataframe['SalePrice'].describe()
 # Describe 'GarageArea
 dataframe['GarageArea'].describe()
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('longley.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('longley.csv')
+# Describe 'Employed
+dataframe['Employed'].describe()
+# Describe 'Employed
+dataframe['Employed'].describe()
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('Spotify.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('altura.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('train.csv')
+# Describe 'OverallQual
+dataframe['OverallQual'].describe()
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('longley.csv')
