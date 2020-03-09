@@ -11,8 +11,10 @@ $def with(result)
         <tr>
             <td>$row</td>
             <td>$result[row]</td>
+            $if row == 'x':
+                $ x = len(result[row])
         </tr>
 </table>
 
-
-<img src="/static/images/lineal.png" class="img-fluid" alt="Lineal">
+$if x == 1:
+    <img src="/static/images/lineal.png" class="img-fluid" alt="Lineal">

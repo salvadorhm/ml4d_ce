@@ -41,7 +41,7 @@ class LinearX:
             form = web.input(column = [''])
             # columns = form.column
             x_cols = form.column
-            app.sessions['x']=str(x_cols)
+            app.sessions['x']=list(x_cols)
             dataframe = pd.read_csv(self.file)
             # columns.append(y)
             # df = dataframe[columns]
@@ -69,19 +69,21 @@ class LinearX:
             # lm.fit(df_x,df_y)
             predictions = lm.predict(x_train)
             # predictions = lm.predict(df_x)
-            figure()
-            width=20
-            height=8
-            figure(figsize=(width,height))
-            # TODO grafica lineal simple, una sola x
-            ax = plt.scatter(x_train,y_train)
-            # ax = plt.scatter(y_train,predictions)
-            # ax = plt.scatter(df_y,predictions)
-            plt.plot(x_train,predictions,"r")
-            # # plt.scatter(y,predictions)
-            image_name = "static/images/lineal.png"
-            # print(image_name)
-            ax.figure.savefig(image_name)
+            if len(list(x_train)) == 1:
+                print("graficar")
+                figure()
+                width=20
+                height=8
+                figure(figsize=(width,height))
+                # TODO grafica lineal simple, una sola x
+                ax = plt.scatter(x_train,y_train)
+                # ax = plt.scatter(y_train,predictions)
+                # ax = plt.scatter(df_y,predictions)
+                plt.plot(x_train,predictions,"r")
+                # # plt.scatter(y,predictions)
+                image_name = "static/images/lineal.png"
+                # print(image_name)
+                ax.figure.savefig(image_name)
 
             app.sessions['Coefficients'] = str(lm.coef_)
             app.sessions['Independent term'] = lm.intercept_
