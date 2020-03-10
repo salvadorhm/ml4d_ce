@@ -457,3 +457,39 @@ dataframe = pd.read_csv('Leads.csv')
 dataframe['Lead Origin'].describe()
 # Describe 'I agree to pay the amount through cheque
 dataframe['I agree to pay the amount through cheque'].describe()
+# Revisando si tiene NaN la columna 'Asymmetrique Activity Index'
+dataframe['Asymmetrique Activity Index'].isnull().sum()
+# Describe columna 'Asymmetrique Activity Index'
+dataframe['Asymmetrique Activity Index'].describe()
+# Imputando valor a los valores NaN de la columna 'Asymmetrique Activity Index'
+dataframe['Asymmetrique Activity Index'].fillna('00.Other', inplace=True)
+# Describe 'Asymmetrique Activity Index
+dataframe['Asymmetrique Activity Index'].describe()
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('train.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('train.csv')
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()
+# Describe 'MSZoning_FV
+dataframe['MSZoning_FV'].describe()
+# Describe 'LotShape_IR1
+dataframe['LotShape_IR1'].describe()

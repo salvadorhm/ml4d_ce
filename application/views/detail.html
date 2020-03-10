@@ -6,7 +6,9 @@ $def with(cols,nulls,dtypes,unique,mode,mean,median)
         <th>No.</th>
         <th>Columns</th>
         <th>Dtypes</th>
+        <th>Drop</th>
         <th>Nulls</th>
+        <th>Dummies</th>
         <th>Impute</th>
         <th>Replace</th>
         <th>Unique</th>
@@ -21,7 +23,9 @@ $def with(cols,nulls,dtypes,unique,mode,mean,median)
             <td>$no</td>
             <td><a href="/field/$cols[i]">$cols[i]</a></td>
             <td>$dtypes[i]</td>
+            <td><a href="/drop/$cols[i]">Drop</a></td>
             <td>$nulls[i]</td>
+            <td><a href="/dummies/$cols[i]">Dummies</a></td>
             <td><a href="/impute/$cols[i]">Impute</a></td>
             <td><a href="/replace/$cols[i]">Replace</a></td>
             <td>$unique[i]</td>

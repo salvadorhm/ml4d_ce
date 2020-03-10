@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.5.6"  # version de la webapp
+app_version = "0.5.7"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
@@ -13,6 +13,7 @@ urls = (
     '/linearx/(.+)', 'application.controllers.linearx.LinearX',
     '/detail', 'application.controllers.detail.Detail',
     '/drop/(.+)','application.controllers.drop.Drop',
+    '/dummies/(.+)','application.controllers.dummies.Dummies',
     '/field/(.+)','application.controllers.field.Field',
     '/impute/(.+)','application.controllers.impute.Impute',
     '/replace/(.+)','application.controllers.replace.Replace',

@@ -3,7 +3,6 @@ $def with(cols,values, duplicates,nulls,dtypes)
 <table class="table table-hover scroll" border=1>
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
-            <th>Drop</th>
             <th>No.</th>
             <th>Columns</th>
             <th>Dtypes</th>
@@ -18,7 +17,6 @@ $def with(cols,values, duplicates,nulls,dtypes)
         $ no = 0
         $for i in range(len(cols)):
             <tr>
-                <td><a href="/drop/$cols[i]">Drop</a></td>
                 <td>$no</td>
                 <td><a href="/field/$cols[i]">$cols[i]</a></td>
                 <td>$dtypes[i]</td>
