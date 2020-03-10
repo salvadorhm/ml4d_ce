@@ -1,4 +1,4 @@
-$def with(column,nulls,dtypes,unique,mode,mean)
+$def with(column,nulls,dtypes,unique,mode,mean,median)
 <h1>Dataframe impute</h1>
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
@@ -9,6 +9,7 @@ $def with(column,nulls,dtypes,unique,mode,mean)
             <th>Unique values</th>
             <th>Mode</th>
             <th>Mean</th>
+            <th>Median</th>
         </tr>
     </thead>
 
@@ -19,6 +20,7 @@ $def with(column,nulls,dtypes,unique,mode,mean)
         <td>$unique</td>
         <td>$mode</td>
         <td>$mean</td>
+        <td>$median</td>
     </tr>
 </table>
 

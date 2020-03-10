@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.5.7"  # version de la webapp
+app_version = "0.5.8"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
@@ -20,6 +20,7 @@ urls = (
     '/countplot/(.+)','application.controllers.countplot.CountPlot',
     '/linearr','application.controllers.linearr.LinearR',
     '/histogram/(.+)','application.controllers.histogram.Histogram',
+    '/describe','application.controllers.describe.Describe',
     '/correlation','application.controllers.correlation.Correlation',
 )
 app = web.application(urls, globals())

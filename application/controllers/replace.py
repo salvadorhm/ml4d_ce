@@ -31,6 +31,7 @@ class Replace:
             unique = dataframe[column].unique().tolist()
             mode = None
             mean = None
+            median = None
 
             '''
                 guardar el codigo generado
@@ -47,12 +48,13 @@ class Replace:
                 print("Col:{} mode: {}".format(column,dataframe[column].mode()[0]))
                 mode = dataframe[column].mode()[0]
                 mean = "None"
+                median = "None"
             else:
                 print("Col:{} mean: {}".format(column,dataframe[column].mean()))
                 mode = dataframe[column].mode()[0]
                 mean = dataframe[column].mean()
-                
-            return render.replace(column,nulls,dtypes,unique,mode,mean)
+                median = dataframe[column].median()
+            return render.replace(column,nulls,dtypes,unique,mode,mean,median)
         except Exception as e:
             print(e.args)
 

@@ -44,6 +44,7 @@ class Impute:
             nulls = dataframe[column].isnull().sum()
             dtypes = dataframe[column].dtypes
             unique = dataframe[column].unique().tolist()
+
             #TODO revisar conteo de nan
             # unique_counts = dataframe[column].value_counts().tolist()
             # unique_counts = dataframe[column].value_counts(normalize=True).tolist()
@@ -60,17 +61,19 @@ class Impute:
 
             mode = None
             mean = None
-
+            median = None
             if dtypes == 'object':
                 # print("Col:{} mode: {}".format(column,dataframe[column].mode()[0]))
                 mode = dataframe[column].mode()[0]
                 mean = "None"
+                median = None
             else:
                 # print("Col:{} mean: {}".format(column,dataframe[column].mean()))
                 mode = dataframe[column].mode()[0]
                 mean = dataframe[column].mean()
+                median = dataframe[column].median()
                 
-            return render.impute(column,nulls,dtypes,unique,mode,mean)
+            return render.impute(column,nulls,dtypes,unique,mode,mean,median)
         except Exception as e:
             print(e.args)
 

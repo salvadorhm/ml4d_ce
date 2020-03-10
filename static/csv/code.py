@@ -493,3 +493,48 @@ dataframe['MSSubClass'].describe()
 dataframe['MSZoning_FV'].describe()
 # Describe 'LotShape_IR1
 dataframe['LotShape_IR1'].describe()
+# Describe 'LotShape_Reg
+dataframe['LotShape_Reg'].describe()
+# Describe 'LotShape_Reg
+dataframe['LotShape_Reg'].describe()
+# Describe 'SaleCondition
+dataframe['SaleCondition'].describe()
+# Describe 'SaleCondition_Normal
+dataframe['SaleCondition_Normal'].describe()
+# Describe 'SaleType
+dataframe['SaleType'].describe()
+# Describe 'MSSubClass
+dataframe['MSSubClass'].describe()
+# Revisando si tiene NaN la columna 'MSSubClass'
+dataframe['MSSubClass'].isnull().sum()
+# Describe columna 'MSSubClass'
+dataframe['MSSubClass'].describe()
+# Revisando si tiene NaN la columna 'MSSubClass'
+dataframe['MSSubClass'].isnull().sum()
+# Describe columna 'MSSubClass'
+dataframe['MSSubClass'].describe()
+# Describe columna 'Id'
+dataframe['Id'].describe()
+# Revisando si tiene NaN la columna 'Id'
+dataframe['Id'].isnull().sum()
+# Describe columna 'Id'
+dataframe['Id'].describe()
+# Describe columna 'Id'
+dataframe['Id'].describe()
+# Revisando si tiene NaN la columna 'Id'
+dataframe['Id'].isnull().sum()
+# Describe columna 'Id'
+dataframe['Id'].describe()
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('Spotify.csv')
+# Describe 'acousticness
+dataframe['acousticness'].describe()
