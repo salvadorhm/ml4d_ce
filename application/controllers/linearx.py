@@ -29,10 +29,23 @@ class LinearX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            types = list(dataframe.dtypes)
-            nulls = list(dataframe.isnull().sum())
+            columns = []
+            types = []
+            nulls = []
+            correlation = []
+            # print(index)
+            # print(len(cols))
+            # print(len(types))
+            # print(len(nulls))
+            # print(len(correlation))
             cols.remove(y)
-            return render.linearx(cols,types,nulls)
+            for row in cols:
+                if dataframe[row].dtypes != 'object':
+                    correlation.append(dataframe[y].corr(dataframe[row]))
+                    types.append(dataframe[row].dtype)
+                    nulls.append(dataframe[row].isnull().sum())
+                    columns.append((row))
+            return render.linearx(columns,types,nulls,correlation)
         except Exception as e:
             print(e.args)
 

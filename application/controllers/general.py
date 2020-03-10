@@ -23,7 +23,6 @@ class General:
 
     def GET(self):
         try:
-            app.sessions = {}
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
             values = []
