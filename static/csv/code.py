@@ -338,3 +338,122 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 # Creando el Dataframe para trabajar
 dataframe = pd.read_csv('longley.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('Housing.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('mmmm.csv')
+# Describe 'TotalVisits
+dataframe['TotalVisits'].describe()
+# Describe 'Last Notable Activity
+dataframe['Last Notable Activity'].describe()
+# Describe 'Last Notable Activity
+dataframe['Last Notable Activity'].describe()
+# Describe 'A free copy of Mastering The Interview
+dataframe['A free copy of Mastering The Interview'].describe()
+# Describe 'Search
+dataframe['Search'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'What matters most to you in choosing a course
+dataframe['What matters most to you in choosing a course'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'Lead Origin
+dataframe['Lead Origin'].describe()
+# Describe 'TotalVisits
+dataframe['TotalVisits'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'Converted
+dataframe['Converted'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'Last Activity
+dataframe['Last Activity'].describe()
+# Describe 'Total Time Spent on Website
+dataframe['Total Time Spent on Website'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'Total Time Spent on Website
+dataframe['Total Time Spent on Website'].describe()
+# Describe 'Page Views Per Visit
+dataframe['Page Views Per Visit'].describe()
+# Describe 'Converted
+dataframe['Converted'].describe()
+# Describe 'Lead Profile
+dataframe['Lead Profile'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'Do Not Email
+dataframe['Do Not Email'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Describe 'Lead Source
+dataframe['Lead Source'].describe()
+# Revisando si tiene NaN la columna 'Converted'
+dataframe['Converted'].isnull().sum()
+# Describe columna 'Converted'
+dataframe['Converted'].describe()
+# Describe 'Last Notable Activity
+dataframe['Last Notable Activity'].describe()
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('mmmm.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('longley.csv')
+# Describe 'Employed
+dataframe['Employed'].describe()
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('Leads.csv')
+# Describe 'Lead Origin
+dataframe['Lead Origin'].describe()
+# Describe 'I agree to pay the amount through cheque
+dataframe['I agree to pay the amount through cheque'].describe()

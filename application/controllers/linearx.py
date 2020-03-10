@@ -106,8 +106,9 @@ class LinearX:
             # app.sessions['Variance'] = r2_score(df_y, predictions)
             # app.sessions['Predictions'] = str(predictions)
 
-            mmmm = pd.DataFrame({"Actual":y_train, "Predicted":predictions})
-            app.sessions['Actual values'] = list(mmmm.Actual.head())
+            predictions_test = lm.predict(x_test)
+            mmmm = pd.DataFrame({"Actual":y_test, "Predicted":predictions_test})
+            app.sessions['Actual test values'] = list(mmmm.Actual.head())
             app.sessions['Predicted values'] = list(mmmm.Predicted.head())
 
             # # Veamos los coeficienetes obtenidos, En nuestro caso, serán la Tangente

@@ -30,12 +30,15 @@ class Field:
 
             result = dataframe[field].describe()
             describe = result.to_dict()
+            describe['nulls'] = dataframe[field].isnull().sum()
+            describe['head'] = list(dataframe[field].head())
+            describe['unique values'] = dataframe[field].unique().tolist()
 
             if dtypes != 'object':
                 result = dataframe.corr()[field]
                 correlation = result.to_dict()
             else:
-                correlation = {"dtype":'object'}
+                correlation = None
 
             # save code
             code_lines = []

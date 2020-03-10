@@ -13,15 +13,16 @@ $def with(cols,types,nulls,correlation)
         <tbody>
             $ no = 0
             $for i in range(len(cols)):
-                <tr>
-                    <td><input type="checkbox" id="column" name="column" value="$cols[i]"> $cols[i]</td>
-                    <td>$types[i]</td>
-                    $if correlation[i] > 0.5:
-                        <td><p class="text-danger">$correlation[i]</p></td>
-                    $else:
-                        <td>$correlation[i]</td>
-                    <td>$nulls[i]</td>
-                </tr>
+                $if types[i] != "object" and nulls[i] == 0:
+                    <tr>
+                        <td><input type="checkbox" id="column" name="column" value="$cols[i]"> $cols[i]</td>
+                        <td>$types[i]</td>
+                        $if correlation[i] > 0.5:
+                            <td><p class="text-danger">$correlation[i]</p></td>
+                        $else:
+                            <td>$correlation[i]</td>
+                        <td>$nulls[i]</td>
+                    </tr>
             $ no+=1
         </tbody>
     </table>

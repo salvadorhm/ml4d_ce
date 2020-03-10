@@ -36,7 +36,7 @@ class Detail:
             mean = []
             median = []
             for col in cols:
-                unique.append(dataframe[col].unique().tolist())
+                unique.append(len(dataframe[col].unique()))
                 # mode.append(dataframe[col].mode())
                 # mean.append(dataframe[col].mean())
 
