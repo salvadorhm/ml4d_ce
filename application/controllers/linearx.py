@@ -12,7 +12,7 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 from sklearn.linear_model import LinearRegression
 from matplotlib.pyplot import figure, show
-from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 
 
@@ -25,10 +25,12 @@ class LinearX:
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
 
-    def GET(self,y):
+    def GET(self):
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
+            y = app.sessions['y']
+
             columns = []
             types = []
             nulls = []
@@ -49,8 +51,9 @@ class LinearX:
         except Exception as e:
             print(e.args)
 
-    def POST(self,y):
-        try:
+    def POST(self):
+        # try:
+            y = app.sessions['y']
             form = web.input(column = [''])
             # columns = form.column
             x_cols = form.column
@@ -66,63 +69,67 @@ class LinearX:
             df_nor_y = (df_y - df_y.mean())/df_y.std()
             
 
-            # x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.4,random_state=101)
-            x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.4,random_state=101)
+            x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
+            
+            # x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
 
-            # print(list(df_x))
-            # print(list(df_y))
-            # # df_nom = (df - df.mean())/df.std()
-
-            # df_nom = (df - df.min())/(df.max() - df.min())
-
-            # x = df_nom[x_cols]
-            # y = df_nom[y]
             lm = LinearRegression()
             lm.fit(x_train,y_train)
-            # lm.fit(df_x,df_y)
-            predictions = lm.predict(x_train)
-            # predictions = lm.predict(df_x)
-            if len(list(x_train)) == 1:
+
+            predictions = lm.predict(x_test)
+
+            if len(list(x_test)) == 1:
                 print("graficar")
                 figure()
                 width=20
                 height=8
                 figure(figsize=(width,height))
                 # TODO grafica lineal simple, una sola x
-                ax = plt.scatter(x_train,y_train)
-                # ax = plt.scatter(y_train,predictions)
-                # ax = plt.scatter(df_y,predictions)
-                plt.plot(x_train,predictions,"r")
-                # # plt.scatter(y,predictions)
+                ax = plt.scatter(y_test,predictions)
+                plt.plot(x_test,predictions,"r")
                 image_name = "static/images/lineal.png"
-                # print(image_name)
                 ax.figure.savefig(image_name)
+                fig = ax.get_figure()
+                plt.close(fig)
+            else:
+                figure()
+                width=20
+                height=8
+                figure(figsize=(width,height))
+                # TODO grafica lineal simple, una sola x
+                ax = plt.scatter(y_test,predictions)
+                # plt.plot(x_test,predictions,"r")
+                image_name = "static/images/lineal.png"
+                ax.figure.savefig(image_name)
+                fig = ax.get_figure()
+                plt.close(fig)
+
+
+            figure()
+            width=20
+            height=8
+            figure(figsize=(width,height))
+            nor = sn.distplot(y_test - predictions)
+            image_name = "static/images/histogram.png"
+            nor.figure.savefig(image_name)
+            fig = nor.get_figure()
+            plt.close(fig)
+
 
             app.sessions['Coefficients'] = str(lm.coef_)
             app.sessions['Independent term'] = lm.intercept_
-            app.sessions['Mean squared error'] = mean_squared_error(y_train, predictions)
-            # app.sessions['Mean squared error'] = mean_squared_error(df_y, predictions)
-            app.sessions['Variance'] = r2_score(y_train, predictions)
-            # app.sessions['Variance'] = r2_score(df_y, predictions)
-            # app.sessions['Predictions'] = str(predictions)
+            app.sessions['Mean squared error'] = mean_squared_error(y_test, predictions)
+            app.sessions['Mean absolute error'] = mean_absolute_error(y_test, predictions)
+            app.sessions['Variance'] = r2_score(y_test, predictions)
 
             predictions_test = lm.predict(x_test)
             mmmm = pd.DataFrame({"Actual":y_test, "Predicted":predictions_test})
             app.sessions['Actual test values'] = list(mmmm.Actual.head())
             app.sessions['Predicted values'] = list(mmmm.Predicted.head())
 
-            # # Veamos los coeficienetes obtenidos, En nuestro caso, serán la Tangente
-            # print('Coefficients: \n', lm.coef_)
-            # # Este es el valor donde corta el eje Y (en X=0)
-            # print('Independent term: \n', lm.intercept_)
-            # # Error Cuadrado Medio
-            # print("Mean squared error: %.2f" % mean_squared_error(y, predictions))
-            # # Puntaje de Varianza. El mejor puntaje es un 1.0
-            # print('Variance score: %.2f' % r2_score(y, predictions))
-
             raise web.seeother('/linearr')
-        except Exception as e:
-            print(e.args)
+        # except Exception as e:
+        #     print(e.args)
 
 
   

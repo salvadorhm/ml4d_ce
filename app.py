@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.5.8"  # version de la webapp
+app_version = "0.5.9"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
@@ -10,7 +10,7 @@ urls = (
     '/dataset','application.controllers.dataset.Dataset',
     '/general', 'application.controllers.general.General',
     '/lineary', 'application.controllers.lineary.LinearY',
-    '/linearx/(.+)', 'application.controllers.linearx.LinearX',
+    '/linearx', 'application.controllers.linearx.LinearX',
     '/detail', 'application.controllers.detail.Detail',
     '/drop/(.+)','application.controllers.drop.Drop',
     '/dummies/(.+)','application.controllers.dummies.Dummies',

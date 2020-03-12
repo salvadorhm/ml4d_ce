@@ -21,19 +21,6 @@ class LinearR:
 
     def GET(self):
         try:
-            # dataframe = pd.read_csv(self.file)
-            # figure()
-            # width=20
-            # height=8
-            # figure(figsize=(width,height))
-            # ax = sn.countplot(data=dataframe, y=column)
-            # # plt.xticks(rotation=70)
-            # # plt.rcParams['xtick.labelsize'] = 15
-            # # plt.rcParams['axes.labelsize'] = 200
-            # # ax = sn.countplot(dataframe[column])
-            # image_name = "static/images/countplot.png"
-            # print(image_name)
-            # ax.figure.savefig(image_name)
             return render.linearr(app.sessions)
         except Exception as e:
             print(e.args)

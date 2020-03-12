@@ -538,3 +538,58 @@ import matplotlib.mlab as mlab
 dataframe = pd.read_csv('Spotify.csv')
 # Describe 'acousticness
 dataframe['acousticness'].describe()
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('original.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('train.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('original.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('regresion_lineal.csv')
+# Librerias
+import pandas as pd
+import numpy as np
+import statsmodels.api as sm
+import scipy.stats as st
+import matplotlib.pyplot as plt
+import seaborn as sn
+from sklearn.metrics import confusion_matrix
+import matplotlib.mlab as mlab
+# Creando el Dataframe para trabajar
+dataframe = pd.read_csv('regresion_logistica.csv')

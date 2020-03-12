@@ -38,7 +38,7 @@ class LinearY:
             # dataframe = pd.read_csv(self.file)
             # cols = list(dataframe)
             # return render.lineal(cols)
-            raise web.seeother('/linearx/'+y)
+            raise web.seeother('/linearx')
         except Exception as e:
             print(e.args)
 
