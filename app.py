@@ -10,8 +10,15 @@ urls = (
     '/dataset','application.controllers.dataset.Dataset',
     '/general', 'application.controllers.general.General',
     '/head', 'application.controllers.head.Head',
+
     '/lineary', 'application.controllers.lineary.LinearY',
     '/linearx', 'application.controllers.linearx.LinearX',
+    '/linearr','application.controllers.linearr.LinearR',
+
+    '/logisticy', 'application.controllers.logisticy.LogisticY',
+    '/logisticx', 'application.controllers.logisticx.LogisticX',
+    '/logisticr','application.controllers.logisticr.LogisticR',
+
     '/boxplot', 'application.controllers.boxplot.BoxPlot',
     '/countplot2', 'application.controllers.countplot2.CountPlot2',
     '/plots', 'application.controllers.plots.Plots',
@@ -22,7 +29,6 @@ urls = (
     '/impute/(.+)','application.controllers.impute.Impute',
     '/replace/(.+)','application.controllers.replace.Replace',
     '/countplot/(.+)','application.controllers.countplot.CountPlot',
-    '/linearr','application.controllers.linearr.LinearR',
     '/histogram/(.+)','application.controllers.histogram.Histogram',
     '/heatmap_null','application.controllers.heatmap_null.HeatmapNull',
     '/describe','application.controllers.describe.Describe',

@@ -52,7 +52,7 @@ class LinearX:
             print(e.args)
 
     def POST(self):
-        # try:
+        try:
             y = app.sessions['y']
             form = web.input(column = [''])
             # columns = form.column
@@ -127,9 +127,7 @@ class LinearX:
             app.sessions['Actual test values'] = list(mmmm.Actual.head())
             app.sessions['Predicted values'] = list(mmmm.Predicted.head())
 
-            raise web.seeother('/linearr')
-        # except Exception as e:
-        #     print(e.args)
-
-
+            raise web.seeother('/logisticr')
+        except Exception as e:
+            print(e.args)
   
