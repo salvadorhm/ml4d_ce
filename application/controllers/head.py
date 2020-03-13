@@ -25,7 +25,16 @@ class Head:
         try:
             dataframe = pd.read_csv(self.file)
             head = dataframe.head().to_dict()
-            print(head)
+            
+            code_lines = []
+            code_lines.append("# Head")
+            code_lines.append("dataframe.head()")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+
             return render.head(head)
         except Exception as e:
             print(e.args)

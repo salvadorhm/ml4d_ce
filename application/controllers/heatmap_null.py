@@ -31,6 +31,16 @@ class HeatmapNull:
             nor = sn.heatmap(dataframe.isnull())
             image_name = "static/images/heatmap_null.png"
             nor.figure.savefig(image_name)
+
+            code_lines = []
+            code_lines.append("# Heatmap nulls")
+            code_lines.append("sn.heatmap(dataframe.isnull())")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+
             return render.plots("Heatmap null", image_name)
         except Exception as e:
             print(e.args)

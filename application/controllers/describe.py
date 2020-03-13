@@ -25,6 +25,16 @@ class Describe:
         try:
             dataframe = pd.read_csv(self.file)
             de = dataframe.describe().to_dict()
+
+            code_lines = []
+            code_lines.append("# Describe")
+            code_lines.append("dataframe.describe()")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+            
             return render.describe(de)
         except Exception as e:
             print(e.args)

@@ -22,7 +22,6 @@ class Notebook:
                 for row in reader:
                     if row.startswith("#",0):
                         if len(code)>0:
-                            print(code)
                             nb.cells.append(new_code_cell(code))
                             nb.cells.append(new_code_cell(row))
                             code = []

@@ -47,7 +47,7 @@ class LogisticX:
             print(e.args)
 
     def POST(self):
-        try:
+        # try:
             y = app.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
@@ -59,31 +59,79 @@ class LogisticX:
 
             x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
 
-            lm = LogisticRegression()
-            lm.fit(x_train,y_train)
+            model = LogisticRegression()
+            model.fit(x_train,y_train)
 
-            predictions = lm.predict(x_test)
+            predictions = model.predict(x_test)
 
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
+
             print(report)
+            figure()
+            width=20
+            height=8
+            figure(figsize=(width,height))
+            plt.bar(range(10),y_test.head(10))
+            plt.bar(range(10),predictions[0:10])
+            
+            image_name = "static/images/logistic.png"
+            plt.savefig(image_name)
+
             
             app.sessions['Report'] = report
             app.sessions['Confusion matrix'] = list(confusion)
-            app.sessions['Score'] = lm.score(x_test,y_test)
+            app.sessions['Score'] = model.score(x_test,y_test)
             app.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
-            # app.sessions['Independent term'] = lm.intercept_
-            # app.sessions['Mean squared error'] = mean_squared_error(y_test, predictions)
-            # app.sessions['Mean absolute error'] = mean_absolute_error(y_test, predictions)
-            # app.sessions['Variance'] = r2_score(y_test, predictions)
 
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             app.sessions['Real test values'] = list(compare.Actual.head(10))
             app.sessions['Predicted values'] = list(compare.Predicted.head(10))
 
+
+            code_lines = []
+            code_lines.append("# Preparacion del dataframe")
+            code_lines.append("df_x = dataframe["+ str(x_cols) +"]")
+            code_lines.append("df_y = dataframe['"+ y +"']")
+            code_lines.append("# x")
+            code_lines.append("df_x")
+            code_lines.append("# y")
+            code_lines.append("df_y")
+            code_lines.append("# Dataframe de entrenamiento y de prueba")
+            code_lines.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code_lines.append("# Model de regresion lineal")
+            code_lines.append("model = LogisticRegression()")
+            code_lines.append("# Entrenamiento del model")
+            code_lines.append("model.fit(x_train,y_train)")
+            code_lines.append("# Prueba del modelo")
+            code_lines.append("predictions = model.predict(x_test)")
+            code_lines.append("# Evaluacion del modelo")
+            code_lines.append("# Coefficients")
+            code_lines.append("classification_report(y_test, predictions)")
+            code_lines.append("# Confusion matrix")
+            code_lines.append("confusion_matrix(y_test, predictions)")
+            code_lines.append("# Score")
+            code_lines.append("model.score(x_test,y_test)")
+            code_lines.append("# Accuracy score")
+            code_lines.append("accuracy_score(y_test, predictions)")
+            code_lines.append("# Comparacion de los resultados")
+            code_lines.append("compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})")
+            code_lines.append("# Valores de prueba")
+            code_lines.append("compare.Actual.head(10)")
+            code_lines.append("# Valores predichos")
+            code_lines.append("compare.Predicted.head(10)")
+            code_lines.append("Bar plot")
+            code_lines.append("plt.bar(range(10),y_test.head(10))")
+            code_lines.append("plt.bar(range(10),predictions[0:10])")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+
             raise web.seeother('/logisticr')
-        except Exception as e:
-            print(e.args)
+        # except Exception as e:
+            # print(e.args)
 
 
   

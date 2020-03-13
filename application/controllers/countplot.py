@@ -36,6 +36,16 @@ class CountPlot:
             image_name = "static/images/countplot.png"
             print(image_name)
             ax.figure.savefig(image_name)
+
+            code_lines = []
+            code_lines.append("# Countplot")
+            code_lines.append("sn.countplot(data=dataframe, y='" + column +"')")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+
             return render.countplot(column)
         except Exception as e:
             print(e.args)

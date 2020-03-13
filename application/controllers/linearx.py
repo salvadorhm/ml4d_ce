@@ -20,7 +20,7 @@ render = web.template.render('application/views/', base="master")
 
 class LinearX:
 
-    file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
+    file = 'static/csv/temp.csv'  # define el archivo donde se amodelacenan los datos
 
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
@@ -52,7 +52,7 @@ class LinearX:
             print(e.args)
 
     def POST(self):
-        try:
+        # try:
             y = app.sessions['y']
             form = web.input(column = [''])
             # columns = form.column
@@ -73,10 +73,10 @@ class LinearX:
             
             # x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
 
-            lm = LinearRegression()
-            lm.fit(x_train,y_train)
+            model = LinearRegression()
+            model.fit(x_train,y_train)
 
-            predictions = lm.predict(x_test)
+            predictions = model.predict(x_test)
 
             if len(list(x_test)) == 1:
                 print("graficar")
@@ -116,18 +116,64 @@ class LinearX:
             #plt.close(fig)
 
 
-            app.sessions['Coefficients'] = str(lm.coef_)
-            app.sessions['Independent term'] = lm.intercept_
+            app.sessions['Coefficients'] = str(model.coef_)
+            app.sessions['Independent term'] = model.intercept_
             app.sessions['Mean squared error'] = mean_squared_error(y_test, predictions)
             app.sessions['Mean absolute error'] = mean_absolute_error(y_test, predictions)
             app.sessions['Variance'] = r2_score(y_test, predictions)
 
-            predictions_test = lm.predict(x_test)
-            mmmm = pd.DataFrame({"Actual":y_test, "Predicted":predictions_test})
-            app.sessions['Actual test values'] = list(mmmm.Actual.head())
-            app.sessions['Predicted values'] = list(mmmm.Predicted.head())
+            compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
+            app.sessions['Actual test values'] = list(compare.Actual.head())
+            app.sessions['Predicted values'] = list(compare.Predicted.head())
 
-            raise web.seeother('/logisticr')
-        except Exception as e:
-            print(e.args)
+            code_lines = []
+            code_lines.append("# Preparacion del dataframe")
+            code_lines.append("df_x = dataframe["+ str(x_cols) +"]")
+            code_lines.append("df_y = dataframe['"+ y +"']")
+            code_lines.append("# Normalizar dataframe")
+            code_lines.append("df_nor_x = (df_x - df_x.mean())/df_x.std()")
+            code_lines.append("# x")
+            code_lines.append("df_nor_x")
+            code_lines.append("# y")
+            code_lines.append("df_nor_y = (df_y - df_y.mean())/df_y.std()")
+            code_lines.append("df_nor_y")
+            code_lines.append("# Dataframe de entrenamiento y de prueba")
+            code_lines.append("x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)")
+            code_lines.append("# Model de regresion lineal")
+            code_lines.append("model = LinearRegression()")
+            code_lines.append("# Entrenamiento del model")
+            code_lines.append("model.fit(x_train,y_train)")
+            code_lines.append("# Prueba del modelo")
+            code_lines.append("predictions = model.predict(x_test)")
+            code_lines.append("# Evaluacion del modelo")
+            code_lines.append("# Coefficients")
+            code_lines.append("model.coef_")
+            code_lines.append("# Independent term")
+            code_lines.append("model.intercept_")
+            code_lines.append("# Mean squared error")
+            code_lines.append("mean_squared_error(y_test, predictions)")
+            code_lines.append("# Mean absolute error")
+            code_lines.append("mean_absolute_error(y_test, predictions)")
+            code_lines.append("# Variance")
+            code_lines.append("r2_score(y_test, predictions)")
+            code_lines.append("# Comparacion de los resultados")
+            code_lines.append("compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})")
+            code_lines.append("# Valores de prueba")
+            code_lines.append("compare.Actual.head(10)")
+            code_lines.append("# Valores predichos")
+            code_lines.append("compare.Predicted.head(10)")
+            code_lines.append("# Grafica scatter")
+            code_lines.append("plt.scatter(y_test,predictions)")
+            code_lines.append("# Grafica de distribucion")
+            code_lines.append("sn.distplot(y_test - predictions)")
+
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+
+            raise web.seeother('/linearr')
+        # except Exception as e:
+            # print(e.args)
   

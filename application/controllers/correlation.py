@@ -27,17 +27,16 @@ class Correlation:
             result = dataframe.corr()
             correlation = result.to_dict()
 
-            # # save code
-            # code_lines = []
-            # code_lines.append("# Describe '" + field )
-            # code_lines.append("dataframe['" + field + "'].describe()" )
-            # MyFile=open('static/csv/code.py','a+')
-            # for element in code_lines:
-            #     MyFile.write(element+"\n")
-            # MyFile.close()
+            code_lines = []
+            code_lines.append("# Correlation")
+            code_lines.append("dataframe.corr()")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
 
             return render.correlation(correlation)
-            print(correlation)
         except Exception as e:
             print(e.args)
 

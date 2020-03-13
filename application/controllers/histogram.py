@@ -31,6 +31,16 @@ class Histogram:
             nor = sn.distplot(dataframe[column])
             image_name = "static/images/normal.png"
             nor.figure.savefig(image_name)
+
+            code_lines = []
+            code_lines.append("# Histogram de " + column)
+            code_lines.append("sn.distplot(dataframe[" + column + "])")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+
             return render.histogram(column)
         except Exception as e:
             print(e.args)

@@ -49,6 +49,16 @@ class BoxPlot:
             nor.figure.savefig(image_name)
             fig = nor.get_figure()
             #plt.close(fig)
+
+            code_lines = []
+            code_lines.append("# Boxplot")
+            code_lines.append("sn.boxplot(x='"+ x_col +"', y='"+ y_col + "', data= dataframe)")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+
             return render.plots("Boxplot",image_name)
         except Exception as e:
             print(e.args)

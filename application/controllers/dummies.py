@@ -34,6 +34,16 @@ class Dummies:
             dataframe = pd.read_csv(self.file)
             # dummies
             dataframe = pd.get_dummies(dataframe, columns =[column])
+
+            code_lines = []
+            code_lines.append("# Getdummies " + column)
+            code_lines.append("dataframe = pd.get_dummies(dataframe, columns =['" + column + "'])")
+
+            python_code=open('static/csv/code.py','a+')
+            for element in code_lines:
+                python_code.write(element+"\n")
+            python_code.close()
+
             # actualiza el archivo csv
             dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
             print("Dummies")
