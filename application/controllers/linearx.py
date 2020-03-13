@@ -90,7 +90,7 @@ class LinearX:
                 image_name = "static/images/lineal.png"
                 ax.figure.savefig(image_name)
                 fig = ax.get_figure()
-                plt.close(fig)
+                #plt.close(fig)
             else:
                 figure()
                 width=20
@@ -102,7 +102,7 @@ class LinearX:
                 image_name = "static/images/lineal.png"
                 ax.figure.savefig(image_name)
                 fig = ax.get_figure()
-                plt.close(fig)
+                #plt.close(fig)
 
 
             figure()
@@ -113,7 +113,7 @@ class LinearX:
             image_name = "static/images/histogram.png"
             nor.figure.savefig(image_name)
             fig = nor.get_figure()
-            plt.close(fig)
+            #plt.close(fig)
 
 
             app.sessions['Coefficients'] = str(lm.coef_)

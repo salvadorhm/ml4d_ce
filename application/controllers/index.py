@@ -56,7 +56,7 @@ class Index:
                 for element in code_lines:
                     MyFile.write(element+"\n")
                 MyFile.close()
-                raise web.seeother('/general') 
+                raise web.seeother('/head') 
             else: 
                 message ="The file it's not a CSV"
                 return render.index(message)

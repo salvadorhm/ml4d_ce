@@ -24,26 +24,6 @@ class Describe:
     def GET(self):
         try:
             dataframe = pd.read_csv(self.file)
-            # dtype = dict(dataframe.dtypes)
-
-            # h = []
-            # for i in dtype:
-            #     if dtype[i]!= "object":
-            #         h.append(i)
-
-            # figure()
-            # width=20
-            # height=8
-            # figure(figsize=(width,height))
-            # hist = sn.distplot(dataframe[h])
-            # image_name = "static/images/hist.png"
-            # hist.figure.savefig(image_name)
-            # return render.histogram(column)
-            # d = []
-            # for row in h:
-            #     d.append(dataframe[row].describe())
-            # print(d)
-
             de = dataframe.describe().to_dict()
             return render.describe(de)
         except Exception as e:

@@ -48,7 +48,7 @@ class CountPlot2:
             image_name = "static/images/countplot2.png"
             nor.figure.savefig(image_name)
             fig = nor.get_figure()
-            plt.close(fig)
+            #plt.close(fig)
             return render.plots("Countplot",image_name)
         except Exception as e:
             print(e.args)

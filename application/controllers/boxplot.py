@@ -48,7 +48,7 @@ class BoxPlot:
             image_name = "static/images/boxplot.png"
             nor.figure.savefig(image_name)
             fig = nor.get_figure()
-            plt.close(fig)
+            #plt.close(fig)
             return render.plots("Boxplot",image_name)
         except Exception as e:
             print(e.args)
