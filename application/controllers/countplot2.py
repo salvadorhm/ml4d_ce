@@ -37,12 +37,14 @@ class CountPlot2:
         try:
             dataframe = pd.read_csv(self.file)
             form = web.input(column = [''])
-            col = form.column
+            form = web.input()
+            x_col = form.x
+            hue_col = form.hue
             figure()
             width=20
             height=8
             figure(figsize=(width,height))
-            nor = sn.countplot(x=col[0], hue=col[1], data= dataframe)
+            nor = sn.countplot(x=x_col, hue=hue_col, data= dataframe)
             image_name = "static/images/countplot2.png"
             nor.figure.savefig(image_name)
             fig = nor.get_figure()

@@ -37,13 +37,14 @@ class BoxPlot:
     def POST(self):
         try:
             dataframe = pd.read_csv(self.file)
-            form = web.input(column = [''])
-            col = form.column
+            form = web.input()
+            x_col = form.x
+            y_col = form.y
             figure()
             width=20
             height=8
             figure(figsize=(width,height))
-            nor = sn.boxplot(x=col[0], y=col[1], data= dataframe)
+            nor = sn.boxplot(x=x_col, y=y_col, data= dataframe)
             image_name = "static/images/boxplot.png"
             nor.figure.savefig(image_name)
             fig = nor.get_figure()

@@ -1,19 +1,22 @@
 $def with(columns)
-<h1>Choose X column and Y column</h1>
+<h1>Boxplot</h1>
 <form action="" method="post" enctype="multipart/form-data">
-    <table class="table table-hover scroll">
-        <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
-            <tr>
-                <th>Columns</th>
-            </tr>
-        </thead>
-        <tbody>
+    <div class="form-group">
+        <label for="x"><h3>x column</h3></label>
+        <select class="form-control" id="x" name="x">
+            $ no = 0
             $for row in columns:
-                <tr>
-                    <td><input type="checkbox" id="column" name="column" value="$row"> $row</td>
-                </tr>
-        </tbody>
-    </table>
+                <option value="$row">$row</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="y"><h3>Y column</h3></label>
+        <select class="form-control" id="y" name="y">
+            $for row in columns:
+                <option value="$row">$row</option>
+        </select>
+    </div>
     <div class="form-group">
         <label></label>
         <button id="send" name="send" class="btn btn-primary">Boxplot</button>

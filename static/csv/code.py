@@ -593,3 +593,7 @@ from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 # Creando el Dataframe para trabajar
 dataframe = pd.read_csv('regresion_logistica.csv')
+# Revisando si tiene NaN la columna 'Age'
+dataframe['Age'].isnull().sum()
+# Describe columna 'Age'
+dataframe['Age'].describe()
