@@ -14,6 +14,8 @@ from sklearn.linear_model import LogisticRegression
 from matplotlib.pyplot import figure, show
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
+from sklearn.metrics import roc_curve, auc
+
 
 
 render = web.template.render('application/views/', base="master")
@@ -76,6 +78,22 @@ class LogisticX:
             plt.bar(range(10),predictions[0:10])
             
             image_name = "static/images/logistic.png"
+            plt.savefig(image_name)
+
+
+            figure()
+            width=20
+            height=8
+            figure(figsize=(width,height))
+            fpr, tpr, thresholds = roc_curve(y_test, predictions)
+            plt.plot(fpr,tpr)
+            plt.xlim([0.0, 1.0])
+            plt.ylim([0.0, 1.0])
+            plt.title('ROC curve del modelo de Droop')
+            plt.xlabel('False positive rate (1-Specificity)')
+            plt.ylabel('True positive rate (Sensitivity)')
+            plt.grid(True)
+            image_name = "static/images/roc.png"
             plt.savefig(image_name)
 
             

@@ -16,6 +16,7 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 
 
+
 render = web.template.render('application/views/', base="master")
 
 class LinearX:
@@ -115,6 +116,8 @@ class LinearX:
             fig = nor.get_figure()
             #plt.close(fig)
 
+            
+
 
             app.sessions['Coefficients'] = str(model.coef_)
             app.sessions['Independent term'] = model.intercept_
@@ -125,6 +128,8 @@ class LinearX:
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             app.sessions['Actual test values'] = list(compare.Actual.head())
             app.sessions['Predicted values'] = list(compare.Predicted.head())
+
+
 
             code_lines = []
             code_lines.append("# Preparacion del dataframe")
