@@ -78,3 +78,29 @@ dataframe.head()
 sn.distplot(dataframe[y61])
 # Head
 dataframe.head()
+# Describe
+dataframe.describe()
+# Describe
+dataframe.describe()
+# Head
+dataframe.head()
+# Correlation
+dataframe.corr()
+# Describe
+dataframe.describe()
+# Describe
+dataframe.describe()
+# Describe
+dataframe.describe()
+# Head
+dataframe.head()
+# Head
+dataframe.head()
+# Head
+dataframe.head()
+# Correlation
+dataframe.corr()
+# Describe
+dataframe.describe()
+# Head
+dataframe.head()
