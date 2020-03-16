@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import app
+import wdmt
 
 
 render = web.template.render('application/views/', base="master")

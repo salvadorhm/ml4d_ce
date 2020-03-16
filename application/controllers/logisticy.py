@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import app
+import wdmt
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -34,7 +34,7 @@ class LogisticY:
         try:
             form = web.input()
             y = form.column
-            app.sessions['y']=y
+            wdmt.sessions['y']=y
             raise web.seeother('/logisticx')
         except Exception as e:
             print(e.args)

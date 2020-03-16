@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import app
+import wdmt
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -21,7 +21,7 @@ class LogisticR:
 
     def GET(self):
         try:
-            return render.logisticr(app.sessions)
+            return render.logisticr(wdmt.sessions)
         except Exception as e:
             print(e.args)
 

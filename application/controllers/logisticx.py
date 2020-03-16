@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import app
+import wdmt
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -32,7 +32,7 @@ class LogisticX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = app.sessions['y']
+            y = wdmt.sessions['y']
 
             columns = []
             types = []
@@ -51,10 +51,10 @@ class LogisticX:
 
     def POST(self):
         # try:
-            y = app.sessions['y']
+            y = wdmt.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
-            app.sessions['x']=list(x_cols)
+            wdmt.sessions['x']=list(x_cols)
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -98,14 +98,14 @@ class LogisticX:
             plt.savefig(image_name)
 
             
-            app.sessions['Report'] = report
-            app.sessions['Confusion matrix'] = list(confusion)
-            app.sessions['Score'] = model.score(x_test,y_test)
-            app.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
+            wdmt.sessions['Report'] = report
+            wdmt.sessions['Confusion matrix'] = list(confusion)
+            wdmt.sessions['Score'] = model.score(x_test,y_test)
+            wdmt.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
 
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-            app.sessions['Real test values'] = list(compare.Actual.head(10))
-            app.sessions['Predicted values'] = list(compare.Predicted.head(10))
+            wdmt.sessions['Real test values'] = list(compare.Actual.head(10))
+            wdmt.sessions['Predicted values'] = list(compare.Predicted.head(10))
 
 
             code_lines = []
