@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import wdmt  # Application
+import webdataminingtool  # Application
 import shutil # Maneja archivos y directorios.
 import cgi,os # Ejecuta un programa en el servidor y despliega su resultado hacia el cliente.
 import cgitb # Proporciona un controlador especial para scripts de Python. 
@@ -21,7 +21,7 @@ class Index:
     def GET(self,**k):
         try:
             message = None
-            app_version = wdmt.app_version
+            app_version = webdataminingtool.app_version
             return render.index(message, app_version)
         except Exception as e:
             print(e.args)

@@ -1,5 +1,5 @@
 import web
-import wdmt
+import webdataminingtool
 
 class SaveCode:
 

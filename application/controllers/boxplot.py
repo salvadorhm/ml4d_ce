@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import wdmt
+import webdataminingtool
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -29,7 +29,7 @@ class BoxPlot:
 
     def GET(self):
         try:
-            wdmt.sessions = {}
+            webdataminingtool.sessions = {}
             dataframe = pd.read_csv(self.file)
             columns = list(dataframe)
             return render.boxplot(columns)

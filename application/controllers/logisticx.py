@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import wdmt
+import webdataminingtool
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -32,7 +32,7 @@ class LogisticX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = wdmt.sessions['y']
+            y = webdataminingtool.sessions['y']
 
             columns = []
             types = []
@@ -51,10 +51,10 @@ class LogisticX:
 
     def POST(self):
         # try:
-            y = wdmt.sessions['y']
+            y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
-            wdmt.sessions['x']=list(x_cols)
+            webdataminingtool.sessions['x']=list(x_cols)
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -98,14 +98,14 @@ class LogisticX:
             plt.savefig(image_name)
 
             
-            wdmt.sessions['Report'] = report
-            wdmt.sessions['Confusion matrix'] = list(confusion)
-            wdmt.sessions['Score'] = model.score(x_test,y_test)
-            wdmt.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
+            webdataminingtool.sessions['Report'] = report
+            webdataminingtool.sessions['Confusion matrix'] = list(confusion)
+            webdataminingtool.sessions['Score'] = model.score(x_test,y_test)
+            webdataminingtool.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
 
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-            wdmt.sessions['Real test values'] = list(compare.Actual.head(10))
-            wdmt.sessions['Predicted values'] = list(compare.Predicted.head(10))
+            webdataminingtool.sessions['Real test values'] = list(compare.Actual.head(10))
+            webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head(10))
 
 
             code_lines = []

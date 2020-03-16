@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import wdmt 
+import webdataminingtool 
 
 render = web.template.render('application/views/', base="master")
 
@@ -10,7 +10,7 @@ class About:
 
     def GET(self):
         try:
-            app_version = wdmt.app_version
+            app_version = webdataminingtool.app_version
             return render.about(app_version)
         except Exception as e:
             print(e.args)

@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import wdmt
+import webdataminingtool
 
 
 render = web.template.render('application/views/', base="master")

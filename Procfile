@@ -1,1 +1,1 @@
-web: python wdmt.py $PORT
+web: python webdataminingtool.py $PORT

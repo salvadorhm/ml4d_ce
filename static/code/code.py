@@ -62,3 +62,19 @@ plt.bar(range(10),predictions[0:10])
 dataframe.corr()
 # Head
 dataframe.head()
+# Head
+dataframe.head()
+# Heatmap nulls
+sn.heatmap(dataframe.isnull())
+# Countplot
+sn.countplot(x='drop', hue='x0', data= dataframe)
+# Describe
+dataframe.describe()
+# Correlation
+dataframe.corr()
+# Head
+dataframe.head()
+# Histogram de y61
+sn.distplot(dataframe[y61])
+# Head
+dataframe.head()

@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import wdmt
+import webdataminingtool
 import csv  # CSV parser
 import pandas as pd
 import numpy as np
@@ -28,7 +28,7 @@ class CountPlot2:
 
     def GET(self):
         try:
-            wdmt.sessions = {}
+            webdataminingtool.sessions = {}
             dataframe = pd.read_csv(self.file)
             columns = list(dataframe)
             return render.countplot2(columns)

@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import wdmt
+import webdataminingtool
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -21,7 +21,7 @@ class LinearR:
 
     def GET(self):
         try:
-            return render.linearr(wdmt.sessions)
+            return render.linearr(webdataminingtool.sessions)
         except Exception as e:
             print(e.args)
 

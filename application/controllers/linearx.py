@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import wdmt
+import webdataminingtool
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -30,7 +30,7 @@ class LinearX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = wdmt.sessions['y']
+            y = webdataminingtool.sessions['y']
 
             columns = []
             types = []
@@ -49,11 +49,11 @@ class LinearX:
 
     def POST(self):
         # try:
-            y = wdmt.sessions['y']
+            y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             # columns = form.column
             x_cols = form.column
-            wdmt.sessions['x']=list(x_cols)
+            webdataminingtool.sessions['x']=list(x_cols)
             dataframe = pd.read_csv(self.file)
             # columns.append(y)
             # df = dataframe[columns]
@@ -114,15 +114,15 @@ class LinearX:
             
 
 
-            wdmt.sessions['Coefficients'] = str(model.coef_)
-            wdmt.sessions['Independent term'] = model.intercept_
-            wdmt.sessions['Mean squared error'] = mean_squared_error(y_test, predictions)
-            wdmt.sessions['Mean absolute error'] = mean_absolute_error(y_test, predictions)
-            wdmt.sessions['Variance'] = r2_score(y_test, predictions)
+            webdataminingtool.sessions['Coefficients'] = str(model.coef_)
+            webdataminingtool.sessions['Independent term'] = model.intercept_
+            webdataminingtool.sessions['Mean squared error'] = mean_squared_error(y_test, predictions)
+            webdataminingtool.sessions['Mean absolute error'] = mean_absolute_error(y_test, predictions)
+            webdataminingtool.sessions['Variance'] = r2_score(y_test, predictions)
 
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-            wdmt.sessions['Actual test values'] = list(compare.Actual.head())
-            wdmt.sessions['Predicted values'] = list(compare.Predicted.head())
+            webdataminingtool.sessions['Actual test values'] = list(compare.Actual.head())
+            webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head())
 
 
 
