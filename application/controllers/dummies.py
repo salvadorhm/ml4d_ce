@@ -10,6 +10,9 @@ import seaborn as sn
 from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
+
 render = web.template.render('application/views/', base="master")
 
 class Dummies:
@@ -38,15 +41,10 @@ class Dummies:
             code_lines = []
             code_lines.append("# Getdummies " + column)
             code_lines.append("dataframe = pd.get_dummies(dataframe, columns =['" + column + "'])")
-
-            python_code=open('static/csv/code.py','a+')
-            for element in code_lines:
-                python_code.write(element+"\n")
-            python_code.close()
+            sc.append(code_lines)
 
             # actualiza el archivo csv
             dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
-            print("Dummies")
             raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)

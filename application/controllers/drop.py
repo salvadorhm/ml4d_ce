@@ -10,6 +10,9 @@ import seaborn as sn
 from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
+
 render = web.template.render('application/views/', base="master")
 
 class Drop:
@@ -23,10 +26,6 @@ class Drop:
     def GET(self,column):
         try:
             dataframe = pd.read_csv(self.file)
-            print(column)
-            # dataframe.drop(['Prospect ID'],axis=1,inplace=True)
-            # dataframe.drop(['Lead Number'],axis=1,inplace=True)
-            # dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
             return render.drop(column)
         except Exception as e:
             print(e.args)
@@ -37,8 +36,13 @@ class Drop:
             column = form['column']
             dataframe = pd.read_csv(self.file)
             dataframe.drop([column],axis=1,inplace=True)
+
             dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
-            print("Borrado")
+
+            code_lines = []
+            code_lines.append("# Drop")
+            code_lines.append("dataframe.drop(['"+ column + "'],axis=1,inplace=True)")
+            sc.append(code_lines)
             raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)

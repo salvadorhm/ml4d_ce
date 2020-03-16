@@ -14,6 +14,8 @@ from matplotlib.pyplot import figure, show
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
 
 render = web.template.render('application/views/', base="master")
 
@@ -53,11 +55,7 @@ class CountPlot2:
             code_lines = []
             code_lines.append("# Countplot")
             code_lines.append("sn.countplot(x='"+ x_col +"', hue='"+ hue_col + "', data= dataframe)")
-
-            python_code=open('static/csv/code.py','a+')
-            for element in code_lines:
-                python_code.write(element+"\n")
-            python_code.close()
+            sc.append(code_lines)
 
             return render.plots("Countplot",image_name)
         except Exception as e:

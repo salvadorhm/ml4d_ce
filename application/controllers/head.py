@@ -11,6 +11,9 @@ import seaborn as sn
 from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
+
 render = web.template.render('application/views/', base="master")
 
 class Head:
@@ -29,11 +32,7 @@ class Head:
             code_lines = []
             code_lines.append("# Head")
             code_lines.append("dataframe.head()")
-
-            python_code=open('static/csv/code.py','a+')
-            for element in code_lines:
-                python_code.write(element+"\n")
-            python_code.close()
+            sc.append(code_lines)
 
             return render.head(head)
         except Exception as e:

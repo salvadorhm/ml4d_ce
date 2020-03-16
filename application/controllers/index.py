@@ -5,9 +5,13 @@ import cgi,os # Ejecuta un programa en el servidor y despliega su resultado haci
 import cgitb # Proporciona un controlador especial para scripts de Python. 
 import os, sys
 
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
+
 cgitb.enable
 
 render = web.template.render('application/views/', base="master")
+
 
 class Index:
 
@@ -37,9 +41,9 @@ class Index:
             filename = filepath.split('/')[-1] # splits the and chooses the last part (the filename with extension)
             if os.path.splitext(filepath)[1] == ".csv":  # Extención del archivo
                 fn = os.path.basename(form.csv_file.filename)
-                file = open('static/csv/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
+                file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
                 new_filename = "temp.csv"
-                shutil.copy('static/csv/'+fn, filedir + new_filename)
+                shutil.copy('static/uploads/'+fn, filedir + new_filename)
                 code_lines = []
                 code_lines.append("# Librerias")
                 code_lines.append("import csv # CSV parser")
@@ -64,11 +68,7 @@ class Index:
                 code_lines.append("dataframe.describe()")
                 code_lines.append("# Dataframe")
                 code_lines.append("dataframe")
-
-                python_code=open('static/csv/code.py','w')
-                for element in code_lines:
-                    python_code.write(element+"\n")
-                python_code.close()
+                sc.create(code_lines)
                 raise web.seeother('/head') 
             else: 
                 message ="The file it's not a CSV"

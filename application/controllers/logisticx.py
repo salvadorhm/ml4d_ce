@@ -15,7 +15,8 @@ from matplotlib.pyplot import figure, show
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve, auc
-
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
 
 
 render = web.template.render('application/views/', base="master")
@@ -138,15 +139,10 @@ class LogisticX:
             code_lines.append("compare.Actual.head(10)")
             code_lines.append("# Valores predichos")
             code_lines.append("compare.Predicted.head(10)")
-            code_lines.append("Bar plot")
+            code_lines.append("# Bar plot")
             code_lines.append("plt.bar(range(10),y_test.head(10))")
             code_lines.append("plt.bar(range(10),predictions[0:10])")
-
-            python_code=open('static/csv/code.py','a+')
-            for element in code_lines:
-                python_code.write(element+"\n")
-            python_code.close()
-
+            sc.append(code_lines)
             raise web.seeother('/logisticr')
         # except Exception as e:
             # print(e.args)

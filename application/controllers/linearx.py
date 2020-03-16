@@ -14,8 +14,8 @@ from sklearn.linear_model import LinearRegression
 from matplotlib.pyplot import figure, show
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
-
-
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
 
 render = web.template.render('application/views/', base="master")
 
@@ -36,11 +36,6 @@ class LinearX:
             types = []
             nulls = []
             correlation = []
-            # print(index)
-            # print(len(cols))
-            # print(len(types))
-            # print(len(nulls))
-            # print(len(correlation))
             cols.remove(y)
             for row in cols:
                 if dataframe[row].dtypes != 'object':
@@ -171,13 +166,7 @@ class LinearX:
             code_lines.append("plt.scatter(y_test,predictions)")
             code_lines.append("# Grafica de distribucion")
             code_lines.append("sn.distplot(y_test - predictions)")
-
-
-            python_code=open('static/csv/code.py','a+')
-            for element in code_lines:
-                python_code.write(element+"\n")
-            python_code.close()
-
+            sc.append(code_lines)
             raise web.seeother('/linearr')
         # except Exception as e:
             # print(e.args)

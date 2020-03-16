@@ -11,6 +11,9 @@ import seaborn as sn
 from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
+
 render = web.template.render('application/views/', base="master")
 
 class CountPlot:
@@ -29,10 +32,6 @@ class CountPlot:
             height=8
             figure(figsize=(width,height))
             ax = sn.countplot(data=dataframe, y=column)
-            # plt.xticks(rotation=70)
-            # plt.rcParams['xtick.labelsize'] = 15
-            # plt.rcParams['axes.labelsize'] = 200
-            # ax = sn.countplot(dataframe[column])
             image_name = "static/images/countplot.png"
             print(image_name)
             ax.figure.savefig(image_name)
@@ -40,11 +39,7 @@ class CountPlot:
             code_lines = []
             code_lines.append("# Countplot")
             code_lines.append("sn.countplot(data=dataframe, y='" + column +"')")
-
-            python_code=open('static/csv/code.py','a+')
-            for element in code_lines:
-                python_code.write(element+"\n")
-            python_code.close()
+            sc.append(code_lines)
 
             return render.countplot(column)
         except Exception as e:

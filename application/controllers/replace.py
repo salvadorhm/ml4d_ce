@@ -9,6 +9,8 @@ import matplotlib.pyplot as plt
 import seaborn as sn
 from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
 
 render = web.template.render('application/views/', base="master")
 
@@ -39,10 +41,7 @@ class Replace:
             code_lines = []
             code_lines.append("# Describe columna '"+column+"'")
             code_lines.append("dataframe['" + column + "'].describe()" )
-            MyFile=open('static/csv/code.py','a+')
-            for element in code_lines:
-                MyFile.write(element+"\n")
-            MyFile.close()
+            sc.append(code_lines)
 
             if dtypes == 'object':
                 print("Col:{} mode: {}".format(column,dataframe[column].mode()[0]))
@@ -68,17 +67,10 @@ class Replace:
             dataframe[column].replace({actual : new}, inplace=True, regex=True)
             dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
 
-            '''
-                guardar el codigo generado
-            '''
             code_lines = []
             code_lines.append("# Remplazando '" +  actual + "' por '" + new + "' en la columna '" + column +"'")
             code_lines.append("dataframe['" + column + "'].replace({'" + actual +"':'" + new +"'}, inplace=True, regex=True)")
-            MyFile=open('static/csv/code.py','a+')
-            for element in code_lines:
-                MyFile.write(element+"\n")
-            MyFile.close()
-
+            sc.append(code_lines)
             raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)

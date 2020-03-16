@@ -11,6 +11,9 @@ import seaborn as sn
 from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
 
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
+
 render = web.template.render('application/views/', base="master")
 
 class Field:
@@ -44,10 +47,7 @@ class Field:
             code_lines = []
             code_lines.append("# Describe '" + field )
             code_lines.append("dataframe['" + field + "'].describe()" )
-            MyFile=open('static/csv/code.py','a+')
-            for element in code_lines:
-                MyFile.write(element+"\n")
-            MyFile.close()
+            sc.append(code_lines)
             return render.field(describe, correlation, field)
         except Exception as e:
             print(e.args)

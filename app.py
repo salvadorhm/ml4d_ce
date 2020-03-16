@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.5.13"  # version de la webapp
+app_version = "0.5.14"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
@@ -38,6 +38,5 @@ app = web.application(urls, globals())
 sessions ={}
 if __name__ == "__main__":
     web.config.debug = False
-    
     print(sessions)
     app.run()

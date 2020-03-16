@@ -24,9 +24,6 @@ class Detail:
     def GET(self):
         try:
             dataframe = pd.read_csv(self.file)
-            # dataframe.drop(['Prospect ID'],axis=1,inplace=True)
-            # dataframe.drop(['Lead Number'],axis=1,inplace=True)
-            # dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
             head = [dataframe.head()]
             cols = list(dataframe)
             nulls = list(dataframe.isnull().sum())
@@ -37,8 +34,6 @@ class Detail:
             median = []
             for col in cols:
                 unique.append(len(dataframe[col].unique()))
-                # mode.append(dataframe[col].mode())
-                # mean.append(dataframe[col].mean())
 
             for i in range(len(dtypes)):
                 if dtypes[i] == 'object':

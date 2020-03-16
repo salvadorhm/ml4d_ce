@@ -15,7 +15,7 @@ class Notebook:
     def GET(self):
         try:
             nb = new_notebook()
-            with open("static/csv/code.py") as f:
+            with open("static/code/code.py") as f:
                 reader = f.readlines()
                 code = []
                 block = False
@@ -30,7 +30,7 @@ class Notebook:
                     elif row.startswith("#",0) == False:
                         code.append(row)
                 nb.cells.append(new_code_cell(code))
-            nbformat.write(nb, 'static/csv/notebook.ipynb')
+            nbformat.write(nb, 'static/code/notebook.ipynb')
             return render.notebook()
         except Exception as e:
             print(e.args)

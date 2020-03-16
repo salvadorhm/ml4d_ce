@@ -35,9 +35,6 @@ class LinearY:
             form = web.input()
             y = form.column
             app.sessions['y']=y
-            # dataframe = pd.read_csv(self.file)
-            # cols = list(dataframe)
-            # return render.lineal(cols)
             raise web.seeother('/linearx')
         except Exception as e:
             print(e.args)
