@@ -1,19 +1,12 @@
 import web  # pip install web.py
 import webdataminingtool
 import csv  # CSV parser
-import json  # json parser
 import pandas as pd
 import numpy as np
-import statsmodels.api as sm
-import scipy.stats as st
 import matplotlib.pyplot as plt
 import seaborn as sn
-from sklearn.metrics import confusion_matrix
 import matplotlib.mlab as mlab
-from sklearn.linear_model import LinearRegression
 from matplotlib.pyplot import figure, show
-from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
-from sklearn.model_selection import train_test_split
 
 from application.controllers.save_code import SaveCode
 sc = SaveCode()

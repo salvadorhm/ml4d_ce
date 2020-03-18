@@ -3,13 +3,13 @@ import csv  # CSV parser
 import json  # json parser
 import pandas as pd
 import numpy as np
-import statsmodels.api as sm
-import scipy.stats as st
-import matplotlib.pyplot as plt
+# import statsmodels.api as sm
+# import scipy.stats as st
+# import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure, show
 import seaborn as sn
-from sklearn.metrics import confusion_matrix
-import matplotlib.mlab as mlab
+# from sklearn.metrics import confusion_matrix
+# import matplotlib.mlab as mlab
 
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
