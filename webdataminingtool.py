@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.5.17"  # version de la webapp
+app_version = "0.5.18"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
@@ -35,8 +35,14 @@ urls = (
     '/correlation','application.controllers.correlation.Correlation',
 )
 webdataminingtool = web.application(urls, globals())
-sessions ={}
-if __name__ == "__main__":
+sessions ={"status":"online","url":"localhost:8080"}
+
+def main():
     web.config.debug = False
     print(sessions)
+    print(os.path.dirname(os.path.abspath(__file__)))
     webdataminingtool.run()
+
+if __name__ == "__main__":
+    
+    main()
