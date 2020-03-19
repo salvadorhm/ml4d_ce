@@ -22,6 +22,7 @@ class LinearY:
             return render.lineary(cols,types,nulls)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self):
         try:
@@ -32,6 +33,7 @@ class LinearY:
             raise web.seeother('/linearx')
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
 
   

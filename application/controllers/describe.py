@@ -37,5 +37,6 @@ class Describe:
             return render.describe(de)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

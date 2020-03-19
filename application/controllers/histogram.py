@@ -38,5 +38,6 @@ class Histogram:
             return render.histogram(column)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

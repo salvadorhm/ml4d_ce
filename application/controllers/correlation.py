@@ -31,5 +31,6 @@ class Correlation:
             return render.correlation(correlation)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

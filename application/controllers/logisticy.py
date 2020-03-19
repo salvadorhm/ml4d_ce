@@ -22,6 +22,7 @@ class LogisticY:
             return render.logisticy(cols,types,nulls)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self):
         try:
@@ -32,6 +33,7 @@ class LogisticY:
             raise web.seeother('/logisticx')
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
 
   

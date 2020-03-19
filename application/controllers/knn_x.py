@@ -54,9 +54,10 @@ class KnnX():
             return render.knn_x(columns,types,nulls,correlation)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self):
-        # try:
+        try:
             y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
@@ -176,8 +177,9 @@ class KnnX():
             # code_lines.append("plt.bar(range(10),predictions[0:10])")
             # sc.append(code_lines)
             raise web.seeother('/knn_r')
-        # except Exception as e:
-            # print(e.args)
+        except Exception as e:
+            print(e.args)
+            return render.error(e.args[0])
 
 
   

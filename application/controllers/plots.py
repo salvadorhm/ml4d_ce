@@ -14,5 +14,6 @@ class Plots:
             return render.plots(title,image)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

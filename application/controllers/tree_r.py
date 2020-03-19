@@ -14,5 +14,6 @@ class TreeR:
             return render.tree_r(webdataminingtool.sessions)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

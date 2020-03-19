@@ -44,5 +44,6 @@ class Field:
             return render.field(describe, correlation, field)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

@@ -46,9 +46,10 @@ class LinearX:
             return render.linearx(columns,types,nulls,correlation)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self):
-        # try:
+        try:
             y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             # columns = form.column
@@ -168,6 +169,7 @@ class LinearX:
             code_lines.append("sn.distplot(y_test - predictions)")
             sc.append(code_lines)
             raise web.seeother('/linearr')
-        # except Exception as e:
-            # print(e.args)
+        except Exception as e:
+            print(e.args)
+            return render.error(e.args[0])
   

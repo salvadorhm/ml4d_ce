@@ -50,6 +50,7 @@ class Replace:
             return render.replace(column,nulls,dtypes,unique,mode,mean,median)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self, column):
         try:
@@ -68,5 +69,6 @@ class Replace:
             raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

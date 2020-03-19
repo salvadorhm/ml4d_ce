@@ -22,6 +22,7 @@ class Drop:
             return render.drop(column)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
     
     def POST(self, column):
         try:
@@ -39,5 +40,6 @@ class Drop:
             raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

@@ -14,5 +14,6 @@ class KnnR:
             return render.knn_r(webdataminingtool.sessions)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

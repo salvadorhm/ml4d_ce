@@ -37,5 +37,6 @@ class HeatmapNull:
             return render.plots("Heatmap null", image_name)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

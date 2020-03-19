@@ -50,9 +50,10 @@ class SvcX():
             return render.svc_x(columns,types,nulls,correlation)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self):
-        # try:
+        try:
             y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
@@ -119,8 +120,9 @@ class SvcX():
             # code_lines.append("plt.bar(range(10),predictions[0:10])")
             # sc.append(code_lines)
             raise web.seeother('/svc_r')
-        # except Exception as e:
-            # print(e.args)
+        except Exception as e:
+            print(e.args)
+            return render.error(e.args[0])
 
 
   

@@ -27,6 +27,7 @@ class CountPlot2:
             return render.countplot2(columns)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self):
         try:
@@ -53,4 +54,5 @@ class CountPlot2:
             return render.plots("Countplot",image_name)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
  

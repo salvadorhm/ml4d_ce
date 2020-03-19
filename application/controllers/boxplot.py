@@ -53,4 +53,5 @@ class BoxPlot:
             return render.plots("Boxplot",image_name)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
  

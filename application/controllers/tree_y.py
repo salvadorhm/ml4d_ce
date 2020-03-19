@@ -22,6 +22,7 @@ class TreeY:
             return render.tree_y(cols,types,nulls)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self):
         try:
@@ -32,6 +33,4 @@ class TreeY:
             raise web.seeother('/tree_x')
         except Exception as e:
             print(e.args)
-
-
-  
+            return render.error(e.args[0])

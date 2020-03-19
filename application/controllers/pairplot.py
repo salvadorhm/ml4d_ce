@@ -53,4 +53,5 @@ class PairPlot:
             return render.plots("Pairplot",image_name)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
  

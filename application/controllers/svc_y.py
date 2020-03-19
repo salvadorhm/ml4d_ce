@@ -22,6 +22,7 @@ class SvcY:
             return render.svc_y(cols,types,nulls)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
     def POST(self):
         try:
@@ -32,6 +33,7 @@ class SvcY:
             raise web.seeother('/svc_x')
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
 
   

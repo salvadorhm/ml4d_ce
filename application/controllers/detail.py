@@ -44,5 +44,6 @@ class Detail:
             return render.detail(cols,nulls,dtypes,unique,mode,mean,median)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   

@@ -23,3 +23,9 @@ dataframe.describe()
 dataframe
 # Head
 dataframe.head()
+# Head
+dataframe.head()
+# Heatmap nulls
+sn.heatmap(dataframe.isnull())
+# Heatmap nulls
+sn.heatmap(dataframe.isnull())

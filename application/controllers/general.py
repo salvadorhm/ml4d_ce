@@ -34,5 +34,6 @@ class General:
             return render.general(cols,values, duplicates,nulls,dtypes)
         except Exception as e:
             print(e.args)
+            return render.error(e.args[0])
 
   
