@@ -11,6 +11,12 @@ $def with(cols,types,nulls,correlation)
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td><input type="checkbox" onClick="toggle(this)"> Select all</td>
+                <td></td>
+                <td></td>
+            </tr>
+
             $ no = 0
             $for i in range(len(cols)):
                 $if types[i] != "object" and nulls[i] == 0:
@@ -31,3 +37,12 @@ $def with(cols,types,nulls,correlation)
         <button id="send" name="send" class="btn btn-primary">Select X</button>
     </div>
 </form>
+
+<script language="JavaScript">
+    function toggle(source){
+        checkboxes  = document.getElementsByName("column");
+        for(var i=0, n=checkboxes.length;i<n;i++){
+            checkboxes[i].checked = source.checked;
+        }
+    }
+</script>

@@ -27,6 +27,7 @@ class LinearY:
         try:
             form = web.input()
             y = form.column
+            webdataminingtool.sessions = {}
             webdataminingtool.sessions['y']=y
             raise web.seeother('/linearx')
         except Exception as e:
