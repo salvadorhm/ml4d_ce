@@ -63,6 +63,10 @@ class KnnX():
 
     def POST(self):
         try:
+            try:
+                filename = webdataminingtool.file['filename']
+            except Exception as e:
+                filename = "temp.csv"
             y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
@@ -135,6 +139,9 @@ class KnnX():
             # image_name = "static/images/roc.png"
             # plt.savefig(image_name)
 
+            webdataminingtool.sessions['filename']= filename
+            webdataminingtool.sessions['y'] = y 
+            webdataminingtool.sessions['x'] = list(x_cols)
             webdataminingtool.sessions["N_neighbors"] = n
             webdataminingtool.sessions['Report'] = report
             webdataminingtool.sessions['Confusion matrix'] = list(confusion)

@@ -59,6 +59,10 @@ class SvcX():
 
     def POST(self):
         try:
+            try:
+                filename = webdataminingtool.file['filename']
+            except Exception as e:
+                filename = "temp.csv"
             y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
@@ -77,7 +81,9 @@ class SvcX():
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
-            
+            webdataminingtool.sessions['filename']= filename
+            webdataminingtool.sessions['y'] = y 
+            webdataminingtool.sessions['x'] = list(x_cols)
             webdataminingtool.sessions['Gamma'] = "auto"
             webdataminingtool.sessions['Report'] = report
             webdataminingtool.sessions['Confusion matrix'] = list(confusion)

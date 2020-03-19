@@ -45,7 +45,7 @@ class CompareX():
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
             y = webdataminingtool.sessions['y']
-
+            
             columns = []
             types = []
             nulls = []
@@ -69,10 +69,15 @@ class CompareX():
 
     def POST(self):
         try:
+            try:
+                filename = webdataminingtool.file['filename']
+            except Exception as e:
+                filename = "temp.csv"
             y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
             webdataminingtool.sessions['x']=list(x_cols)
+            webdataminingtool.sessions['y']= y
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -119,7 +124,9 @@ class CompareX():
             image_name = "static/images/knn.png"
             plt.savefig(image_name)
       
-
+            webdataminingtool.knn['filename']= filename
+            webdataminingtool.knn['x']=list(x_cols)
+            webdataminingtool.knn['y']= y
             webdataminingtool.knn["N_neighbors"] = n
             webdataminingtool.knn['Report'] = report
             webdataminingtool.knn['Confusion matrix'] = list(confusion)
@@ -142,7 +149,9 @@ class CompareX():
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
-            
+            webdataminingtool.tree['filename']= filename
+            webdataminingtool.tree['x']=list(x_cols)
+            webdataminingtool.tree['y']= y
             webdataminingtool.tree['Report'] = report
             webdataminingtool.tree['Confusion matrix'] = list(confusion)
             webdataminingtool.tree['Score'] = tree.score(x_test,y_test)
@@ -164,7 +173,9 @@ class CompareX():
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
-            
+            webdataminingtool.randomf['filename']= filename
+            webdataminingtool.randomf['x']=list(x_cols)
+            webdataminingtool.randomf['y']= y
             webdataminingtool.randomf['N_estimators'] = 80
             webdataminingtool.randomf['Report'] = report
             webdataminingtool.randomf['Confusion matrix'] = list(confusion)
@@ -187,7 +198,9 @@ class CompareX():
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
-            
+            webdataminingtool.svc['filename']= filename
+            webdataminingtool.svc['x']=list(x_cols)
+            webdataminingtool.svc['y']= y
             webdataminingtool.svc['Gamma'] = "auto"
             webdataminingtool.svc['Report'] = report
             webdataminingtool.svc['Confusion matrix'] = list(confusion)

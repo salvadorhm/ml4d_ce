@@ -42,6 +42,7 @@ class Index:
             filename = filepath.split('/')[-1] # splits the and chooses the last part (the filename with extension)
             if os.path.splitext(filepath)[1] == ".csv":  # Extención del archivo
                 fn = os.path.basename(form.csv_file.filename)
+                webdataminingtool.file = {'filename':fn}
                 file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
                 new_filename = "temp.csv"
                 shutil.copy('static/uploads/'+fn, filedir + new_filename)

@@ -50,6 +50,10 @@ class LinearX:
 
     def POST(self):
         try:
+            try:
+                filename = webdataminingtool.file['filename']
+            except Exception as e:
+                filename = "temp.csv"
             y = webdataminingtool.sessions['y']
             form = web.input(column = [''])
             # columns = form.column
@@ -114,7 +118,9 @@ class LinearX:
 
             
 
-
+            webdataminingtool.sessions['filename']= filename
+            webdataminingtool.sessions['y'] = y 
+            webdataminingtool.sessions['x'] = list(x_cols)
             webdataminingtool.sessions['Coefficients'] = str(model.coef_)
             webdataminingtool.sessions['Independent term'] = model.intercept_
             webdataminingtool.sessions['Mean squared error'] = mean_squared_error(y_test, predictions)
