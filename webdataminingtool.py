@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.5.20"  # version de la webapp
+app_version = "0.5.21"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
@@ -15,6 +15,10 @@ urls = (
     '/linearx', 'application.controllers.linearx.LinearX',
     '/linearr','application.controllers.linearr.LinearR',
 
+    '/tree_y', 'application.controllers.tree_y.TreeY',
+    '/tree_x', 'application.controllers.tree_x.TreeX',
+    '/tree_r','application.controllers.tree_r.TreeR',
+
     '/logisticy', 'application.controllers.logisticy.LogisticY',
     '/logisticx', 'application.controllers.logisticx.LogisticX',
     '/logisticr','application.controllers.logisticr.LogisticR',
@@ -23,8 +27,19 @@ urls = (
     '/knn_x', 'application.controllers.knn_x.KnnX',
     '/knn_r','application.controllers.knn_r.KnnR',
 
+    '/svc_y', 'application.controllers.svc_y.SvcY',
+    '/svc_x', 'application.controllers.svc_x.SvcX',
+    '/svc_r','application.controllers.svc_r.SvcR',
+
+    '/randomf_y', 'application.controllers.randomf_y.RandomfY',
+    '/randomf_x', 'application.controllers.randomf_x.RandomfX',
+    '/randomf_r','application.controllers.randomf_r.RandomfR',
+
     '/boxplot', 'application.controllers.boxplot.BoxPlot',
     '/countplot2', 'application.controllers.countplot2.CountPlot2',
+    '/heatmap_null','application.controllers.heatmap_null.HeatmapNull',
+    '/pairplot','application.controllers.pairplot.PairPlot',
+
     '/plots', 'application.controllers.plots.Plots',
     '/detail', 'application.controllers.detail.Detail',
     '/drop/(.+)','application.controllers.drop.Drop',
@@ -34,7 +49,6 @@ urls = (
     '/replace/(.+)','application.controllers.replace.Replace',
     '/countplot/(.+)','application.controllers.countplot.CountPlot',
     '/histogram/(.+)','application.controllers.histogram.Histogram',
-    '/heatmap_null','application.controllers.heatmap_null.HeatmapNull',
     '/describe','application.controllers.describe.Describe',
     '/correlation','application.controllers.correlation.Correlation',
 )
