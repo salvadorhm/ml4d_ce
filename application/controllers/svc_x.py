@@ -72,6 +72,7 @@ class SvcX():
             confusion = confusion_matrix(y_test, predictions)
 
             
+            webdataminingtool.sessions['Gamma'] = "auto"
             webdataminingtool.sessions['Report'] = report
             webdataminingtool.sessions['Confusion matrix'] = list(confusion)
             webdataminingtool.sessions['Score'] = model.score(x_test,y_test)

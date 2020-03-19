@@ -72,6 +72,7 @@ class RandomfX:
             confusion = confusion_matrix(y_test, predictions)
 
             
+            webdataminingtool.sessions['N_estimators'] = 80
             webdataminingtool.sessions['Report'] = report
             webdataminingtool.sessions['Confusion matrix'] = list(confusion)
             webdataminingtool.sessions['Score'] = model.score(x_test,y_test)
