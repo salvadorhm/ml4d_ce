@@ -1,0 +1,47 @@
+$def with(cols,types,nulls,correlation)
+<h1>Compare classifiers: independent term X</h1>
+<form action="" method="post" enctype="multipart/form-data">
+    <table class="table table-hover scroll">
+        <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+            <tr>
+                <th>Columns</th>
+                <th>Types</th>
+                <th>Correlation</th>
+                <th>Nulls</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" onClick="toggle(this)"> Select all</td>
+                <td></td>
+                <td></td>
+            </tr>
+            $ no = 0
+            $for i in range(len(cols)):
+                $if types[i] != "object" and nulls[i] == 0:
+                    <tr>
+                        <td><input type="checkbox" id="column" name="column" value="$cols[i]"> $cols[i]</td>
+                        <td>$types[i]</td>
+                        $if correlation[i] > 0.5:
+                            <td><p class="text-danger">$correlation[i]</p></td>
+                        $else:
+                            <td>$correlation[i]</td>
+                        <td>$nulls[i]</td>
+                    </tr>
+            $ no+=1
+        </tbody>
+    </table>
+    <div class="form-group">
+        <label></label>
+        <button id="send" name="send" class="btn btn-primary">Select X</button>
+    </div>
+</form>
+
+<script language="JavaScript">
+    function toggle(source){
+        checkboxes  = document.getElementsByName("column");
+        for(var i=0, n=checkboxes.length;i<n;i++){
+            checkboxes[i].checked = source.checked;
+        }
+    }
+</script>

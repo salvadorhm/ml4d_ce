@@ -31,6 +31,10 @@ urls = (
     '/svc_x', 'application.controllers.svc_x.SvcX',
     '/svc_r','application.controllers.svc_r.SvcR',
 
+    '/compare_y', 'application.controllers.compare_y.CompareY',
+    '/compare_x', 'application.controllers.compare_x.CompareX',
+    '/compare_r','application.controllers.compare_r.CompareR',
+
     '/randomf_y', 'application.controllers.randomf_y.RandomfY',
     '/randomf_x', 'application.controllers.randomf_x.RandomfX',
     '/randomf_r','application.controllers.randomf_r.RandomfR',

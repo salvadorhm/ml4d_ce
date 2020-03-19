@@ -1,0 +1,92 @@
+$def with(knn,tree,randomf,svc)
+<h3>KNeighbors Classifer: result</h3>
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in knn:
+        <tr>
+            <td>$row</td>
+            $if row == "Report":
+                <td>
+                <pre>
+                <code>
+                $knn[row]
+                </code>
+                </pre>
+                </td>
+            $else:
+                <td>$knn[row]</td>
+        </tr>
+</table>
+
+<h3>Decision Tree Classfier: result</h3>
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in tree:
+        <tr>
+            <td>$row</td>
+            $if row == "Report":
+                <td>
+                <pre>
+                <code>
+                $tree[row]
+                </code>
+                </pre>
+                </td>
+            $else:
+                <td>$tree[row]</td>
+        </tr>
+</table>
+
+<h3>RandomForest Classfier: result</h3>
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in randomf:
+        <tr>
+            <td>$row</td>
+            $if row == "Report":
+                <td>
+                <pre>
+                <code>
+                $randomf[row]
+                </code>
+                </pre>
+                </td>
+            $else:
+                <td>$randomf[row]</td>
+        </tr>
+</table>
+
+<h3>Support Vector Machine: result</h3>
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in svc:
+        <tr>
+            <td>$row</td>
+            $if row == "Report":
+                <td>
+                <pre>
+                <code>
+                $svc[row]
+                </code>
+                </pre>
+                </td>
+            $else:
+                <td>$svc[row]</td>
+        </tr>
+</table>
