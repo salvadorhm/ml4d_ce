@@ -5,7 +5,7 @@ $def with(cols,types,nulls)
     <select class="form-control" id="column" name="column">
         $ no = 0
         $for i in range(len(cols)):
-            $if types[i] != "object" and nulls[i] == 0:
+            $if nulls[i] == 0:
                 <option value="$cols[i]">$cols[i] - $types[i] - $nulls[i]</option>
     </select>
     </div>

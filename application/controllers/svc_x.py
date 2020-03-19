@@ -42,8 +42,13 @@ class SvcX():
             correlation = []
             cols.remove(y)
             for row in cols:
-                if dataframe[row].dtypes != 'object':
+                if dataframe[row].dtypes != 'object' and dataframe[y].dtype != 'object':
                     correlation.append(dataframe[y].corr(dataframe[row]))
+                    types.append(dataframe[row].dtype)
+                    nulls.append(dataframe[row].isnull().sum())
+                    columns.append((row))
+                else:
+                    correlation.append(0)
                     types.append(dataframe[row].dtype)
                     nulls.append(dataframe[row].isnull().sum())
                     columns.append((row))
