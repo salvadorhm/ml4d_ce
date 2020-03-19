@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.5.19"  # version de la webapp
+app_version = "0.5.20"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
@@ -18,6 +18,10 @@ urls = (
     '/logisticy', 'application.controllers.logisticy.LogisticY',
     '/logisticx', 'application.controllers.logisticx.LogisticX',
     '/logisticr','application.controllers.logisticr.LogisticR',
+
+    '/knn_y', 'application.controllers.knn_y.KnnY',
+    '/knn_x', 'application.controllers.knn_x.KnnX',
+    '/knn_r','application.controllers.knn_r.KnnR',
 
     '/boxplot', 'application.controllers.boxplot.BoxPlot',
     '/countplot2', 'application.controllers.countplot2.CountPlot2',
