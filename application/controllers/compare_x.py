@@ -123,6 +123,34 @@ class CompareX():
             plt.title("KNeighbors test")
             image_name = "static/images/knn.png"
             plt.savefig(image_name)
+
+            code = []
+            code.append("import numpy as np")
+            code.append("\n")
+            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("\n")
+            code.append("from sklearn.model_selection import train_test_split")
+            code.append("\n")
+            code.append("from sklearn.neighbors import KNeighborsClassifier")
+            code.append("\n")
+            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("\n")
+            code.append("df_x = dataframe["+str(x_cols)+"]")
+            code.append("\n")
+            code.append("df_y = dataframe['"+y+"']")
+            code.append("\n")
+            code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code.append("\n")
+            code.append("model = KNeighborsClassifier(n_neighbors="+str(n)+")")
+            code.append("\n")
+            code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("predictions = model.predict(x_test)")
+            code.append("\n")
+            code.append("classification_report(y_test, predictions)")
+            code.append("\n")
+            code.append("confusion_matrix(y_test, predictions)")
+
       
             webdataminingtool.knn['filename']= filename
             webdataminingtool.knn['x']=list(x_cols)
@@ -136,6 +164,7 @@ class CompareX():
             data_result = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.knn['Real test values'] = list(data_result.Actual.head(10))
             webdataminingtool.knn['Predicted values'] = list(data_result.Predicted.head(10))
+            webdataminingtool.knn['Python'] = "".join(code)
 
             '''
             ---------------------------------------------------------------------------
@@ -149,6 +178,33 @@ class CompareX():
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
+            code = []
+            code.append("import numpy as np")
+            code.append("\n")
+            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("\n")
+            code.append("from sklearn.model_selection import train_test_split")
+            code.append("\n")
+            code.append("from sklearn.tree import DecisionTreeClassifier")
+            code.append("\n")
+            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("\n")
+            code.append("df_x = dataframe["+str(x_cols)+"]")
+            code.append("\n")
+            code.append("df_y = dataframe['"+y+"']")
+            code.append("\n")
+            code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code.append("\n")
+            code.append("model = DecisionTreeClassifier()")
+            code.append("\n")
+            code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("predictions = model.predict(x_test)")
+            code.append("\n")
+            code.append("classification_report(y_test, predictions)")
+            code.append("\n")
+            code.append("confusion_matrix(y_test, predictions)")
+
             webdataminingtool.tree['filename']= filename
             webdataminingtool.tree['x']=list(x_cols)
             webdataminingtool.tree['y']= y
@@ -160,6 +216,7 @@ class CompareX():
             data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.tree['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.tree['Predicted values'] = list(data_compare.Predicted.head(10))
+            webdataminingtool.tree['Python'] = "".join(code)
 
             '''
             ---------------------------------------------------------------------------
@@ -173,6 +230,33 @@ class CompareX():
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
+            code = []
+            code.append("import numpy as np\n")
+            code.append("\n")
+            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("\n")
+            code.append("from sklearn.model_selection import train_test_split")
+            code.append("\n")
+            code.append("from sklearn.ensemble import RandomForestClassifier")
+            code.append("\n")
+            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("\n")
+            code.append("df_x = dataframe["+str(x_cols)+"]")
+            code.append("\n")
+            code.append("df_y = dataframe['"+y+"']")
+            code.append("\n")
+            code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code.append("\n")
+            code.append("model = RandomForestClassifier(n_estimators=80)")
+            code.append("\n")
+            code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("predictions = model.predict(x_test)")
+            code.append("\n")
+            code.append("classification_report(y_test, predictions)")
+            code.append("\n")
+            code.append("confusion_matrix(y_test, predictions)")
+
             webdataminingtool.randomf['filename']= filename
             webdataminingtool.randomf['x']=list(x_cols)
             webdataminingtool.randomf['y']= y
@@ -185,6 +269,7 @@ class CompareX():
             data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.randomf['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.randomf['Predicted values'] = list(data_compare.Predicted.head(10))
+            webdataminingtool.randomf['Python'] = "".join(code)
 
             '''
             ---------------------------------------------------------------------------
@@ -198,6 +283,33 @@ class CompareX():
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
+            code = []
+            code.append("import numpy as np")
+            code.append("\n")
+            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("\n")
+            code.append("from sklearn.model_selection import train_test_split")
+            code.append("\n")
+            code.append("from sklearn.svm import SVC")
+            code.append("\n")
+            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("\n")
+            code.append("df_x = dataframe["+str(x_cols)+"]")
+            code.append("\n")
+            code.append("df_y = dataframe['"+y+"']")
+            code.append("\n")
+            code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code.append("\n")
+            code.append("model = SVC(gamma='auto')")
+            code.append("\n")
+            code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("predictions = model.predict(x_test)")
+            code.append("\n")
+            code.append("classification_report(y_test, predictions)")
+            code.append("\n")
+            code.append("confusion_matrix(y_test, predictions)")
+
             webdataminingtool.svc['filename']= filename
             webdataminingtool.svc['x']=list(x_cols)
             webdataminingtool.svc['y']= y
@@ -210,6 +322,7 @@ class CompareX():
             data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.svc['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.svc['Predicted values'] = list(data_compare.Predicted.head(10))
+            webdataminingtool.svc['Python'] = "".join(code)
 
             raise web.seeother('/compare_r')
         except Exception as e:

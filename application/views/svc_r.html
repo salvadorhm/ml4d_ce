@@ -10,7 +10,7 @@ $def with(result)
     $for row in result:
         <tr>
             <td>$row</td>
-            $if row == "Report":
+            $if row == "Report" or row == "Python":
                 <td>
                 <pre>
                 <code>

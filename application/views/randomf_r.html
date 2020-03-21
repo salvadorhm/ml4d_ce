@@ -10,15 +10,17 @@ $def with(result)
     $for row in result:
         <tr>
             <td>$row</td>
-            $if row == "Report":
-                <td>
-                <pre>
-                <code>
-                $result[row]
-                </code>
-                </pre>
-                </td>
-            $else:
-                <td>$result[row]</td>
+        $if row == "Report" or row == "Python":
+            <td>
+            <pre>
+            <code>
+            $result[row]
+            </code>
+            </pre>
+            </td>
+        $else:
+            <td>$result[row]</td>
         </tr>
 </table>
+
+<img src="/static/images/randomf.png" class="img-fluid" alt="RandomForest">

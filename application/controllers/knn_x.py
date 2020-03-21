@@ -71,6 +71,7 @@ class KnnX():
             form = web.input(column = [''])
             x_cols = form.column
             webdataminingtool.sessions['x']=list(x_cols)
+
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -78,6 +79,7 @@ class KnnX():
 
             x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
             
+
             tasa_error = []
             for i in range(1,30):
                 knn = KNeighborsClassifier(n_neighbors=i)
@@ -95,10 +97,39 @@ class KnnX():
             model = KNeighborsClassifier(n_neighbors=n)
             model.fit(x_train,y_train)
             predictions = model.predict(x_test)
+            
+            
 
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
+            code = []
+            code.append("import numpy as np")
+            code.append("\n")
+            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("\n")
+            code.append("from sklearn.model_selection import train_test_split")
+            code.append("\n")
+            code.append("from sklearn.neighbors import KNeighborsClassifier")
+            code.append("\n")
+            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("\n")
+            code.append("df_x = dataframe["+str(x_cols)+"]")
+            code.append("\n")
+            code.append("df_y = dataframe['"+y+"']")
+            code.append("\n")
+            code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code.append("\n")
+            code.append("model = KNeighborsClassifier(n_neighbors="+str(n)+")")
+            code.append("\n")
+            code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("predictions = model.predict(x_test)")
+            code.append("\n")
+            code.append("classification_report(y_test, predictions)")
+            code.append("\n")
+            code.append("confusion_matrix(y_test, predictions)")
+            
             valores = range(1,30)
 
             figure()
@@ -151,6 +182,7 @@ class KnnX():
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.sessions['Real test values'] = list(compare.Actual.head(10))
             webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head(10))
+            webdataminingtool.sessions['Python'] = ''.join(code)
 
 
             # code_lines = []

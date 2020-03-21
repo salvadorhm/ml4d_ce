@@ -9,7 +9,7 @@ $def with(knn,tree,randomf,svc)
     $for row in knn:
         <tr>
             <td>$row</td>
-            $if row == "Report":
+            $if row == "Report" or row == "Python":
                 <td>
                 <pre>
                 <code>
@@ -22,6 +22,8 @@ $def with(knn,tree,randomf,svc)
         </tr>
 </table>
 
+<img src="/static/images/knn.png" class="img-fluid" alt="knn">
+
 <h3>Decision Tree Classfier: result</h3>
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
@@ -32,7 +34,7 @@ $def with(knn,tree,randomf,svc)
     $for row in tree:
         <tr>
             <td>$row</td>
-            $if row == "Report":
+            $if row == "Report" or row == "Python":
                 <td>
                 <pre>
                 <code>
@@ -45,6 +47,8 @@ $def with(knn,tree,randomf,svc)
         </tr>
 </table>
 
+<img src="/static/images/tree_small.png" class="img-fluid" alt="Decision Tree">
+
 <h3>RandomForest Classfier: result</h3>
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
@@ -55,7 +59,7 @@ $def with(knn,tree,randomf,svc)
     $for row in randomf:
         <tr>
             <td>$row</td>
-            $if row == "Report":
+            $if row == "Report" or row == "Python":
                 <td>
                 <pre>
                 <code>
@@ -68,6 +72,8 @@ $def with(knn,tree,randomf,svc)
         </tr>
 </table>
 
+<img src="/static/images/randomf.png" class="img-fluid" alt="RandomForest">
+
 <h3>Support Vector Machine: result</h3>
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
@@ -78,7 +84,7 @@ $def with(knn,tree,randomf,svc)
     $for row in svc:
         <tr>
             <td>$row</td>
-            $if row == "Report":
+            $if row == "Report" or row == "Python":
                 <td>
                 <pre>
                 <code>

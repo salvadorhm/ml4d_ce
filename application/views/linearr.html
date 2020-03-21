@@ -1,5 +1,5 @@
 $def with(result)
-<h2>Linear regression : result</h2>
+<h2>Linear regression: Result</h2>
 
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
@@ -10,16 +10,16 @@ $def with(result)
     $for row in result:
         <tr>
             <td>$row</td>
-            $if row == "Report":
-                <td>
-                <pre>
-                <code>
-                $result[row]
-                </code>
-                </pre>
-                </td>
-            $else:
-                <td>$result[row]</td>
+        $if row == "Report" or row == "Python":
+            <td>
+            <pre>
+            <code>
+            $result[row]
+            </code>
+            </pre>
+            </td>
+        $else:
+            <td>$result[row]</td>
         </tr>
 </table>
 

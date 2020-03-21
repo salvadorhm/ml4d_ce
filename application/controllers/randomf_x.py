@@ -81,6 +81,49 @@ class RandomfX:
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
+            importances = model.feature_importances_
+            indices = np.argsort(importances)
+
+            features = x_train.columns
+
+            plt.figure()
+            width=50
+            height=24
+            figure(figsize=(width,height))
+            plt.title('Feature Importances')
+            plt.barh(range(len(indices)), importances[indices], color='b', align='center')
+            plt.yticks(range(len(indices)), features[indices])
+            plt.xlabel('Relative Importance')
+            image_name = "static/images/randomf.png"
+            plt.savefig(image_name)
+
+            code = []
+            code.append("import numpy as np\n")
+            code.append("\n")
+            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("\n")
+            code.append("from sklearn.model_selection import train_test_split")
+            code.append("\n")
+            code.append("from sklearn.ensemble import RandomForestClassifier")
+            code.append("\n")
+            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("\n")
+            code.append("df_x = dataframe["+str(x_cols)+"]")
+            code.append("\n")
+            code.append("df_y = dataframe['"+y+"']")
+            code.append("\n")
+            code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code.append("\n")
+            code.append("model = RandomForestClassifier(n_estimators=80)")
+            code.append("\n")
+            code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("predictions = model.predict(x_test)")
+            code.append("\n")
+            code.append("classification_report(y_test, predictions)")
+            code.append("\n")
+            code.append("confusion_matrix(y_test, predictions)")
+
             webdataminingtool.sessions['filename']= filename
             webdataminingtool.sessions['y'] = y 
             webdataminingtool.sessions['x'] = list(x_cols)
@@ -93,7 +136,7 @@ class RandomfX:
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.sessions['Real test values'] = list(compare.Actual.head(10))
             webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head(10))
-
+            webdataminingtool.sessions['Python'] = ''.join(code)
 
             # code_lines = []
             # code_lines.append("# Preparacion del dataframe")

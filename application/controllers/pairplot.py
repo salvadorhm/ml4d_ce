@@ -39,7 +39,7 @@ class PairPlot:
             width=20
             height=8
             figure(figsize=(width,height))
-            nor = sn.pairplot(dataframe[x_col], hue=y_col)
+            nor = sn.pairplot(pd.DataFrame(dataframe[x_col]), hue=y_col)
             image_name = "static/images/pairplot.png"
             nor.figure.savefig(image_name)
             fig = nor.get_figure()

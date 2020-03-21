@@ -10,7 +10,7 @@ $def with(result)
     $for row in result:
         <tr>
             <td>$row</td>
-            $if row == "Report":
+            $if row == "Report" or row == "Python":
                 <td>
                 <pre>
                 <code>
@@ -22,3 +22,5 @@ $def with(result)
                 <td>$result[row]</td>
         </tr>
 </table>
+
+<img src="/static/images/tree_small.png" class="img-fluid" alt="Decision Tree">

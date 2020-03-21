@@ -70,9 +70,9 @@ class LinearX:
             df_nor_y = (df_y - df_y.mean())/df_y.std()
             
 
-            x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
+            # x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
             
-            # x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
+            x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
 
             model = LinearRegression()
             model.fit(x_train,y_train)
@@ -90,7 +90,7 @@ class LinearX:
                 plt.plot(x_test,predictions,"r")
                 image_name = "static/images/lineal.png"
                 ax.figure.savefig(image_name)
-                fig = ax.get_figure()
+                # fig = ax.get_figure()
                 #plt.close(fig)
             else:
                 figure()
@@ -102,7 +102,7 @@ class LinearX:
                 # plt.plot(x_test,predictions,"r")
                 image_name = "static/images/lineal.png"
                 ax.figure.savefig(image_name)
-                fig = ax.get_figure()
+                # fig = ax.get_figure()
                 #plt.close(fig)
 
 
@@ -113,10 +113,35 @@ class LinearX:
             nor = sn.distplot(y_test - predictions)
             image_name = "static/images/histogram.png"
             nor.figure.savefig(image_name)
-            fig = nor.get_figure()
+            # fig = nor.get_figure()
             #plt.close(fig)
 
-            
+            code = []
+            code.append("import numpy as np")
+            code.append("\n")
+            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("\n")
+            code.append("from sklearn.model_selection import train_test_split")
+            code.append("\n")
+            code.append("from sklearn.linear_model import LinearRegression")
+            code.append("\n")
+            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("\n")
+            code.append("df_x = dataframe["+str(x_cols)+"]")
+            code.append("\n")
+            code.append("df_y = dataframe['"+y+"']")
+            code.append("\n")
+            code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code.append("\n")
+            code.append("model = LinearRegression()")
+            code.append("\n")
+            code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("predictions = model.predict(x_test)")
+            # code.append("\n")
+            # code.append("classification_report(y_test, predictions)")
+            # code.append("\n")
+            # code.append("confusion_matrix(y_test, predictions)")
 
             webdataminingtool.sessions['filename']= filename
             webdataminingtool.sessions['y'] = y 
@@ -130,6 +155,8 @@ class LinearX:
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.sessions['Actual test values'] = list(compare.Actual.head())
             webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head())
+            webdataminingtool.sessions['Python'] = "".join(code)
+
 
 
 
