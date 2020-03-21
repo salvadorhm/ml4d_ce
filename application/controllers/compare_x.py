@@ -10,6 +10,8 @@ import matplotlib.pyplot as plt
 import seaborn as sn
 from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
 import matplotlib.mlab as mlab
+from sklearn import tree as tree_pl
+
 
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -178,6 +180,17 @@ class CompareX():
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
+            figure()
+            width=50
+            height=24
+            figure(figsize=(width,height))
+            tree_pl.plot_tree(tree)
+            # plt.xlabel("KNeighbors")
+            # plt.ylabel("Mean error")
+            # plt.title("KNeighbors test")
+            image_name = "static/images/tree_small.png"
+            plt.savefig(image_name)
+
             code = []
             code.append("import numpy as np")
             code.append("\n")
@@ -229,6 +242,22 @@ class CompareX():
 
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
+
+            importances = randomf.feature_importances_
+            indices = np.argsort(importances)
+
+            features = x_train.columns
+
+            plt.figure()
+            width=50
+            height=24
+            figure(figsize=(width,height))
+            plt.title('Feature Importances')
+            plt.barh(range(len(indices)), importances[indices], color='b', align='center')
+            plt.yticks(range(len(indices)), features[indices])
+            plt.xlabel('Relative Importance')
+            image_name = "static/images/randomf.png"
+            plt.savefig(image_name)
 
             code = []
             code.append("import numpy as np\n")
