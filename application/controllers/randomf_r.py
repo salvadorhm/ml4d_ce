@@ -11,7 +11,10 @@ class RandomfR:
 
     def GET(self):
         try:
-            return render.randomf_r(webdataminingtool.sessions)
+            result = webdataminingtool.randomf
+            result_nor = webdataminingtool.randomf_nor
+
+            return render.randomf_r(result, result_nor)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

@@ -1,4 +1,4 @@
-$def with(result)
+$def with(result,result_nor)
 <h2>RandomForest Classfier: Result</h2>
 
 <table class="table table-hover scroll">
@@ -23,4 +23,43 @@ $def with(result)
         </tr>
 </table>
 
+<img src="/static/images/confusion_matrix.png" class="img-fluid" alt="RandomForest">
+
 <img src="/static/images/randomf.png" class="img-fluid" alt="RandomForest">
+
+<img src="/static/images/varianzas.png" class="img-fluid" alt="RandomForest">
+
+<img src="/static/images/medias.png" class="img-fluid" alt="RandomForest">
+
+
+<h2>RandomForest Classfier: Result Normalized</h2>
+
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in result_nor:
+        <tr>
+            <td>$row</td>
+        $if row == "Report" or row == "Python":
+            <td>
+            <pre>
+            <code>
+            $result_nor[row]
+            </code>
+            </pre>
+            </td>
+        $else:
+            <td>$result_nor[row]</td>
+        </tr>
+</table>
+
+<img src="/static/images/confusion_matrix_nor.png" class="img-fluid" alt="RandomForest">
+
+<img src="/static/images/randomf_nor.png" class="img-fluid" alt="RandomForest">
+
+<img src="/static/images/varianzas_nor.png" class="img-fluid" alt="RandomForest">
+
+<img src="/static/images/medias_nor.png" class="img-fluid" alt="RandomForest">
