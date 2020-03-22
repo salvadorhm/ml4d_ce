@@ -16,7 +16,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.linear_model import LogisticRegression
 # Creando el Dataframe para trabajar
-dataframe = pd.read_csv('droop_dataset.csv')
+dataframe = pd.read_csv('wine_dataset.csv')
 # Descripcion del dataframe
 dataframe.describe()
 # Dataframe

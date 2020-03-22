@@ -13,8 +13,9 @@ class RandomfR:
         try:
             result = webdataminingtool.randomf
             result_nor = webdataminingtool.randomf_nor
+            result_pca = webdataminingtool.randomf_pca
 
-            return render.randomf_r(result, result_nor)
+            return render.randomf_r(result, result_nor, result_pca)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

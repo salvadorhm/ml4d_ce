@@ -1,4 +1,4 @@
-$def with(result,result_nor)
+$def with(result,result_nor, result_pca)
 <h2>RandomForest Classfier: Result</h2>
 
 <table class="table table-hover scroll">
@@ -63,3 +63,35 @@ $def with(result,result_nor)
 <img src="/static/images/varianzas_nor.png" class="img-fluid" alt="RandomForest">
 
 <img src="/static/images/medias_nor.png" class="img-fluid" alt="RandomForest">
+
+<h2>RandomForest Classfier: Result Normalized PCA</h2>
+
+<table class="table table-hover scroll">
+    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <tr>
+            <th>Name</th>
+            <th>Value</th>
+    </thead>
+    $for row in result_pca:
+        <tr>
+            <td>$row</td>
+        $if row == "Report" or row == "Python":
+            <td>
+            <pre>
+            <code>
+            $result_pca[row]
+            </code>
+            </pre>
+            </td>
+        $else:
+            <td>$result_pca[row]</td>
+        </tr>
+</table>
+
+<img src="/static/images/confusion_matrix_pca.png" class="img-fluid" alt="RandomForest">
+
+<img src="/static/images/randomf_pca.png" class="img-fluid" alt="RandomForest">
+
+<img src="/static/images/varianzas_pca.png" class="img-fluid" alt="RandomForest">
+
+<img src="/static/images/medias_pca.png" class="img-fluid" alt="RandomForest">
