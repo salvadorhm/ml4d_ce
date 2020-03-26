@@ -1,7 +1,6 @@
 import web  # pip install web.py
 import webdataminingtool
 import csv  # CSV parser
-import json  # json parser
 import pandas as pd
 import numpy as np
 import statsmodels.api as sm
@@ -41,6 +40,7 @@ class ClassificationX():
             cols = list(dataframe)
             y = webdataminingtool.classification['y']
             method = webdataminingtool.classification['method']
+            title = webdataminingtool.classification['title']
             
             columns = []
             types = []
@@ -59,7 +59,7 @@ class ClassificationX():
                     types.append(dataframe[row].dtype)
                     nulls.append(dataframe[row].isnull().sum())
                     columns.append((row))
-            return render.classification_x(method,columns,types,nulls,correlation)
+            return render.classification_x(title,columns,types,nulls,correlation)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
@@ -83,6 +83,7 @@ class ClassificationX():
             df_y = dataframe[y]
 
             x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
+            labels = y_train.unique()
             
             if method == "knn":
                 '''
@@ -92,9 +93,9 @@ class ClassificationX():
                 '''
                 tasa_error = []
                 for i in range(1,30):
-                    knn = KNeighborsClassifier(n_neighbors=i)
-                    knn.fit(x_train, y_train)
-                    prediction_i = knn.predict(x_test)
+                    model = KNeighborsClassifier(n_neighbors=i)
+                    model.fit(x_train, y_train)
+                    prediction_i = model.predict(x_test)
                     tasa_error.append(np.mean(prediction_i != y_test))
 
                 min = 1
@@ -104,67 +105,11 @@ class ClassificationX():
                         min = tasa_error[i]
                         n = i + 1 
 
-                knn = KNeighborsClassifier(n_neighbors=n)
-                knn.fit(x_train,y_train)
-                predictions = knn.predict(x_test)
+                model = KNeighborsClassifier(n_neighbors=n)
 
-                report = classification_report(y_test, predictions)
-                confusion = confusion_matrix(y_test, predictions)
-
-                valores = range(1,30)
-
-                figure()
-                width=20
-                height=8
-                figure(figsize=(width,height))
-                plt.plot(valores, tasa_error, color="g", marker="o", markerfacecolor="r")
-                plt.xlabel("KNeighbors")
-                plt.ylabel("Mean error")
-                plt.title("KNeighbors test")
-                image_name = "static/images/result.png"
-                plt.savefig(image_name)
-
-                code = []
-                code.append("import numpy as np")
-                code.append("\n")
-                code.append("from sklearn.metrics import classification_report, confusion_matrix")
-                code.append("\n")
-                code.append("from sklearn.model_selection import train_test_split")
-                code.append("\n")
-                code.append("from sklearn.neighbors import KNeighborsClassifier")
-                code.append("\n")
-                code.append("dataframe = pd.read_csv("+filename+")")
-                code.append("\n")
-                code.append("df_x = dataframe["+str(x_cols)+"]")
-                code.append("\n")
-                code.append("df_y = dataframe['"+y+"']")
-                code.append("\n")
-                code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
-                code.append("\n")
-                code.append("model = KNeighborsClassifier(n_neighbors="+str(n)+")")
-                code.append("\n")
-                code.append("model.fit(x_train,y_train)")
-                code.append("\n")
-                code.append("predictions = model.predict(x_test)")
-                code.append("\n")
-                code.append("classification_report(y_test, predictions)")
-                code.append("\n")
-                code.append("confusion_matrix(y_test, predictions)")
-
-        
-                webdataminingtool.classification['filename']= filename
-                webdataminingtool.classification['x']=list(x_cols)
-                webdataminingtool.classification['y']= y
-                webdataminingtool.classification["N_neighbors"] = n
-                webdataminingtool.classification['Report'] = report
-                webdataminingtool.classification['Confusion matrix'] = list(confusion)
-                webdataminingtool.classification['Score'] = knn.score(x_test,y_test)
-                webdataminingtool.classification['Accuracy score'] = accuracy_score(y_test, predictions)
-
-                data_result = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-                webdataminingtool.classification['Real test values'] = list(data_result.Actual.head(10))
-                webdataminingtool.classification['Predicted values'] = list(data_result.Predicted.head(10))
-                webdataminingtool.classification['Python'] = "".join(code)
+                title = "KNeighbors Classifier"
+                library = "from sklearn.neighbors import KNeighborsClassifier"
+                method_model ="model = KNeighborsClassifier(n_neighbors="+str(n)+")"
 
             elif method == "tree":
                 '''
@@ -172,63 +117,11 @@ class ClassificationX():
                 Decision Tree classifier
                 ---------------------------------------------------------------------------
                 '''
-                tree = DecisionTreeClassifier()
-                tree.fit(x_train,y_train)
-                predictions = tree.predict(x_test)
+                model = DecisionTreeClassifier()
 
-                report = classification_report(y_test, predictions)
-                confusion = confusion_matrix(y_test, predictions)
-
-                figure()
-                width=50
-                height=24
-                figure(figsize=(width,height))
-                tree_pl.plot_tree(tree)
-                # plt.xlabel("KNeighbors")
-                # plt.ylabel("Mean error")
-                # plt.title("KNeighbors test")
-                image_name = "static/images/result.png"
-                plt.savefig(image_name)
-
-                code = []
-                code.append("import numpy as np")
-                code.append("\n")
-                code.append("from sklearn.metrics import classification_report, confusion_matrix")
-                code.append("\n")
-                code.append("from sklearn.model_selection import train_test_split")
-                code.append("\n")
-                code.append("from sklearn.tree import DecisionTreeClassifier")
-                code.append("\n")
-                code.append("dataframe = pd.read_csv("+filename+")")
-                code.append("\n")
-                code.append("df_x = dataframe["+str(x_cols)+"]")
-                code.append("\n")
-                code.append("df_y = dataframe['"+y+"']")
-                code.append("\n")
-                code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
-                code.append("\n")
-                code.append("model = DecisionTreeClassifier()")
-                code.append("\n")
-                code.append("model.fit(x_train,y_train)")
-                code.append("\n")
-                code.append("predictions = model.predict(x_test)")
-                code.append("\n")
-                code.append("classification_report(y_test, predictions)")
-                code.append("\n")
-                code.append("confusion_matrix(y_test, predictions)")
-
-                webdataminingtool.classification['filename']= filename
-                webdataminingtool.classification['x']=list(x_cols)
-                webdataminingtool.classification['y']= y
-                webdataminingtool.classification['Report'] = report
-                webdataminingtool.classification['Confusion matrix'] = list(confusion)
-                webdataminingtool.classification['Score'] = tree.score(x_test,y_test)
-                webdataminingtool.classification['Accuracy score'] = accuracy_score(y_test, predictions)
-
-                data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-                webdataminingtool.classification['Real test values'] = list(data_compare.Actual.head(10))
-                webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
-                webdataminingtool.classification['Python'] = "".join(code)
+                title = "Decision Tree classifier"
+                library = "from sklearn.tree import DecisionTreeClassifier"
+                method_model ="model = DecisionTreeClassifier()"
 
             elif method == "randomf":
                 '''
@@ -236,123 +129,87 @@ class ClassificationX():
                 RandomForest Classifier
                 ---------------------------------------------------------------------------
                 '''
-                randomf = RandomForestClassifier(n_estimators=80)
-                randomf.fit(x_train,y_train)
-                predictions = randomf.predict(x_test)
+                n=80
+                model = RandomForestClassifier(n_estimators=n)
 
-                report = classification_report(y_test, predictions)
-                confusion = confusion_matrix(y_test, predictions)
+                title = "RandomForest Classifier"
+                library = "from sklearn.ensemble import RandomForestClassifier"
+                method_model ="model = RandomForestClassifier(n_estimators=" +str(n)+")"
 
-                importances = randomf.feature_importances_
-                indices = np.argsort(importances)
-
-                features = x_train.columns
-
-                plt.figure()
-                width=50
-                height=24
-                figure(figsize=(width,height))
-                plt.title('Feature Importances')
-                plt.barh(range(len(indices)), importances[indices], color='b', align='center')
-                plt.yticks(range(len(indices)), features[indices])
-                plt.xlabel('Relative Importance')
-                image_name = "static/images/result.png"
-                plt.savefig(image_name)
-
-                code = []
-                code.append("import numpy as np\n")
-                code.append("\n")
-                code.append("from sklearn.metrics import classification_report, confusion_matrix")
-                code.append("\n")
-                code.append("from sklearn.model_selection import train_test_split")
-                code.append("\n")
-                code.append("from sklearn.ensemble import RandomForestClassifier")
-                code.append("\n")
-                code.append("dataframe = pd.read_csv("+filename+")")
-                code.append("\n")
-                code.append("df_x = dataframe["+str(x_cols)+"]")
-                code.append("\n")
-                code.append("df_y = dataframe['"+y+"']")
-                code.append("\n")
-                code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
-                code.append("\n")
-                code.append("model = RandomForestClassifier(n_estimators=80)")
-                code.append("\n")
-                code.append("model.fit(x_train,y_train)")
-                code.append("\n")
-                code.append("predictions = model.predict(x_test)")
-                code.append("\n")
-                code.append("classification_report(y_test, predictions)")
-                code.append("\n")
-                code.append("confusion_matrix(y_test, predictions)")
-
-                webdataminingtool.classification['filename']= filename
-                webdataminingtool.classification['x']=list(x_cols)
-                webdataminingtool.classification['y']= y
-                webdataminingtool.classification['N_estimators'] = 80
-                webdataminingtool.classification['Report'] = report
-                webdataminingtool.classification['Confusion matrix'] = list(confusion)
-                webdataminingtool.classification['Score'] = randomf.score(x_test,y_test)
-                webdataminingtool.classification['Accuracy score'] = accuracy_score(y_test, predictions)
-
-                data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-                webdataminingtool.classification['Real test values'] = list(data_compare.Actual.head(10))
-                webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
-                webdataminingtool.classification['Python'] = "".join(code)
-
+                
             elif method == "svc":
                 '''
                 ---------------------------------------------------------------------------
-                Suport Vector MAchine Classifier
+                Suport Vector Machine Classifier
                 ---------------------------------------------------------------------------
                 '''
-                svc = SVC(gamma='auto')
-                svc.fit(x_train,y_train)
-                predictions = svc.predict(x_test)
+                model = SVC(gamma='auto')
+                title = "Suport Vector Machine Classifier"
+                library = "from sklearn.svm import SVC"
+                method_model ="model = SVC(gamma='auto')"
 
-                report = classification_report(y_test, predictions)
-                confusion = confusion_matrix(y_test, predictions)
 
-                code = []
-                code.append("import numpy as np")
-                code.append("\n")
-                code.append("from sklearn.metrics import classification_report, confusion_matrix")
-                code.append("\n")
-                code.append("from sklearn.model_selection import train_test_split")
-                code.append("\n")
-                code.append("from sklearn.svm import SVC")
-                code.append("\n")
-                code.append("dataframe = pd.read_csv("+filename+")")
-                code.append("\n")
-                code.append("df_x = dataframe["+str(x_cols)+"]")
-                code.append("\n")
-                code.append("df_y = dataframe['"+y+"']")
-                code.append("\n")
-                code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
-                code.append("\n")
-                code.append("model = SVC(gamma='auto')")
-                code.append("\n")
-                code.append("model.fit(x_train,y_train)")
-                code.append("\n")
-                code.append("predictions = model.predict(x_test)")
-                code.append("\n")
-                code.append("classification_report(y_test, predictions)")
-                code.append("\n")
-                code.append("confusion_matrix(y_test, predictions)")
+            model.fit(x_train,y_train)
+            predictions = model.predict(x_test)
 
-                webdataminingtool.classification['filename']= filename
-                webdataminingtool.classification['x']=list(x_cols)
-                webdataminingtool.classification['y']= y
-                webdataminingtool.classification['Gamma'] = "auto"
-                webdataminingtool.classification['Report'] = report
-                webdataminingtool.classification['Confusion matrix'] = list(confusion)
-                webdataminingtool.classification['Score'] = svc.score(x_test,y_test)
-                webdataminingtool.classification['Accuracy score'] = accuracy_score(y_test, predictions)
+            report = classification_report(y_test, predictions)
+            confusion = confusion_matrix(y_test, predictions)
 
-                data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-                webdataminingtool.classification['Real test values'] = list(data_compare.Actual.head(10))
-                webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
-                webdataminingtool.classification['Python'] = "".join(code)
+            data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
+
+            code = []
+            code.append("import numpy as np")
+            code.append("\n")
+            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("\n")
+            code.append("from sklearn.model_selection import train_test_split")
+            code.append("\n")
+            code.append(library)
+            code.append("\n")
+            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("\n")
+            code.append("df_x = dataframe["+str(x_cols)+"]")
+            code.append("\n")
+            code.append("df_y = dataframe['"+y+"']")
+            code.append("\n")
+            code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            code.append("\n")
+            code.append(method_model)
+            code.append("\n")
+            code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("predictions = model.predict(x_test)")
+            code.append("\n")
+            code.append("classification_report(y_test, predictions)")
+            code.append("\n")
+            code.append("confusion_matrix(y_test, predictions)")
+
+            webdataminingtool.classification['method']= title
+            webdataminingtool.classification['filename']= filename
+            webdataminingtool.classification['x']=list(x_cols)
+            webdataminingtool.classification['y']= y
+            webdataminingtool.classification['Report'] = report
+            webdataminingtool.classification['Confusion matrix'] = list(confusion)
+            webdataminingtool.classification['Score'] = model.score(x_test,y_test)
+            webdataminingtool.classification['Accuracy score'] = accuracy_score(y_test, predictions)
+            webdataminingtool.classification['Real test values'] = list(data_compare.Actual.head(10))
+            webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
+            webdataminingtool.classification['Python'] = "".join(code)
+
+            figure()
+            width=20
+            height=8
+            figure(figsize=(width,height))
+
+            confusion_columns=[]
+            confusion_index=[]
+            for variable in labels:
+                confusion_columns.append("Predicted:"+str(variable))
+                confusion_index.append("Actual:"+str(variable))
+            conf_matrix = pd.DataFrame(data=confusion,columns=confusion_columns,index=confusion_index)
+            sn.heatmap(conf_matrix, annot=True,  fmt='d',cmap="YlGnBu")
+            image_name = "static/images/result.png"
+            plt.savefig(image_name)
 
             raise web.seeother('/classification_r')
         except Exception as e:

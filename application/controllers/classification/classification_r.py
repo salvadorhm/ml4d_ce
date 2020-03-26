@@ -11,9 +11,9 @@ class ClassificationR:
 
     def GET(self):
         try:
-            method = webdataminingtool.classification['method']
+            title = webdataminingtool.classification['title']
             result = webdataminingtool.classification
-            return render.classification_r(method, result)
+            return render.classification_r(title, result)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
