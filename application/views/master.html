@@ -3,12 +3,12 @@ $def with (page)
     Author: Salvador Hernandez Mendoza
     Email: salvadorhm@gmail.com
     -->
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Web Data Mining Tool v 0.7.3</title>
-    <link rel="icon" type="image/png" href="/static/icon/favicon.ico">
+    <title>Web Data Mining Tool v 0.7.4</title>
+    <link rel="icon" type="image/png" href="static/icon/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -16,27 +16,39 @@ $def with (page)
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">WebDataMiningTool-Home</a>
+        <a class="navbar-brand" href="/general">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link" href="/head">Head</a>
+              <a class="nav-link" href="/">CSV upload</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Statistics
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/general">Dataset info</a>
+                <a class="dropdown-item" href="/correlation">Correlation</a>
+                <a class="dropdown-item" href="/describe">Describe</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Plots
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <a class="dropdown-item" href="/heatmap_null">Heatmap null</a>
+                <a class="dropdown-item" href="/boxplot">Boxplot</a>
+                <a class="dropdown-item" href="/countplot2">Countplot</a>
+              </div>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/general">Dataset info</a>
+              <a class="nav-link" href="/detail">Dataset clean</a>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/detail">Dataset update</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/correlation">Correlation</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="/describe">Describe</a>
-            </li>
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Downloads
@@ -46,6 +58,7 @@ $def with (page)
                 <a class="dropdown-item" href="/dataset">Dataset download</a>
               </div>
             </li>
+
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Regression
@@ -67,16 +80,7 @@ $def with (page)
                 <a class="dropdown-item" href="/compare_y">Compare classifiers</a>
               </div>
             </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Plots
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item" href="/heatmap_null">Heatmap null</a>
-                <a class="dropdown-item" href="/boxplot">Boxplot</a>
-                <a class="dropdown-item" href="/countplot2">Countplot</a>
-              </div>
-            </li>
+            
             <li class="nav-item">
                 <a class="nav-link" href="/about">About</a>
             </li>

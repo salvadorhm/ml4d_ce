@@ -1,6 +1,8 @@
 $def with(cols,types,nulls,correlation)
-<h1>RandomForest Classfier: independent term X</h1>
+<h1>RandomForest Classfier: independent term X <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
+
 <form action="" method="post" enctype="multipart/form-data">
+    <div class="table-responsive">
     <table class="table table-hover scroll">
         <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
             <tr>
@@ -31,6 +33,8 @@ $def with(cols,types,nulls,correlation)
             $ no+=1
         </tbody>
     </table>
+    </div>
+    
     <div class="form-group">
         <label></label>
         <button id="send" name="send" class="btn btn-primary">Select X</button>

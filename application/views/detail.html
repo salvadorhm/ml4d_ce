@@ -1,5 +1,6 @@
 $def with(cols,nulls,dtypes,unique,mode,mean,median)
-<h1>Dataframe update</h1>
+<h1>Dataset clean</h1>
+<div class="table-responsive">
 <table class="table table-hover scroll" border=1>
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
     <tr>
@@ -7,10 +8,10 @@ $def with(cols,nulls,dtypes,unique,mode,mean,median)
         <th>Columns</th>
         <th>Dtypes</th>
         <th>Drop</th>
-        <th>Nulls</th>
         <th>Dummies</th>
         <th>Impute</th>
         <th>Replace</th>
+        <th>Nulls</th>
         <th>Unique</th>
         <th>Mode</th>
         <th>Mean</th>
@@ -24,10 +25,10 @@ $def with(cols,nulls,dtypes,unique,mode,mean,median)
             <td><a href="/field/$cols[i]">$cols[i]</a></td>
             <td>$dtypes[i]</td>
             <td><a href="/drop/$cols[i]">Drop</a></td>
-            <td>$nulls[i]</td>
             <td><a href="/dummies/$cols[i]">Dummies</a></td>
             <td><a href="/impute/$cols[i]">Impute</a></td>
             <td><a href="/replace/$cols[i]">Replace</a></td>
+            <td>$nulls[i]</td>
             <td>$unique[i]</td>
             <td>$mode[i]</td>
             <td>$mean[i]</td>
@@ -35,3 +36,4 @@ $def with(cols,nulls,dtypes,unique,mode,mean,median)
         </tr>
         $ no+=1
 </table>
+</div>

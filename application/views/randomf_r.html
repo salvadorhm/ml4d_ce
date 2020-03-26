@@ -1,6 +1,7 @@
 $def with(result,result_nor, result_pca)
-<h2>RandomForest Classfier: Result</h2>
+<h1>RandomForest Classfier: Result <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
 
+<div class="table-responsive">
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
@@ -22,6 +23,7 @@ $def with(result,result_nor, result_pca)
             <td>$result[row]</td>
         </tr>
 </table>
+</div>
 
 <img src="/static/images/confusion_matrix.png" class="img-fluid" alt="RandomForest">
 
@@ -32,8 +34,9 @@ $def with(result,result_nor, result_pca)
 <img src="/static/images/medias.png" class="img-fluid" alt="RandomForest">
 
 
-<h2>RandomForest Classfier: Result Normalized</h2>
+<h1>RandomForest Classfier: Result Normalized</h1>
 
+<div class="table-responsive">
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
@@ -55,6 +58,7 @@ $def with(result,result_nor, result_pca)
             <td>$result_nor[row]</td>
         </tr>
 </table>
+</div>
 
 <img src="/static/images/confusion_matrix_nor.png" class="img-fluid" alt="RandomForest">
 
@@ -64,8 +68,9 @@ $def with(result,result_nor, result_pca)
 
 <img src="/static/images/medias_nor.png" class="img-fluid" alt="RandomForest">
 
-<h2>RandomForest Classfier: Result Normalized PCA</h2>
+<h1>RandomForest Classfier: Result Normalized PCA </h1>
 
+<div class="table-responsive">
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
@@ -87,6 +92,7 @@ $def with(result,result_nor, result_pca)
             <td>$result_pca[row]</td>
         </tr>
 </table>
+</div>
 
 <img src="/static/images/confusion_matrix_pca.png" class="img-fluid" alt="RandomForest">
 
