@@ -64,3 +64,15 @@ compare.Predicted.head(10)
 # Bar plot
 plt.bar(range(10),y_test.head(10))
 plt.bar(range(10),predictions[0:10])
+# Describe 'droop
+dataframe['droop'].describe()
+# Revisando si tiene NaN la columna 'droop'
+dataframe['droop'].isnull().sum()
+# Describe columna 'droop'
+dataframe['droop'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.ico'
+dataframe['static/icon/favicon.ico'].isnull().sum()
+# Describe columna 'static/icon/favicon.ico'
+dataframe['static/icon/favicon.ico'].describe()
+# Describe columna 'droop'
+dataframe['droop'].describe()

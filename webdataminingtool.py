@@ -45,12 +45,15 @@ urls = (
     '/pairplot','application.controllers.pairplot.PairPlot',
 
     '/plots', 'application.controllers.plots.Plots',
-    '/detail', 'application.controllers.detail.Detail',
-    '/drop/(.+)','application.controllers.drop.Drop',
-    '/dummies/(.+)','application.controllers.dummies.Dummies',
+
+    '/detail', 'application.controllers.clean.detail.Detail',
+    '/drop/(.+)','application.controllers.clean.drop.Drop',
+    '/dummies/(.+)','application.controllers.clean.dummies.Dummies',
+    '/impute/(.+)','application.controllers.clean.impute.Impute',
+    '/replace/(.+)','application.controllers.clean.replace.Replace',
+
     '/field/(.+)','application.controllers.field.Field',
-    '/impute/(.+)','application.controllers.impute.Impute',
-    '/replace/(.+)','application.controllers.replace.Replace',
+    
     '/countplot/(.+)','application.controllers.countplot.CountPlot',
     '/histogram/(.+)','application.controllers.histogram.Histogram',
     '/describe','application.controllers.describe.Describe',

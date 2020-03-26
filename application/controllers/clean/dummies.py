@@ -7,10 +7,11 @@ import numpy as np
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/clean', base="../master")
 
-class Drop:
+class Dummies:
 
+    app_version = "0.1.0"  # version de la webapp
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
 
     def __init__(self):  # Método inicial o constructor de la clase
@@ -19,7 +20,7 @@ class Drop:
     def GET(self,column):
         try:
             dataframe = pd.read_csv(self.file)
-            return render.drop(column)
+            return render.dummies(column)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
@@ -29,17 +30,16 @@ class Drop:
             form = web.input() # get form data
             column = form['column']
             dataframe = pd.read_csv(self.file)
-            dataframe.drop([column],axis=1,inplace=True)
-
-            dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            # dummies
+            dataframe = pd.get_dummies(dataframe, columns =[column])
 
             code_lines = []
-            code_lines.append("# Drop")
-            code_lines.append("dataframe.drop(['"+ column + "'],axis=1,inplace=True)")
+            code_lines.append("# Getdummies " + column)
+            code_lines.append("dataframe = pd.get_dummies(dataframe, columns =['" + column + "'])")
             sc.append(code_lines)
+
+            # actualiza el archivo csv
+            dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
             raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)
-            return render.error(e.args[0])
-
-  

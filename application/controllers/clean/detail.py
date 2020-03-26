@@ -5,7 +5,7 @@ import json  # json parser
 import pandas as pd
 import numpy as np
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/clean', base="../master")
 
 class Detail:
 
