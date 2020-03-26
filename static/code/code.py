@@ -92,3 +92,13 @@ sn.heatmap(dataframe.isnull())
 sn.boxplot(x='droop', y='x0', data= dataframe)
 # Countplot
 sn.countplot(x='droop', hue='x0', data= dataframe)
+# Correlation
+dataframe.corr()
+# Correlation
+dataframe.corr()
+# Correlation
+dataframe.corr()
+# Describe
+dataframe.describe()
+# Describe 'droop
+dataframe['droop'].describe()

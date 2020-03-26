@@ -11,7 +11,7 @@ import numpy as np
 # from sklearn.metrics import confusion_matrix
 # import matplotlib.mlab as mlab
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/statistics', base="../master")
 
 class General:
 

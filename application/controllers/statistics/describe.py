@@ -14,7 +14,7 @@ import matplotlib.mlab as mlab
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/statistics', base="../master")
 
 class Describe:
 

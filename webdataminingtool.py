@@ -8,8 +8,11 @@ urls = (
     '/about','application.controllers.about.About',
     '/notebook','application.controllers.notebook.Notebook',
     '/dataset','application.controllers.dataset.Dataset',
-    '/general', 'application.controllers.general.General',
     '/head', 'application.controllers.head.Head',
+
+    '/general', 'application.controllers.statistics.general.General',
+    '/describe','application.controllers.statistics.describe.Describe',
+    '/correlation','application.controllers.statistics.correlation.Correlation',
 
     '/lineary', 'application.controllers.linear.lineary.LinearY',
     '/linearx', 'application.controllers.linear.linearx.LinearX',
@@ -58,8 +61,7 @@ urls = (
     
     '/countplot/(.+)','application.controllers.countplot.CountPlot',
     '/histogram/(.+)','application.controllers.histogram.Histogram',
-    '/describe','application.controllers.describe.Describe',
-    '/correlation','application.controllers.correlation.Correlation',
+
 )
 webdataminingtool = web.application(urls, globals())
 sessions ={"status":"online","url":"localhost:8080"}
