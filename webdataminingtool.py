@@ -35,9 +35,9 @@ urls = (
     '/compare_x', 'application.controllers.compare_x.CompareX',
     '/compare_r','application.controllers.compare_r.CompareR',
 
-    '/randomf_y', 'application.controllers.randomf_y.RandomfY',
-    '/randomf_x', 'application.controllers.randomf_x.RandomfX',
-    '/randomf_r','application.controllers.randomf_r.RandomfR',
+    '/randomf_y', 'application.controllers.randomf.randomf_y.RandomfY',
+    '/randomf_x', 'application.controllers.randomf.randomf_x.RandomfX',
+    '/randomf_r','application.controllers.randomf.randomf_r.RandomfR',
 
     '/boxplot', 'application.controllers.boxplot.BoxPlot',
     '/countplot2', 'application.controllers.countplot2.CountPlot2',
