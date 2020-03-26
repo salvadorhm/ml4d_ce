@@ -20,6 +20,7 @@ from matplotlib.pyplot import figure, show
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve, auc
+from joblib import dump, load
 
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
@@ -65,7 +66,7 @@ class ClassificationX():
             return render.error(e.args[0])
 
     def POST(self):
-        try:
+        # try:
             try:
                 filename = webdataminingtool.file['filename']
             except Exception as e:
@@ -196,15 +197,19 @@ class ClassificationX():
 
 
             model.fit(x_train,y_train)
+            dump(model, "static/models/"+method+".joblib") 
             predictions = model.predict(x_test)
-
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
-
+            print("Entrenamiento",confusion)
             data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
 
+            
+
             code = []
-            code.append("import numpy as np")
+            code.append("import csv")
+            code.append("\n")
+            code.append("import pandas as pd")
             code.append("\n")
             code.append(("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score"))
             code.append("\n")
@@ -220,9 +225,13 @@ class ClassificationX():
             code.append("\n")
             code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
             code.append("\n")
+            code.append("from joblib import dump, load")
+            code.append("\n")
             code.append(method_model)
             code.append("\n")
             code.append("model.fit(x_train,y_train)")
+            code.append("\n")
+            code.append("dump(model," + method + ".joblib)")
             code.append("\n")
             code.append("predictions = model.predict(x_test)")
             code.append("\n")
@@ -230,6 +239,28 @@ class ClassificationX():
             code.append("\n")
             code.append("confusion_matrix(y_test, predictions)")
            
+            test = []
+            test.append("# Load fit model and predict")
+            test.append("\n")
+            test.append("import csv")
+            test.append("\n")
+            test.append("import pandas as pd")
+            test.append("\n")
+            test.append(("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score"))
+            test.append("\n")
+            test.append("model = load('"+method+".joblib')")
+            test.append("\n")
+            test.append("dataframe_test = pd.read_csv('test.csv')")
+            test.append("\n")
+            test.append("xs = dataframe["+str(x_cols)+"]")
+            test.append("\n")
+            test.append("ys = dataframe['"+y+"']")
+            test.append("\n")
+            test.append("predictions = model.predict(xs)")
+            test.append("\n")
+            test.append("data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})")
+            test.append("\n")
+            test.append("data_compare_test")
 
             webdataminingtool.classification['filename']= filename
             webdataminingtool.classification['x']=list(x_cols)
@@ -241,6 +272,8 @@ class ClassificationX():
             webdataminingtool.classification['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
             webdataminingtool.classification['Python'] = "".join(code)
+            webdataminingtool.classification['Model'] = method+".joblib"
+            webdataminingtool.classification['Python_test'] = "".join(test)
 
             figure()
             width=10
@@ -284,9 +317,11 @@ class ClassificationX():
             '''
             notebook = []
             notebook.append("# " + title)
-            notebook.append("import numpy as np")
+            notebook.append("import csv")
+            notebook.append("import pandas as pd")
             notebook.append("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score")
             notebook.append("from sklearn.model_selection import train_test_split")
+            notebook.append("from joblib import dump, load")
             notebook.append(library)
             notebook.append("dataframe = pd.read_csv('"+filename+"')")
             notebook.append("df_x = dataframe["+str(x_cols)+"]")
@@ -294,6 +329,7 @@ class ClassificationX():
             notebook.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
             notebook.append(method_model)
             notebook.append("model.fit(x_train,y_train)")
+            notebook.append("dump(model,'" + method + ".joblib')")
             notebook.append("predictions = model.predict(x_test)")
             notebook.append(("# Classification report"))
             notebook.append("print(classification_report(y_test, predictions))")
@@ -307,10 +343,32 @@ class ClassificationX():
             notebook.append("data_compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})")
             notebook.append("# Compare")
             notebook.append("data_compare")
+            notebook.append("# Load fit model and predict")
+            notebook.append("import csv")
+            notebook.append("import pandas as pd")
+            notebook.append("from joblib import dump, load")
+            notebook.append("model = load('"+method+".joblib')")
+            notebook.append("dataframe_test = pd.read_csv('test.csv')")
+            notebook.append("xs = dataframe_test["+str(x_cols)+"]")
+            notebook.append("ys = dataframe_test['"+y+"']")
+            notebook.append("predictions = model.predict(xs)")
+            notebook.append("data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})")
+            notebook.append("data_compare_test")
             sc.append(notebook) # actualiza el notebook
 
+            '''
+            Usando el modelo
+            '''
+            model = load("static/models/"+method+".joblib")
+            dataframe_test = pd.read_csv("static/csv/droop_test.csv")
+            xs = dataframe_test[['x0', 'y0', 'x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x4', 'y4', 'x5', 'y5', 'x6', 'y6', 'x7', 'y7', 'x8', 'y8', 'x9', 'y9', 'x10', 'y10', 'x11', 'y11', 'x12', 'y12', 'x13', 'y13', 'x14', 'y14', 'x15', 'y15', 'x16', 'y16', 'x17', 'y17', 'x18', 'y18', 'x19', 'y19', 'x20', 'y20', 'x21', 'y21', 'x22', 'y22', 'x23', 'y23', 'x24', 'y24', 'x25', 'y25', 'x26', 'y26', 'x27', 'y27', 'x28', 'y28', 'x29', 'y29', 'x30', 'y30', 'x31', 'y31', 'x32', 'y32', 'x33', 'y33', 'x34', 'y34', 'x35', 'y35', 'x36', 'y36', 'x37', 'y37', 'x38', 'y38', 'x39', 'y39', 'x40', 'y40', 'x41', 'y41', 'x42', 'y42', 'x43', 'y43', 'x44', 'y44', 'x45', 'y45', 'x46', 'y46', 'x47', 'y47', 'x48', 'y48', 'x49', 'y49', 'x50', 'y50', 'x51', 'y51', 'x52', 'y52', 'x53', 'y53', 'x54', 'y54', 'x55', 'y55', 'x56', 'y56', 'x57', 'y57', 'x58', 'y58', 'x59', 'y59', 'x60', 'y60', 'x61', 'y61', 'x62', 'y62', 'x63', 'y63', 'x64', 'y64', 'x65', 'y65', 'x66', 'y66', 'x67', 'y67']]
+            ys = dataframe_test['droop']
+            predictions = model.predict(xs)
+            data_compare_test = pd.DataFrame({"Actual":ys, "Predicted":predictions})
+            print(data_compare_test)
+
             raise web.seeother('/classification_r')
-        except Exception as e:
-            print(e.args)
-            return render.error(e.args[0])
+        # except Exception as e:
+        #     print(e.args)
+        #     return render.error(e.args[0])
 

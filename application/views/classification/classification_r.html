@@ -11,7 +11,7 @@ $def with(method, result)
     $for row in result:
         <tr>
             <td>$row</td>
-        $if row == "Report" or row == "Python":
+        $if row == "Report" or row == "Python" or row == "Python_test":
             <td>
             <pre>
             <code>
@@ -30,6 +30,10 @@ $def with(method, result)
         $elif row == "optimization_plot" and result[row] == True:
             <td>
                 <img src="/static/images/optimization_plot.png" class="img-fluid" alt="roc">
+            </td>
+        $elif row == "Model":
+            <td>
+                <a href="static/models/$result[row]">Download $result[row]</a>
             </td>
         $else:
             <td>$result[row]</td>
