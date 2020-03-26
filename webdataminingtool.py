@@ -27,9 +27,9 @@ urls = (
     '/knn_x', 'application.controllers.knn.knn_x.KnnX',
     '/knn_r', 'application.controllers.knn.knn_r.KnnR',
 
-    '/svc_y', 'application.controllers.svc_y.SvcY',
-    '/svc_x', 'application.controllers.svc_x.SvcX',
-    '/svc_r','application.controllers.svc_r.SvcR',
+    '/svc_y', 'application.controllers.svc.svc_y.SvcY',
+    '/svc_x', 'application.controllers.svc.svc_x.SvcX',
+    '/svc_r','application.controllers.svc.svc_r.SvcR',
 
     '/compare_y', 'application.controllers.compare_y.CompareY',
     '/compare_x', 'application.controllers.compare_x.CompareX',
