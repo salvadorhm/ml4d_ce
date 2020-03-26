@@ -14,6 +14,10 @@ urls = (
     '/describe','application.controllers.statistics.describe.Describe',
     '/correlation','application.controllers.statistics.correlation.Correlation',
 
+    '/classification_y/(.+)', 'application.controllers.classification.classification_y.ClassificationY',
+    '/classification_x', 'application.controllers.classification.classification_x.ClassificationX',
+    '/classification_r', 'application.controllers.classification.classification_r.ClassificationR',
+
     '/lineary', 'application.controllers.linear.lineary.LinearY',
     '/linearx', 'application.controllers.linear.linearx.LinearX',
     '/linearr', 'application.controllers.linear.linearr.LinearR',

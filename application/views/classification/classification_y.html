@@ -1,0 +1,20 @@
+$def with(method, cols,types,nulls)
+
+<h1>$method: dependent term Y <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
+
+<form action="" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+    <select class="form-control" id="column" name="column">
+        $ no = 0
+        $for i in range(len(cols)):
+            $if nulls[i] == 0:
+                <option value="$cols[i]">$cols[i] - $types[i] - $nulls[i]</option>
+    </select>
+    </div>
+    
+    <div class="form-group">
+        <label></label>
+        <button id="send" name="send" class="btn btn-primary">Select Y</button>
+    </div>
+</form>
+
