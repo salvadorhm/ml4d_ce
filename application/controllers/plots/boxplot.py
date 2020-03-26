@@ -5,14 +5,15 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sn
+import matplotlib.mlab as mlab
 from matplotlib.pyplot import figure, show
 
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/plots', base="../master")
 
-class CountPlot2:
+class BoxPlot:
 
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
 
@@ -24,34 +25,32 @@ class CountPlot2:
             webdataminingtool.sessions = {}
             dataframe = pd.read_csv(self.file)
             columns = list(dataframe)
-            return render.countplot2(columns)
+            return render.boxplot(columns)
         except Exception as e:
             print(e.args)
-            return render.error(e.args[0])
 
     def POST(self):
         try:
             dataframe = pd.read_csv(self.file)
-            # form = web.input(column = [''])
             form = web.input()
             x_col = form.x
-            hue_col = form.hue
+            y_col = form.y
             figure()
             width=20
             height=8
             figure(figsize=(width,height))
-            nor = sn.countplot(x=x_col, hue=hue_col, data= dataframe)
-            image_name = "static/images/countplot2.png"
+            nor = sn.boxplot(x=x_col, y=y_col, data= dataframe)
+            image_name = "static/images/boxplot.png"
             nor.figure.savefig(image_name)
             fig = nor.get_figure()
             #plt.close(fig)
 
             code_lines = []
-            code_lines.append("# Countplot")
-            code_lines.append("sn.countplot(x='"+ x_col +"', hue='"+ hue_col + "', data= dataframe)")
+            code_lines.append("# Boxplot")
+            code_lines.append("sn.boxplot(x='"+ x_col +"', y='"+ y_col + "', data= dataframe)")
             sc.append(code_lines)
 
-            return render.plots("Countplot",image_name)
+            return render.plots("Boxplot",image_name)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

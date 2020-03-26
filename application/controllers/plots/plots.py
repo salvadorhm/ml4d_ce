@@ -2,7 +2,7 @@ import web  # pip install web.py
 import webdataminingtool
 
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/plots', base="../master")
 
 class Plots:
 

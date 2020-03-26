@@ -39,12 +39,14 @@ urls = (
     '/randomf_x', 'application.controllers.randomf.randomf_x.RandomfX',
     '/randomf_r','application.controllers.randomf.randomf_r.RandomfR',
 
-    '/boxplot', 'application.controllers.boxplot.BoxPlot',
-    '/countplot2', 'application.controllers.countplot2.CountPlot2',
-    '/heatmap_null','application.controllers.heatmap_null.HeatmapNull',
+    '/boxplot', 'application.controllers.plots.boxplot.BoxPlot',
+    '/countplot2', 'application.controllers.plots.countplot2.CountPlot2',
+    '/heatmap_null','application.controllers.plots.heatmap_null.HeatmapNull',
+    '/plots', 'application.controllers.plots.plots.Plots',
+
+
     '/pairplot','application.controllers.pairplot.PairPlot',
 
-    '/plots', 'application.controllers.plots.Plots',
 
     '/detail', 'application.controllers.clean.detail.Detail',
     '/drop/(.+)','application.controllers.clean.drop.Drop',

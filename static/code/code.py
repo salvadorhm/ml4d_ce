@@ -76,3 +76,19 @@ dataframe['static/icon/favicon.ico'].isnull().sum()
 dataframe['static/icon/favicon.ico'].describe()
 # Describe columna 'droop'
 dataframe['droop'].describe()
+# Revisando si tiene NaN la columna 'droop'
+dataframe['droop'].isnull().sum()
+# Describe columna 'droop'
+dataframe['droop'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.ico'
+dataframe['static/icon/favicon.ico'].isnull().sum()
+# Describe columna 'static/icon/favicon.ico'
+dataframe['static/icon/favicon.ico'].describe()
+# Describe columna 'x1'
+dataframe['x1'].describe()
+# Heatmap nulls
+sn.heatmap(dataframe.isnull())
+# Boxplot
+sn.boxplot(x='droop', y='x0', data= dataframe)
+# Countplot
+sn.countplot(x='droop', hue='x0', data= dataframe)
