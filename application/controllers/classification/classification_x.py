@@ -93,7 +93,7 @@ class ClassificationX():
                 '''
                 tasa_error = []
                 for i in range(1,100):
-                    model = KNeighborsClassifier(n_neighbors=i)
+                    model = KNeighborsClassifier(n_neighbors=i, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
                     model.fit(x_train, y_train)
                     prediction_i = model.predict(x_test)
                     tasa_error.append(np.mean(prediction_i != y_test))
@@ -105,11 +105,12 @@ class ClassificationX():
                         min = tasa_error[i]
                         n = i + 1 
 
-                model = KNeighborsClassifier(n_neighbors=n)
+                model = KNeighborsClassifier(n_neighbors=n, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
+
 
                 title = "KNeighbors Classifier"
                 library = "from sklearn.neighbors import KNeighborsClassifier"
-                method_model ="model = KNeighborsClassifier(n_neighbors="+str(n)+")"
+                method_model ="model = KNeighborsClassifier(n_neighbors="+str(n)+", weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)"
                 webdataminingtool.classification['n_neighbors']= n
 
 
@@ -133,11 +134,11 @@ class ClassificationX():
                 Decision Tree classifier
                 ---------------------------------------------------------------------------
                 '''
-                model = DecisionTreeClassifier()
+                model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None, random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, class_weight=None, presort='deprecated', ccp_alpha=0.0)
 
                 title = "Decision Tree classifier"
                 library = "from sklearn.tree import DecisionTreeClassifier"
-                method_model ="model = DecisionTreeClassifier()"
+                method_model ="model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None, random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, class_weight=None, presort='deprecated', ccp_alpha=0.0)"
 
             elif method == "randomf":
                 '''
@@ -146,8 +147,8 @@ class ClassificationX():
                 ---------------------------------------------------------------------------
                 '''
                 tasa_error = []
-                for i in range(1,100):
-                    model = RandomForestClassifier(n_estimators=i)
+                for n in range(1,100):
+                    model = RandomForestClassifier(n_estimators=n, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
                     model.fit(x_train, y_train)
                     prediction_i = model.predict(x_test)
                     tasa_error.append(np.mean(prediction_i != y_test))
@@ -160,11 +161,11 @@ class ClassificationX():
                         n = i + 1 
 
                 # n=80
-                model = RandomForestClassifier(n_estimators=n)
+                model = RandomForestClassifier(n_estimators=n, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
 
                 title = "RandomForest Classifier"
                 library = "from sklearn.ensemble import RandomForestClassifier"
-                method_model ="model = RandomForestClassifier(n_estimators=" +str(n)+")"
+                method_model ="model = RandomForestClassifier(n_estimators=" +str(n)+",criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)"
                 webdataminingtool.classification['n_estimators']= n
 
                 values = range(1,100)
@@ -188,10 +189,10 @@ class ClassificationX():
                 Suport Vector Machine Classifier
                 ---------------------------------------------------------------------------
                 '''
-                model = SVC(gamma='auto')
+                model = SVC(C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=True, max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None)
                 title = "Suport Vector Machine Classifier"
                 library = "from sklearn.svm import SVC"
-                method_model ="model = SVC(gamma='auto')"
+                method_model ="model = SVC(C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=True, max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None)"
 
 
             model.fit(x_train,y_train)

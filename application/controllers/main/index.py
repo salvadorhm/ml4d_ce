@@ -47,7 +47,7 @@ class Index:
                 new_filename = "temp.csv"
                 shutil.copy('static/uploads/'+fn, filedir + new_filename)
                 code_lines = []
-                code_lines.append("# Librerias")
+                code_lines.append("# Libraries")
                 code_lines.append("import csv")
                 code_lines.append("import pandas as pd")
                 code_lines.append("import numpy as np")
@@ -55,13 +55,14 @@ class Index:
                 code_lines.append("import seaborn as sn")
                 code_lines.append("import matplotlib.mlab as mlab")
                 code_lines.append("from matplotlib.pyplot import figure, show")
-                code_lines.append("# Creando el Dataframe para trabajar")
+                code_lines.append("# Loading Dataframe ")
                 code_lines.append("dataframe = pd.read_csv('"+filename+"')")
-                code_lines.append("# Descripcion del dataframe")
+                code_lines.append("# Describe dataframe")
                 code_lines.append("dataframe.describe()")
                 code_lines.append("# Dataframe")
                 code_lines.append("dataframe")
                 sc.create(code_lines)
+                
                 raise web.seeother('/general') 
             else: 
                 message ="The file it's not a CSV"
