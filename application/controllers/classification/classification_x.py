@@ -129,7 +129,21 @@ class ClassificationX():
                 RandomForest Classifier
                 ---------------------------------------------------------------------------
                 '''
-                n=80
+                tasa_error = []
+                for i in range(1,100):
+                    model = KNeighborsClassifier(n_neighbors=i)
+                    model.fit(x_train, y_train)
+                    prediction_i = model.predict(x_test)
+                    tasa_error.append(np.mean(prediction_i != y_test))
+
+                min = 1
+                n = 0
+                for i in range(len(tasa_error)):
+                    if tasa_error[i] < min:
+                        min = tasa_error[i]
+                        n = i + 1 
+
+                # n=80
                 model = RandomForestClassifier(n_estimators=n)
 
                 title = "RandomForest Classifier"
@@ -184,7 +198,6 @@ class ClassificationX():
             code.append("\n")
             code.append("confusion_matrix(y_test, predictions)")
 
-            webdataminingtool.classification['method']= title
             webdataminingtool.classification['filename']= filename
             webdataminingtool.classification['x']=list(x_cols)
             webdataminingtool.classification['y']= y
