@@ -1,11 +1,11 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.7.5"  # version de la webapp
+app_version = "0.7.6"  # version de la webapp
 
 urls = (
-    '/','application.controllers.index.Index',
-    '/about','application.controllers.about.About',
+    '/','application.controllers.main.index.Index',
+    '/about','application.controllers.main.about.About',
 
     '/notebook','application.controllers.downloads.notebook.Notebook',
     '/dataset','application.controllers.downloads.dataset.Dataset',

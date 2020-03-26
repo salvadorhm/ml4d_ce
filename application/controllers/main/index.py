@@ -10,7 +10,7 @@ sc = SaveCode()
 
 cgitb.enable
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/main', base="../master")
 
 
 class Index:
