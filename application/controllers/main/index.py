@@ -4,6 +4,8 @@ import shutil # Maneja archivos y directorios.
 import cgi,os # Ejecuta un programa en el servidor y despliega su resultado hacia el cliente.
 import cgitb # Proporciona un controlador especial para scripts de Python. 
 import os, sys
+import pandas as pd
+from sklearn.model_selection import train_test_split
 
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
@@ -44,8 +46,16 @@ class Index:
                 fn = os.path.basename(form.csv_file.filename)
                 webdataminingtool.file = {'filename':fn}
                 file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
-                new_filename = "temp.csv"
+                new_filename = "train.csv"
                 shutil.copy('static/uploads/'+fn, filedir + new_filename)
+
+
+                df = pd.read_csv("static/csv/train.csv")
+                train, validation = train_test_split(df, test_size=0.1)
+                train.to_csv('static/csv/train.csv', sep=',',index=False)
+                validation.to_csv('static/csv/validation.csv', sep=',',index=False)
+                
+
                 code_lines = []
                 code_lines.append("# Libraries")
                 code_lines.append("import csv")
@@ -56,7 +66,7 @@ class Index:
                 code_lines.append("import matplotlib.mlab as mlab")
                 code_lines.append("from matplotlib.pyplot import figure, show")
                 code_lines.append("# Loading Dataframe ")
-                code_lines.append("dataframe = pd.read_csv('"+filename+"')")
+                code_lines.append("dataframe = pd.read_csv('train')")
                 code_lines.append("# Describe dataframe")
                 code_lines.append("dataframe.describe()")
                 code_lines.append("# Dataframe")

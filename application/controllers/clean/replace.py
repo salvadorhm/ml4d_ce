@@ -11,7 +11,7 @@ render = web.template.render('application/views/clean', base="../master")
 class Replace:
 
     app_version = "0.1.0"  # version de la webapp
-    file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
+    file = 'static/csv/train.csv'  # define el archivo donde se almacenan los datos
 
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
@@ -21,7 +21,7 @@ class Replace:
             dataframe = pd.read_csv(self.file)
             # dataframe.drop(['Prospect ID'],axis=1,inplace=True)
             # dataframe.drop(['Lead Number'],axis=1,inplace=True)
-            # dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            # dataframe.to_csv('static/csv/train.csv', sep=',',index=False)
             nulls = dataframe[column].isnull().sum()
             dtypes = dataframe[column].dtypes
             unique = dataframe[column].unique().tolist()
@@ -60,7 +60,7 @@ class Replace:
             new = form['new']
             dataframe = pd.read_csv(self.file)
             dataframe[column].replace({actual : new}, inplace=True, regex=True)
-            dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            dataframe.to_csv('static/csv/train.csv', sep=',',index=False)
 
             code_lines = []
             code_lines.append("# Remplazando '" +  actual + "' por '" + new + "' en la columna '" + column +"'")

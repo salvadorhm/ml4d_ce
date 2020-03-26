@@ -12,7 +12,7 @@ render = web.template.render('application/views/clean', base="../master")
 class Dummies:
 
     app_version = "0.1.0"  # version de la webapp
-    file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
+    file = 'static/csv/train.csv'  # define el archivo donde se almacenan los datos
 
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
@@ -39,7 +39,7 @@ class Dummies:
             sc.append(code_lines)
 
             # actualiza el archivo csv
-            dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            dataframe.to_csv('static/csv/train.csv', sep=',',index=False)
             raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)

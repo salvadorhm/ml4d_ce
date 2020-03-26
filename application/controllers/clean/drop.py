@@ -11,7 +11,7 @@ render = web.template.render('application/views/clean', base="../master")
 
 class Drop:
 
-    file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
+    file = 'static/csv/train.csv'  # define el archivo donde se almacenan los datos
 
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
@@ -31,7 +31,7 @@ class Drop:
             dataframe = pd.read_csv(self.file)
             dataframe.drop([column],axis=1,inplace=True)
 
-            dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            dataframe.to_csv('static/csv/train.csv', sep=',',index=False)
 
             code_lines = []
             code_lines.append("# Drop")

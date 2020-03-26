@@ -11,7 +11,7 @@ $def with(method, result)
     $for row in result:
         <tr>
             <td>$row</td>
-        $if row == "Report" or row == "Python" or row == "Python_test":
+        $if row == "Report" or row == "Python" or row == "Python validation":
             <td>
             <pre>
             <code>
@@ -33,7 +33,11 @@ $def with(method, result)
             </td>
         $elif row == "Model":
             <td>
-                <a href="static/models/$result[row]">Download $result[row]</a>
+                <a href="static/models/$result[row]">Download model: $result[row]</a>
+            </td>
+        $elif row == "train.csv" or row == "validation.csv":
+            <td>
+                <a href="static/csv/$result[row]">Download dataset: $result[row]</a>
             </td>
         $else:
             <td>$result[row]</td>

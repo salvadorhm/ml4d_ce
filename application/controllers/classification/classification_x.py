@@ -30,7 +30,7 @@ render = web.template.render('application/views/classification', base="../master
 
 class ClassificationX():
 
-    file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
+    file = 'static/csv/train.csv'  # define el archivo donde se almacenan los datos
 
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
@@ -70,7 +70,7 @@ class ClassificationX():
             try:
                 filename = webdataminingtool.file['filename']
             except Exception as e:
-                filename = "temp.csv"
+                filename = "train.csv"
             y = webdataminingtool.classification['y']
             method = webdataminingtool.classification['method']
 
@@ -217,7 +217,7 @@ class ClassificationX():
             code.append("\n")
             code.append(library)
             code.append("\n")
-            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("dataframe = pd.read_csv('train.csv')")
             code.append("\n")
             code.append("df_x = dataframe["+str(x_cols)+"]")
             code.append("\n")
@@ -250,7 +250,7 @@ class ClassificationX():
             test.append("\n")
             test.append("model = load('"+method+".joblib')")
             test.append("\n")
-            test.append("dataframe_test = pd.read_csv('test.csv')")
+            test.append("dataframe_test = pd.read_csv('validation.csv')")
             test.append("\n")
             test.append("xs = dataframe["+str(x_cols)+"]")
             test.append("\n")
@@ -272,8 +272,10 @@ class ClassificationX():
             webdataminingtool.classification['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
             webdataminingtool.classification['Python'] = "".join(code)
+            webdataminingtool.classification['train.csv'] = "train.csv"
             webdataminingtool.classification['Model'] = method+".joblib"
-            webdataminingtool.classification['Python_test'] = "".join(test)
+            webdataminingtool.classification['Python validation'] = "".join(test)
+            webdataminingtool.classification['validation.csv'] = "validation.csv"
 
             figure()
             width=10
@@ -323,7 +325,7 @@ class ClassificationX():
             notebook.append("from sklearn.model_selection import train_test_split")
             notebook.append("from joblib import dump, load")
             notebook.append(library)
-            notebook.append("dataframe = pd.read_csv('"+filename+"')")
+            notebook.append("dataframe = pd.read_csv('train.csv')")
             notebook.append("df_x = dataframe["+str(x_cols)+"]")
             notebook.append("df_y = dataframe['"+y+"']")
             notebook.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
@@ -348,7 +350,7 @@ class ClassificationX():
             notebook.append("import pandas as pd")
             notebook.append("from joblib import dump, load")
             notebook.append("model = load('"+method+".joblib')")
-            notebook.append("dataframe_test = pd.read_csv('test.csv')")
+            notebook.append("dataframe_test = pd.read_csv('validation.csv')")
             notebook.append("xs = dataframe_test["+str(x_cols)+"]")
             notebook.append("ys = dataframe_test['"+y+"']")
             notebook.append("predictions = model.predict(xs)")
@@ -360,9 +362,9 @@ class ClassificationX():
             Usando el modelo
             '''
             model = load("static/models/"+method+".joblib")
-            dataframe_test = pd.read_csv("static/csv/droop_test.csv")
-            xs = dataframe_test[['x0', 'y0', 'x1', 'y1', 'x2', 'y2', 'x3', 'y3', 'x4', 'y4', 'x5', 'y5', 'x6', 'y6', 'x7', 'y7', 'x8', 'y8', 'x9', 'y9', 'x10', 'y10', 'x11', 'y11', 'x12', 'y12', 'x13', 'y13', 'x14', 'y14', 'x15', 'y15', 'x16', 'y16', 'x17', 'y17', 'x18', 'y18', 'x19', 'y19', 'x20', 'y20', 'x21', 'y21', 'x22', 'y22', 'x23', 'y23', 'x24', 'y24', 'x25', 'y25', 'x26', 'y26', 'x27', 'y27', 'x28', 'y28', 'x29', 'y29', 'x30', 'y30', 'x31', 'y31', 'x32', 'y32', 'x33', 'y33', 'x34', 'y34', 'x35', 'y35', 'x36', 'y36', 'x37', 'y37', 'x38', 'y38', 'x39', 'y39', 'x40', 'y40', 'x41', 'y41', 'x42', 'y42', 'x43', 'y43', 'x44', 'y44', 'x45', 'y45', 'x46', 'y46', 'x47', 'y47', 'x48', 'y48', 'x49', 'y49', 'x50', 'y50', 'x51', 'y51', 'x52', 'y52', 'x53', 'y53', 'x54', 'y54', 'x55', 'y55', 'x56', 'y56', 'x57', 'y57', 'x58', 'y58', 'x59', 'y59', 'x60', 'y60', 'x61', 'y61', 'x62', 'y62', 'x63', 'y63', 'x64', 'y64', 'x65', 'y65', 'x66', 'y66', 'x67', 'y67']]
-            ys = dataframe_test['droop']
+            dataframe_test = pd.read_csv("static/csv/validation.csv")
+            xs = dataframe_test[x_cols]
+            ys = dataframe_test[y]
             predictions = model.predict(xs)
             data_compare_test = pd.DataFrame({"Actual":ys, "Predicted":predictions})
             print(data_compare_test)

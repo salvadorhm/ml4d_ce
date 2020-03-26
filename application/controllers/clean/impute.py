@@ -10,7 +10,7 @@ render = web.template.render('application/views/clean', base="../master")
 
 class Impute:
 
-    file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
+    file = 'static/csv/train.csv'  # define el archivo donde se almacenan los datos
 
     def __init__(self):  # Método inicial o constructor de la clase
         pass  # Simplemente continua con la ejecución
@@ -60,7 +60,7 @@ class Impute:
             code_lines.append("# Imputando valor a los valores NaN de la columna '"+column+"'")
             code_lines.append("dataframe['"+column+"'].fillna('"+nan_value+"', inplace=True)")
             sc.append(code_lines)
-            dataframe.to_csv('static/csv/temp.csv', sep=',',index=False)
+            dataframe.to_csv('static/csv/train.csv', sep=',',index=False)
             raise web.seeother('/detail') 
         except Exception as e:
             print(e.args)
