@@ -92,42 +92,42 @@ class ClassificationX():
                 KNeighbors classifier
                 ---------------------------------------------------------------------------
                 '''
-                tasa_error = []
-                for i in range(1,100):
-                    model = KNeighborsClassifier(n_neighbors=i, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
-                    model.fit(x_train, y_train)
-                    prediction_i = model.predict(x_test)
-                    tasa_error.append(np.mean(prediction_i != y_test))
+                # tasa_error = []
+                # for i in range(1,100):
+                #     model = KNeighborsClassifier(n_neighbors=i, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
+                #     model.fit(x_train, y_train)
+                #     prediction_i = model.predict(x_test)
+                #     tasa_error.append(np.mean(prediction_i != y_test))
 
-                min = 1
-                n = 0
-                for i in range(len(tasa_error)):
-                    if tasa_error[i] < min:
-                        min = tasa_error[i]
-                        n = i + 1 
+                # min = 1
+                # n = 0
+                # for i in range(len(tasa_error)):
+                #     if tasa_error[i] < min:
+                #         min = tasa_error[i]
+                #         n = i + 1 
 
-                model = KNeighborsClassifier(n_neighbors=n, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
+                model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
 
 
                 title = "KNeighbors Classifier"
                 library = "from sklearn.neighbors import KNeighborsClassifier"
-                method_model ="model = KNeighborsClassifier(n_neighbors="+str(n)+", weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)"
-                webdataminingtool.classification['n_neighbors']= n
+                method_model ="model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)"
+                # webdataminingtool.classification['n_neighbors']= 5
 
 
-                values = range(1,100)
+                # values = range(1,100)
 
-                figure()
-                width=10
-                height=4
-                figure(figsize=(width,height))
-                plt.plot(values, tasa_error, color="g", marker="o", markerfacecolor="r")
-                plt.xlabel("Optimization")
-                plt.ylabel("Mean error")
-                plt.title("Optimization test")
-                image_name = "static/images/optimization_plot.png"
-                plt.savefig(image_name)
-                webdataminingtool.classification['optimization_plot']= True
+                # figure()
+                # width=10
+                # height=4
+                # figure(figsize=(width,height))
+                # plt.plot(values, tasa_error, color="g", marker="o", markerfacecolor="r")
+                # plt.xlabel("Optimization")
+                # plt.ylabel("Mean error")
+                # plt.title("Optimization test")
+                # image_name = "static/images/optimization_plot.png"
+                # plt.savefig(image_name)
+                # webdataminingtool.classification['optimization_plot']= True
 
             elif method == "tree":
                 '''
@@ -147,40 +147,40 @@ class ClassificationX():
                 RandomForest Classifier
                 ---------------------------------------------------------------------------
                 '''
-                tasa_error = []
-                for n in range(1,100):
-                    model = RandomForestClassifier(n_estimators=n, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
-                    model.fit(x_train, y_train)
-                    prediction_i = model.predict(x_test)
-                    tasa_error.append(np.mean(prediction_i != y_test))
+                # tasa_error = []
+                # for n in range(1,100):
+                #     model = RandomForestClassifier(n_estimators=n, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=0, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
+                #     model.fit(x_train, y_train)
+                #     prediction_i = model.predict(x_test)
+                #     tasa_error.append(np.mean(prediction_i != y_test))
 
-                min = 1
-                n = 0
-                for i in range(len(tasa_error)):
-                    if tasa_error[i] < min:
-                        min = tasa_error[i]
-                        n = i + 1 
+                # min = 1
+                # n = 0
+                # for i in range(len(tasa_error)):
+                #     if tasa_error[i] < min:
+                #         min = tasa_error[i]
+                #         n = i + 1 
 
                 # n=80
-                model = RandomForestClassifier(n_estimators=n, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
+                model = RandomForestClassifier(n_estimators=50, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
 
                 title = "RandomForest Classifier"
                 library = "from sklearn.ensemble import RandomForestClassifier"
-                method_model ="model = RandomForestClassifier(n_estimators=" +str(n)+",criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)"
-                webdataminingtool.classification['n_estimators']= n
+                method_model ="model = RandomForestClassifier(n_estimators=50,criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)"
+                # webdataminingtool.classification['n_estimators']= n
 
-                values = range(1,100)
-                figure()
-                width=10
-                height=4
-                figure(figsize=(width,height))
-                plt.plot(values, tasa_error, color="g", marker="o", markerfacecolor="r")
-                plt.xlabel("Optimization")
-                plt.ylabel("Mean error")
-                plt.title("Optimization test")
-                image_name = "static/images/optimization_plot.png"
-                plt.savefig(image_name)
-                webdataminingtool.classification['optimization_plot']= True
+                # values = range(1,100)
+                # figure()
+                # width=10
+                # height=4
+                # figure(figsize=(width,height))
+                # plt.plot(values, tasa_error, color="g", marker="o", markerfacecolor="r")
+                # plt.xlabel("Optimization")
+                # plt.ylabel("Mean error")
+                # plt.title("Optimization test")
+                # image_name = "static/images/optimization_plot.png"
+                # plt.savefig(image_name)
+                # webdataminingtool.classification['optimization_plot']= True
 
 
                 
