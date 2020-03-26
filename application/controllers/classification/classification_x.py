@@ -110,6 +110,8 @@ class ClassificationX():
                 title = "KNeighbors Classifier"
                 library = "from sklearn.neighbors import KNeighborsClassifier"
                 method_model ="model = KNeighborsClassifier(n_neighbors="+str(n)+")"
+                webdataminingtool.classification['n_neighbors']= n
+
 
                 values = range(1,100)
 
@@ -163,6 +165,7 @@ class ClassificationX():
                 title = "RandomForest Classifier"
                 library = "from sklearn.ensemble import RandomForestClassifier"
                 method_model ="model = RandomForestClassifier(n_estimators=" +str(n)+")"
+                webdataminingtool.classification['n_estimators']= n
 
                 values = range(1,100)
                 figure()
@@ -202,7 +205,7 @@ class ClassificationX():
             code = []
             code.append("import numpy as np")
             code.append("\n")
-            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append(("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score"))
             code.append("\n")
             code.append("from sklearn.model_selection import train_test_split")
             code.append("\n")
@@ -225,6 +228,7 @@ class ClassificationX():
             code.append("classification_report(y_test, predictions)")
             code.append("\n")
             code.append("confusion_matrix(y_test, predictions)")
+           
 
             webdataminingtool.classification['filename']= filename
             webdataminingtool.classification['x']=list(x_cols)
@@ -273,6 +277,36 @@ class ClassificationX():
                 webdataminingtool.classification['roc_plot'] = True
             else:
                 webdataminingtool.classification['roc_plot'] = False
+
+            '''
+            Update notebook
+            '''
+            notebook = []
+            notebook.append("# " + title)
+            notebook.append("import numpy as np")
+            notebook.append("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score")
+            notebook.append("from sklearn.model_selection import train_test_split")
+            notebook.append(library)
+            notebook.append("dataframe = pd.read_csv('"+filename+"')")
+            notebook.append("df_x = dataframe["+str(x_cols)+"]")
+            notebook.append("df_y = dataframe['"+y+"']")
+            notebook.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            notebook.append(method_model)
+            notebook.append("model.fit(x_train,y_train)")
+            notebook.append("predictions = model.predict(x_test)")
+            notebook.append(("# Classification report"))
+            notebook.append("print(classification_report(y_test, predictions))")
+            notebook.append(("# Confusion matrix"))
+            notebook.append("confusion_matrix(y_test, predictions)")
+            notebook.append("# Score")
+            notebook.append("model.score(x_test,y_test)")
+            notebook.append("# Accuracy score")
+            notebook.append("accuracy_score(y_test, predictions)")
+            notebook.append("# Data compare")
+            notebook.append("data_compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})")
+            notebook.append("# Compare")
+            notebook.append("data_compare")
+            sc.append(notebook) # actualiza el notebook
 
             raise web.seeother('/classification_r')
         except Exception as e:
