@@ -23,9 +23,9 @@ urls = (
     '/logisticx', 'application.controllers.logistic.logisticx.LogisticX',
     '/logisticr', 'application.controllers.logistic.logisticr.LogisticR',
 
-    '/knn_y', 'application.controllers.knn_y.KnnY',
-    '/knn_x', 'application.controllers.knn_x.KnnX',
-    '/knn_r','application.controllers.knn_r.KnnR',
+    '/knn_y', 'application.controllers.knn.knn_y.KnnY',
+    '/knn_x', 'application.controllers.knn.knn_x.KnnX',
+    '/knn_r', 'application.controllers.knn.knn_r.KnnR',
 
     '/svc_y', 'application.controllers.svc_y.SvcY',
     '/svc_x', 'application.controllers.svc_x.SvcX',
