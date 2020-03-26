@@ -92,7 +92,7 @@ class ClassificationX():
                 ---------------------------------------------------------------------------
                 '''
                 tasa_error = []
-                for i in range(1,30):
+                for i in range(1,100):
                     model = KNeighborsClassifier(n_neighbors=i)
                     model.fit(x_train, y_train)
                     prediction_i = model.predict(x_test)
@@ -110,6 +110,20 @@ class ClassificationX():
                 title = "KNeighbors Classifier"
                 library = "from sklearn.neighbors import KNeighborsClassifier"
                 method_model ="model = KNeighborsClassifier(n_neighbors="+str(n)+")"
+
+                values = range(1,100)
+
+                figure()
+                width=10
+                height=4
+                figure(figsize=(width,height))
+                plt.plot(values, tasa_error, color="g", marker="o", markerfacecolor="r")
+                plt.xlabel("Optimization")
+                plt.ylabel("Mean error")
+                plt.title("Optimization test")
+                image_name = "static/images/optimization_plot.png"
+                plt.savefig(image_name)
+                webdataminingtool.classification['optimization_plot']= True
 
             elif method == "tree":
                 '''
@@ -131,7 +145,7 @@ class ClassificationX():
                 '''
                 tasa_error = []
                 for i in range(1,100):
-                    model = KNeighborsClassifier(n_neighbors=i)
+                    model = RandomForestClassifier(n_estimators=i)
                     model.fit(x_train, y_train)
                     prediction_i = model.predict(x_test)
                     tasa_error.append(np.mean(prediction_i != y_test))
@@ -149,6 +163,20 @@ class ClassificationX():
                 title = "RandomForest Classifier"
                 library = "from sklearn.ensemble import RandomForestClassifier"
                 method_model ="model = RandomForestClassifier(n_estimators=" +str(n)+")"
+
+                values = range(1,100)
+                figure()
+                width=10
+                height=4
+                figure(figsize=(width,height))
+                plt.plot(values, tasa_error, color="g", marker="o", markerfacecolor="r")
+                plt.xlabel("Optimization")
+                plt.ylabel("Mean error")
+                plt.title("Optimization test")
+                image_name = "static/images/optimization_plot.png"
+                plt.savefig(image_name)
+                webdataminingtool.classification['optimization_plot']= True
+
 
                 
             elif method == "svc":
@@ -210,8 +238,8 @@ class ClassificationX():
             webdataminingtool.classification['Python'] = "".join(code)
 
             figure()
-            width=20
-            height=8
+            width=10
+            height=4
             figure(figsize=(width,height))
 
             confusion_columns=[]
@@ -221,8 +249,30 @@ class ClassificationX():
                 confusion_index.append("Actual:"+str(variable))
             conf_matrix = pd.DataFrame(data=confusion,columns=confusion_columns,index=confusion_index)
             sn.heatmap(conf_matrix, annot=True,  fmt='d',cmap="YlGnBu")
-            image_name = "static/images/result.png"
+            image_name = "static/images/confusion_plot.png"
             plt.savefig(image_name)
+            webdataminingtool.classification['confusion_plot'] = True
+
+          
+            if len(labels) <= 2 and dataframe[y].dtypes != 'object':
+                probs = model.predict_proba(x_test)  
+                probs = probs[:, 1]  
+                fper, tper, thresholds = roc_curve(y_test, probs) 
+                figure()
+                width=10
+                height=4
+                figure(figsize=(width,height))
+                plt.plot(fper, tper, color='orange', label='ROC')
+                plt.plot([0, 1], [0, 1], color='darkblue', linestyle='--')
+                plt.xlabel('False Positive Rate')
+                plt.ylabel('True Positive Rate')
+                plt.title('Receiver Operating Characteristic (ROC) Curve')
+                plt.legend()
+                image_name = "static/images/roc_plot.png"
+                plt.savefig(image_name)
+                webdataminingtool.classification['roc_plot'] = True
+            else:
+                webdataminingtool.classification['roc_plot'] = False
 
             raise web.seeother('/classification_r')
         except Exception as e:

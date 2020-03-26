@@ -71,7 +71,7 @@ class Index:
                 code_lines.append("# Dataframe")
                 code_lines.append("dataframe")
                 sc.create(code_lines)
-                raise web.seeother('/head') 
+                raise web.seeother('/general') 
             else: 
                 message ="The file it's not a CSV"
                 return render.index(message)

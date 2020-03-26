@@ -19,10 +19,20 @@ $def with(method, result)
             </code>
             </pre>
             </td>
+        $elif row == "confusion_plot":
+            <td>
+                <img src="/static/images/confusion_plot.png" class="img-fluid" alt="confusion_matrix">
+            </td>
+        $elif row == "roc_plot" and result[row] == True:
+            <td>
+                <img src="/static/images/roc_plot.png" class="img-fluid" alt="roc">
+            </td>
+        $elif row == "optimization_plot" and result[row] == True:
+            <td>
+                <img src="/static/images/optimization_plot.png" class="img-fluid" alt="roc">
+            </td>
         $else:
             <td>$result[row]</td>
         </tr>
 </table>
 </div>
-
-<img src="/static/images/result.png" class="img-fluid" alt="result">
