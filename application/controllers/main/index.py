@@ -66,7 +66,7 @@ class Index:
                 code_lines.append("import matplotlib.mlab as mlab")
                 code_lines.append("from matplotlib.pyplot import figure, show")
                 code_lines.append("# Loading Dataframe ")
-                code_lines.append("dataframe = pd.read_csv('train')")
+                code_lines.append("dataframe = pd.read_csv('train.csv')")
                 code_lines.append("# Describe dataframe")
                 code_lines.append("dataframe.describe()")
                 code_lines.append("# Dataframe")
