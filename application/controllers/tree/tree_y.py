@@ -4,7 +4,7 @@ import csv  # CSV parser
 import pandas as pd
 import numpy as np
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/tree', base="../master")
 
 class TreeY:
 

@@ -2,7 +2,7 @@ import web  # pip install web.py
 import webdataminingtool
 import csv  # CSV parser
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/tree', base="../master")
 
 class TreeR:
 

@@ -15,9 +15,9 @@ urls = (
     '/linearx', 'application.controllers.linear.linearx.LinearX',
     '/linearr', 'application.controllers.linear.linearr.LinearR',
 
-    '/tree_y', 'application.controllers.tree_y.TreeY',
-    '/tree_x', 'application.controllers.tree_x.TreeX',
-    '/tree_r','application.controllers.tree_r.TreeR',
+    '/tree_y', 'application.controllers.tree.tree_y.TreeY',
+    '/tree_x', 'application.controllers.tree.tree_x.TreeX',
+    '/tree_r', 'application.controllers.tree.tree_r.TreeR',
 
     '/logisticy', 'application.controllers.logistic.logisticy.LogisticY',
     '/logisticx', 'application.controllers.logistic.logisticx.LogisticX',
