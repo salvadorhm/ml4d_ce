@@ -19,7 +19,7 @@ from application.controllers.save_code import SaveCode
 sc = SaveCode()
 
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/logistic', base="../master")
 
 class LogisticX:
 

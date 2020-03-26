@@ -1,12 +1,12 @@
 import web  # pip install web.py
 import webdataminingtool
 import csv  # CSV parser
-import json  # json parser
 import pandas as pd
 import numpy as np
-render = web.template.render('application/views/', base="master")
 
-class LinearY:
+render = web.template.render('application/views/logistic', base="../master")
+
+class LogisticY:
 
     file = 'static/csv/temp.csv'  # define el archivo donde se almacenan los datos
 
@@ -19,7 +19,7 @@ class LinearY:
             cols = list(dataframe)
             types = list(dataframe.dtypes)
             nulls = list(dataframe.isnull().sum())
-            return render.lineary(cols,types,nulls)
+            return render.logisticy(cols,types,nulls)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
@@ -30,7 +30,7 @@ class LinearY:
             y = form.column
             webdataminingtool.sessions = {}
             webdataminingtool.sessions['y']=y
-            raise web.seeother('/linearx')
+            raise web.seeother('/logisticx')
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

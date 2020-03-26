@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.7.4"  # version de la webapp
+app_version = "0.7.5"  # version de la webapp
 
 urls = (
     '/','application.controllers.index.Index',
@@ -11,17 +11,17 @@ urls = (
     '/general', 'application.controllers.general.General',
     '/head', 'application.controllers.head.Head',
 
-    '/lineary', 'application.controllers.lineary.LinearY',
-    '/linearx', 'application.controllers.linearx.LinearX',
-    '/linearr','application.controllers.linearr.LinearR',
+    '/lineary', 'application.controllers.linear.lineary.LinearY',
+    '/linearx', 'application.controllers.linear.linearx.LinearX',
+    '/linearr', 'application.controllers.linear.linearr.LinearR',
 
     '/tree_y', 'application.controllers.tree_y.TreeY',
     '/tree_x', 'application.controllers.tree_x.TreeX',
     '/tree_r','application.controllers.tree_r.TreeR',
 
-    '/logisticy', 'application.controllers.logisticy.LogisticY',
-    '/logisticx', 'application.controllers.logisticx.LogisticX',
-    '/logisticr','application.controllers.logisticr.LogisticR',
+    '/logisticy', 'application.controllers.logistic.logisticy.LogisticY',
+    '/logisticx', 'application.controllers.logistic.logisticx.LogisticX',
+    '/logisticr', 'application.controllers.logistic.logisticr.LogisticR',
 
     '/knn_y', 'application.controllers.knn_y.KnnY',
     '/knn_x', 'application.controllers.knn_x.KnnX',

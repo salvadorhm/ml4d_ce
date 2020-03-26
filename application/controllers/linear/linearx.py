@@ -17,7 +17,7 @@ from sklearn.model_selection import train_test_split
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/linear/', base="../master")
 
 class LinearX:
 

@@ -12,7 +12,7 @@ import csv  # CSV parser
 # from sklearn.metrics import confusion_matrix
 # import matplotlib.mlab as mlab
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/linear/', base="../master")
 
 class LinearR:
 
