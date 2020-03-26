@@ -102,3 +102,17 @@ dataframe.corr()
 dataframe.describe()
 # Describe 'droop
 dataframe['droop'].describe()
+# Heatmap nulls
+sn.heatmap(dataframe.isnull())
+# Boxplot
+sn.boxplot(x='droop', y='y0', data= dataframe)
+# Describe 'droop
+dataframe['droop'].describe()
+# Countplot
+sn.countplot(data=dataframe, y='x0')
+# Histogram de x0
+sn.distplot(dataframe[x0])
+# Describe 'x0
+dataframe['x0'].describe()
+# Histogram de x0
+sn.distplot(dataframe[x0])

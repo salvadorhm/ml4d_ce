@@ -10,8 +10,6 @@ urls = (
     '/notebook','application.controllers.downloads.notebook.Notebook',
     '/dataset','application.controllers.downloads.dataset.Dataset',
 
-    '/head', 'application.controllers.head.Head',
-
     '/general', 'application.controllers.statistics.general.General',
     '/describe','application.controllers.statistics.describe.Describe',
     '/correlation','application.controllers.statistics.correlation.Correlation',
@@ -49,23 +47,19 @@ urls = (
     '/heatmap_null','application.controllers.plots.heatmap_null.HeatmapNull',
     '/plots', 'application.controllers.plots.plots.Plots',
 
-
-    '/pairplot','application.controllers.pairplot.PairPlot',
-
-
     '/detail', 'application.controllers.clean.detail.Detail',
     '/drop/(.+)','application.controllers.clean.drop.Drop',
     '/dummies/(.+)','application.controllers.clean.dummies.Dummies',
     '/impute/(.+)','application.controllers.clean.impute.Impute',
     '/replace/(.+)','application.controllers.clean.replace.Replace',
 
-    '/field/(.+)','application.controllers.field.Field',
-    
-    '/countplot/(.+)','application.controllers.countplot.CountPlot',
-    '/histogram/(.+)','application.controllers.histogram.Histogram',
+    '/field/(.+)','application.controllers.field.field.Field',
+    '/countplot/(.+)','application.controllers.field.countplot.CountPlot',
+    '/histogram/(.+)','application.controllers.field.histogram.Histogram',
 
 )
 webdataminingtool = web.application(urls, globals())
+
 sessions ={"status":"online","url":"localhost:8080"}
 
 def main():
@@ -75,5 +69,4 @@ def main():
     webdataminingtool.run()
 
 if __name__ == "__main__":
-    
     main()
