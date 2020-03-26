@@ -3,7 +3,7 @@ import sys
 import nbformat
 from nbformat.v4 import new_notebook, new_code_cell
 
-render = web.template.render('application/views/', base="master")
+render = web.template.render('application/views/downloads', base="../master")
 
 class Notebook:
 

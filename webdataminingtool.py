@@ -6,8 +6,10 @@ app_version = "0.7.5"  # version de la webapp
 urls = (
     '/','application.controllers.index.Index',
     '/about','application.controllers.about.About',
-    '/notebook','application.controllers.notebook.Notebook',
-    '/dataset','application.controllers.dataset.Dataset',
+
+    '/notebook','application.controllers.downloads.notebook.Notebook',
+    '/dataset','application.controllers.downloads.dataset.Dataset',
+
     '/head', 'application.controllers.head.Head',
 
     '/general', 'application.controllers.statistics.general.General',
