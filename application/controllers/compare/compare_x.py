@@ -79,46 +79,36 @@ class CompareX():
             df_y = dataframe[y]
 
             x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
-            
+            labels = y_train.unique()
             '''
             ---------------------------------------------------------------------------
             KNeighbors classifier
             ---------------------------------------------------------------------------
             '''
-            tasa_error = []
-            for i in range(1,30):
-                knn = KNeighborsClassifier(n_neighbors=i)
-                knn.fit(x_train, y_train)
-                prediction_i = knn.predict(x_test)
-                tasa_error.append(np.mean(prediction_i != y_test))
+            knn = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
 
-            min = 1
-            n = 0
-            for i in range(len(tasa_error)):
-                if tasa_error[i] < min:
-                    min = tasa_error[i]
-                    n = i + 1 
-
-            knn = KNeighborsClassifier(n_neighbors=n)
             knn.fit(x_train,y_train)
             predictions = knn.predict(x_test)
 
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
 
-            valores = range(1,30)
-
             figure()
-            width=20
-            height=8
+            width=10
+            height=4
             figure(figsize=(width,height))
-            plt.plot(valores, tasa_error, color="g", marker="o", markerfacecolor="r")
-            plt.xlabel("KNeighbors")
-            plt.ylabel("Mean error")
-            plt.title("KNeighbors test")
+
+            confusion_columns=[]
+            confusion_index=[]
+            for variable in labels:
+                confusion_columns.append("Predicted:"+str(variable))
+                confusion_index.append("Actual:"+str(variable))
+            conf_matrix = pd.DataFrame(data=confusion,columns=confusion_columns,index=confusion_index)
+            sn.heatmap(conf_matrix, annot=True,  fmt='d',cmap="YlGnBu")
             image_name = "static/images/knn.png"
             plt.savefig(image_name)
 
+ 
             code = []
             code.append("import numpy as np")
             code.append("\n")
@@ -128,7 +118,7 @@ class CompareX():
             code.append("\n")
             code.append("from sklearn.neighbors import KNeighborsClassifier")
             code.append("\n")
-            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("dataframe = pd.read_csv('"+filename+"')")
             code.append("\n")
             code.append("df_x = dataframe["+str(x_cols)+"]")
             code.append("\n")
@@ -136,7 +126,7 @@ class CompareX():
             code.append("\n")
             code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
             code.append("\n")
-            code.append("model = KNeighborsClassifier(n_neighbors="+str(n)+")")
+            code.append("model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)")
             code.append("\n")
             code.append("model.fit(x_train,y_train)")
             code.append("\n")
@@ -150,7 +140,6 @@ class CompareX():
             webdataminingtool.knn['filename']= filename
             webdataminingtool.knn['x']=list(x_cols)
             webdataminingtool.knn['y']= y
-            webdataminingtool.knn["N_neighbors"] = n
             webdataminingtool.knn['Report'] = report
             webdataminingtool.knn['Confusion matrix'] = list(confusion)
             webdataminingtool.knn['Score'] = knn.score(x_test,y_test)
@@ -160,28 +149,34 @@ class CompareX():
             webdataminingtool.knn['Real test values'] = list(data_result.Actual.head(10))
             webdataminingtool.knn['Predicted values'] = list(data_result.Predicted.head(10))
             webdataminingtool.knn['Python'] = "".join(code)
+            webdataminingtool.knn['Confusion matrix plot']= True
 
             '''
             ---------------------------------------------------------------------------
             Decision Tree classifier
             ---------------------------------------------------------------------------
             '''
-            tree = DecisionTreeClassifier()
+            tree = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None, random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, class_weight=None, presort='deprecated', ccp_alpha=0.0)
             tree.fit(x_train,y_train)
             predictions = tree.predict(x_test)
 
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
+            data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
 
             figure()
-            width=50
-            height=24
+            width=10
+            height=4
             figure(figsize=(width,height))
-            tree_pl.plot_tree(tree)
-            # plt.xlabel("KNeighbors")
-            # plt.ylabel("Mean error")
-            # plt.title("KNeighbors test")
-            image_name = "static/images/tree_small.png"
+
+            confusion_columns=[]
+            confusion_index=[]
+            for variable in labels:
+                confusion_columns.append("Predicted:"+str(variable))
+                confusion_index.append("Actual:"+str(variable))
+            conf_matrix = pd.DataFrame(data=confusion,columns=confusion_columns,index=confusion_index)
+            sn.heatmap(conf_matrix, annot=True,  fmt='d',cmap="YlGnBu")
+            image_name = "static/images/tree.png"
             plt.savefig(image_name)
 
             code = []
@@ -193,7 +188,7 @@ class CompareX():
             code.append("\n")
             code.append("from sklearn.tree import DecisionTreeClassifier")
             code.append("\n")
-            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("dataframe = pd.read_csv('"+filename+"')")
             code.append("\n")
             code.append("df_x = dataframe["+str(x_cols)+"]")
             code.append("\n")
@@ -201,7 +196,7 @@ class CompareX():
             code.append("\n")
             code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
             code.append("\n")
-            code.append("model = DecisionTreeClassifier()")
+            code.append("model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None, random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, class_weight=None, presort='deprecated', ccp_alpha=0.0)")
             code.append("\n")
             code.append("model.fit(x_train,y_train)")
             code.append("\n")
@@ -218,37 +213,41 @@ class CompareX():
             webdataminingtool.tree['Confusion matrix'] = list(confusion)
             webdataminingtool.tree['Score'] = tree.score(x_test,y_test)
             webdataminingtool.tree['Accuracy score'] = accuracy_score(y_test, predictions)
-
-            data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.tree['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.tree['Predicted values'] = list(data_compare.Predicted.head(10))
             webdataminingtool.tree['Python'] = "".join(code)
+            webdataminingtool.tree['Confusion matrix plot']= True
 
             '''
             ---------------------------------------------------------------------------
             RandomForest Classifier
             ---------------------------------------------------------------------------
             '''
-            randomf = RandomForestClassifier(n_estimators=80)
+            randomf = RandomForestClassifier(n_estimators=50, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
             randomf.fit(x_train,y_train)
             predictions = randomf.predict(x_test)
 
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
+            data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
 
             importances = randomf.feature_importances_
             indices = np.argsort(importances)
 
             features = x_train.columns
 
-            plt.figure()
-            width=50
-            height=24
+            figure()
+            width=10
+            height=4
             figure(figsize=(width,height))
-            plt.title('Feature Importances')
-            plt.barh(range(len(indices)), importances[indices], color='b', align='center')
-            plt.yticks(range(len(indices)), features[indices])
-            plt.xlabel('Relative Importance')
+
+            confusion_columns=[]
+            confusion_index=[]
+            for variable in labels:
+                confusion_columns.append("Predicted:"+str(variable))
+                confusion_index.append("Actual:"+str(variable))
+            conf_matrix = pd.DataFrame(data=confusion,columns=confusion_columns,index=confusion_index)
+            sn.heatmap(conf_matrix, annot=True,  fmt='d',cmap="YlGnBu")
             image_name = "static/images/randomf.png"
             plt.savefig(image_name)
 
@@ -261,7 +260,7 @@ class CompareX():
             code.append("\n")
             code.append("from sklearn.ensemble import RandomForestClassifier")
             code.append("\n")
-            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("dataframe = pd.read_csv('"+filename+"')")
             code.append("\n")
             code.append("df_x = dataframe["+str(x_cols)+"]")
             code.append("\n")
@@ -269,7 +268,7 @@ class CompareX():
             code.append("\n")
             code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
             code.append("\n")
-            code.append("model = RandomForestClassifier(n_estimators=80)")
+            code.append("model = RandomForestClassifier(n_estimators=50, criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)")
             code.append("\n")
             code.append("model.fit(x_train,y_train)")
             code.append("\n")
@@ -287,23 +286,39 @@ class CompareX():
             webdataminingtool.randomf['Confusion matrix'] = list(confusion)
             webdataminingtool.randomf['Score'] = randomf.score(x_test,y_test)
             webdataminingtool.randomf['Accuracy score'] = accuracy_score(y_test, predictions)
-
-            data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.randomf['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.randomf['Predicted values'] = list(data_compare.Predicted.head(10))
             webdataminingtool.randomf['Python'] = "".join(code)
+            webdataminingtool.randomf['Confusion matrix plot']= True
+
 
             '''
             ---------------------------------------------------------------------------
             Suport Vector MAchine Classifier
             ---------------------------------------------------------------------------
             '''
-            svc = SVC(gamma='auto')
+            svc = SVC(C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=True, max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None)
             svc.fit(x_train,y_train)
             predictions = svc.predict(x_test)
 
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
+            data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
+
+            figure()
+            width=10
+            height=4
+            figure(figsize=(width,height))
+
+            confusion_columns=[]
+            confusion_index=[]
+            for variable in labels:
+                confusion_columns.append("Predicted:"+str(variable))
+                confusion_index.append("Actual:"+str(variable))
+            conf_matrix = pd.DataFrame(data=confusion,columns=confusion_columns,index=confusion_index)
+            sn.heatmap(conf_matrix, annot=True,  fmt='d',cmap="YlGnBu")
+            image_name = "static/images/svc.png"
+            plt.savefig(image_name)
 
             code = []
             code.append("import numpy as np")
@@ -314,7 +329,7 @@ class CompareX():
             code.append("\n")
             code.append("from sklearn.svm import SVC")
             code.append("\n")
-            code.append("dataframe = pd.read_csv("+filename+")")
+            code.append("dataframe = pd.read_csv('"+filename+"')")
             code.append("\n")
             code.append("df_x = dataframe["+str(x_cols)+"]")
             code.append("\n")
@@ -322,7 +337,7 @@ class CompareX():
             code.append("\n")
             code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
             code.append("\n")
-            code.append("model = SVC(gamma='auto')")
+            code.append("model = SVC(C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=True, max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None)")
             code.append("\n")
             code.append("model.fit(x_train,y_train)")
             code.append("\n")
@@ -340,16 +355,12 @@ class CompareX():
             webdataminingtool.svc['Confusion matrix'] = list(confusion)
             webdataminingtool.svc['Score'] = svc.score(x_test,y_test)
             webdataminingtool.svc['Accuracy score'] = accuracy_score(y_test, predictions)
-
-            data_compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.svc['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.svc['Predicted values'] = list(data_compare.Predicted.head(10))
             webdataminingtool.svc['Python'] = "".join(code)
+            webdataminingtool.svc['Confusion matrix plot']= True
 
             raise web.seeother('/compare_r')
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
-
-
-  

@@ -66,7 +66,7 @@ class ClassificationX():
             return render.error(e.args[0])
 
     def POST(self):
-        # try:
+        try:
             try:
                 filename = webdataminingtool.file['filename']
             except Exception as e:
@@ -215,6 +215,8 @@ class ClassificationX():
             code.append("\n")
             code.append("from sklearn.model_selection import train_test_split")
             code.append("\n")
+            code.append("from joblib import dump, load")
+            code.append("\n")
             code.append(library)
             code.append("\n")
             code.append("dataframe = pd.read_csv('train.csv')")
@@ -225,13 +227,15 @@ class ClassificationX():
             code.append("\n")
             code.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
             code.append("\n")
-            code.append("from joblib import dump, load")
-            code.append("\n")
             code.append(method_model)
             code.append("\n")
             code.append("model.fit(x_train,y_train)")
             code.append("\n")
+            code.append("# Dump train model to joblib")
+            code.append("\n")
             code.append("dump(model," + method + ".joblib)")
+            code.append("\n")
+            code.append("# Make predictions")
             code.append("\n")
             code.append("predictions = model.predict(x_test)")
             code.append("\n")
@@ -246,7 +250,11 @@ class ClassificationX():
             test.append("\n")
             test.append("import pandas as pd")
             test.append("\n")
+            test.append("from joblib import dump, load")
+            test.append("\n")
             test.append(("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score"))
+            test.append("\n")
+            test.append("# Load trained model")
             test.append("\n")
             test.append("model = load('"+method+".joblib')")
             test.append("\n")
@@ -370,7 +378,7 @@ class ClassificationX():
             print(data_compare_test)
 
             raise web.seeother('/classification_r')
-        # except Exception as e:
-        #     print(e.args)
-        #     return render.error(e.args[0])
+        except Exception as e:
+            print(e.args)
+            return render.error(e.args[0])
 

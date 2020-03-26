@@ -1,6 +1,7 @@
 $def with(knn,tree,randomf,svc)
-<h1>KNeighbors Classifer: Result <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
+<h1>KNeighbors Classifer <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
 
+<div class="table-responsive">
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
@@ -18,14 +19,19 @@ $def with(knn,tree,randomf,svc)
                 </code>
                 </pre>
                 </td>
+            $elif row == "Confusion matrix plot":
+                <td>
+                    <img src="/static/images/knn.png" class="img-fluid" alt="KNeighbors">
+                </td>
             $else:
                 <td>$knn[row]</td>
         </tr>
 </table>
+</div>
 
-<img src="/static/images/knn.png" class="img-fluid" alt="knn">
 
-<h1>Decision Tree Classfier: result</h1>
+<h1>Decision Tree Classfier</h1>
+<div class="table-responsive">
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
@@ -43,14 +49,20 @@ $def with(knn,tree,randomf,svc)
                 </code>
                 </pre>
                 </td>
+            $elif row == "Confusion matrix plot":
+                <td>
+                    <img src="/static/images/tree.png" class="img-fluid" alt="Decision Tree Classfier">
+                </td>
             $else:
                 <td>$tree[row]</td>
         </tr>
 </table>
+</div>
 
-<img src="/static/images/tree_small.png" class="img-fluid" alt="Decision Tree">
 
-<h1>RandomForest Classfier: result</h1>
+<h1>RandomForest Classfier</h1>
+
+<div class="table-responsive">
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
@@ -68,14 +80,20 @@ $def with(knn,tree,randomf,svc)
                 </code>
                 </pre>
                 </td>
+            $elif row == "Confusion matrix plot":
+                <td>
+                    <img src="/static/images/randomf.png" class="img-fluid" alt="RandomForest Classfier">
+                </td>
             $else:
                 <td>$randomf[row]</td>
         </tr>
 </table>
+</div>
 
-<img src="/static/images/randomf.png" class="img-fluid" alt="RandomForest">
 
-<h1>Support Vector Machine: result</h1>
+<h1>Support Vector Machine</h1>
+
+<div class="table-responsive">
 <table class="table table-hover scroll">
     <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
@@ -93,7 +111,12 @@ $def with(knn,tree,randomf,svc)
                 </code>
                 </pre>
                 </td>
+            $elif row == "Confusion matrix plot":
+                <td>
+                    <img src="/static/images/svc.png" class="img-fluid" alt="Support Vector Machine Classfier">
+                </td>
             $else:
                 <td>$svc[row]</td>
         </tr>
 </table>
+</div>
