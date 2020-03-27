@@ -30,3 +30,14 @@ class SaveCode:
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
+
+    def createCode(self,file, code):
+        try:
+            file=open('static/code/'+file,'w')
+            for element in code:
+                file.write(element+"\n")
+            file.close()
+            print("Append code.py")
+        except Exception as e:
+            print(e.args)
+            return render.error(e.args[0])

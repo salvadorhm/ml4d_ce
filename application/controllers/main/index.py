@@ -54,7 +54,7 @@ class Index:
                 train, validation = train_test_split(df, test_size=0.1)
                 train.to_csv('static/csv/train.csv', sep=',',index=False)
                 validation.to_csv('static/csv/validation.csv', sep=',',index=False)
-                
+                print("train.csv")
 
                 code_lines = []
                 code_lines.append("# Libraries")

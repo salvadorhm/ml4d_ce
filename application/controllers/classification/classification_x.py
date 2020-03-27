@@ -242,33 +242,65 @@ class ClassificationX():
             code.append("classification_report(y_test, predictions)")
             code.append("\n")
             code.append("confusion_matrix(y_test, predictions)")
-           
+
+            train_py = []
+            train_py.append("__author__ = 'Salvador Hernandez Mendoza'")
+            train_py.append("__email__ = 'salvadorhm@gmail.com'")
+            train_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            train_py.append("import csv")
+            train_py.append("import pandas as pd")
+            train_py.append(("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score"))
+            train_py.append("from sklearn.model_selection import train_test_split")
+            train_py.append("from joblib import dump")
+            train_py.append(library)
+            train_py.append("dataframe = pd.read_csv('train.csv')")
+            train_py.append("df_x = dataframe["+str(x_cols)+"]")
+            train_py.append("df_y = dataframe['"+y+"']")
+            train_py.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            train_py.append(method_model)
+            train_py.append("model.fit(x_train,y_train)")
+            train_py.append("# Dump train model to joblib")
+            train_py.append("dump(model," + method + ".joblib)")
+            train_py.append("# Make predictions")
+            train_py.append("predictions = model.predict(x_test)")
+            train_py.append("classification_report(y_test, predictions)")
+            train_py.append("confusion_matrix(y_test, predictions)")
+            sc.createCode("train.py",train_py)
+
+
             test = []
-            test.append("# Load fit model and predict")
+            test.append("# Load model and predict")
             test.append("\n")
             test.append("import csv")
             test.append("\n")
             test.append("import pandas as pd")
             test.append("\n")
-            test.append("from joblib import dump, load")
-            test.append("\n")
-            test.append(("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score"))
+            test.append("from joblib import load")
             test.append("\n")
             test.append("# Load trained model")
             test.append("\n")
             test.append("model = load('"+method+".joblib')")
             test.append("\n")
-            test.append("dataframe_test = pd.read_csv('validation.csv')")
+            test.append("dataframe = pd.read_csv('validation.csv')")
             test.append("\n")
             test.append("xs = dataframe["+str(x_cols)+"]")
-            test.append("\n")
-            test.append("ys = dataframe['"+y+"']")
-            test.append("\n")
             test.append("predictions = model.predict(xs)")
             test.append("\n")
-            test.append("data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})")
-            test.append("\n")
-            test.append("data_compare_test")
+            test.append("print(predictions)")
+           
+            predictions_py = []
+            predictions_py.append("__author__ = 'Salvador Hernandez Mendoza'")
+            predictions_py.append("__email__ = 'salvadorhm@gmail.com'")
+            predictions_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            predictions_py.append("import csv")
+            predictions_py.append("import pandas as pd")
+            predictions_py.append("from joblib import load")
+            predictions_py.append("model = load('"+method+".joblib')")
+            predictions_py.append("dataframe = pd.read_csv('validation.csv')")
+            predictions_py.append("xs = dataframe["+str(x_cols)+"]")
+            predictions_py.append("predictions = model.predict(xs)")
+            predictions_py.append("print(predictions)")
+            sc.createCode("predictions_py",predictions_py)
 
             webdataminingtool.classification['filename']= filename
             webdataminingtool.classification['x']=list(x_cols)
@@ -281,9 +313,11 @@ class ClassificationX():
             webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
             webdataminingtool.classification['Python'] = "".join(code)
             webdataminingtool.classification['train.csv'] = "train.csv"
-            webdataminingtool.classification['Model'] = method+".joblib"
             webdataminingtool.classification['Python validation'] = "".join(test)
+            webdataminingtool.classification['Model'] = method+".joblib"
             webdataminingtool.classification['validation.csv'] = "validation.csv"
+            webdataminingtool.classification['train.py'] = "train.py"
+            webdataminingtool.classification['predictions.py'] = "predictions.py"
 
             figure()
             width=10
