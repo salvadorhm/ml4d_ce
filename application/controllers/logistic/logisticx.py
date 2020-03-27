@@ -15,6 +15,7 @@ from matplotlib.pyplot import figure, show
 from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve, auc
+from joblib import dump, load
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
 
@@ -69,11 +70,16 @@ class LogisticX:
 
             model = LogisticRegression()
             model.fit(x_train,y_train)
+            dump(model, "static/models/logistic.joblib") 
+
 
             predictions = model.predict(x_test)
 
             report = classification_report(y_test, predictions)
             confusion = confusion_matrix(y_test, predictions)
+
+            compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
+
 
             print(report)
             figure()
@@ -104,9 +110,7 @@ class LogisticX:
 
 
             code = []
-            code.append("import numpy as np")
-            code.append("\n")
-            code.append("from sklearn.metrics import classification_report, confusion_matrix")
+            code.append("import pandas as pd")
             code.append("\n")
             code.append("from sklearn.model_selection import train_test_split")
             code.append("\n")
@@ -124,7 +128,69 @@ class LogisticX:
             code.append("\n")
             code.append("model.fit(x_train,y_train)")
             code.append("\n")
+            code.append("# Dump train model to joblib")
+            code.append("\n")
+            code.append("dump(model,'logistic.joblib')")
+            code.append("\n")
             code.append("predictions = model.predict(x_test)")
+            code.append("\n")
+            code.append("print(predictions)")
+
+            train_py = []
+            train_py.append("__author__ = 'Salvador Hernandez Mendoza'")
+            train_py.append("__email__ = 'salvadorhm@gmail.com'")
+            train_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            train_py.append("import pandas as pd")
+            train_py.append("from sklearn.model_selection import train_test_split")
+            train_py.append("from sklearn.linear_model import LogisticRegression")
+            train_py.append("from joblib import dump")
+            train_py.append("dataframe = pd.read_csv('train.csv')")
+            train_py.append("df_x = dataframe["+str(x_cols)+"]")
+            train_py.append("df_y = dataframe['"+y+"']")
+            train_py.append("x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)")
+            train_py.append("model = LogisticRegression()")
+            train_py.append("model.fit(x_train,y_train)")
+            train_py.append("# Dump train model to joblib")
+            train_py.append("dump(model,'logistic.joblib')")
+            train_py.append("predictions = model.predict(x_test)")
+            train_py.append("print(predictions)")
+            sc.createCode("train.py",train_py)
+
+            test = []
+            test.append("# Load model and predict")
+            test.append("\n")
+            test.append("import csv")
+            test.append("\n")
+            test.append("import pandas as pd")
+            test.append("\n")
+            test.append("from joblib import load")
+            test.append("\n")
+            test.append("# Load trained model")
+            test.append("\n")
+            test.append("model = load('logistic.joblib')")
+            test.append("\n")
+            test.append("dataframe = pd.read_csv('validation.csv')")
+            test.append("\n")
+            test.append("xs = dataframe["+str(x_cols)+"]")
+            test.append("\n")
+            test.append("predictions = model.predict(xs)")
+            test.append("\n")
+            test.append("print(predictions)")
+
+
+            predictions_py = []
+            predictions_py.append("__author__ = 'Salvador Hernandez Mendoza'")
+            predictions_py.append("__email__ = 'salvadorhm@gmail.com'")
+            predictions_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            predictions_py.append("import csv")
+            predictions_py.append("import pandas as pd")
+            predictions_py.append("from joblib import load")
+            predictions_py.append("model = load('logistic.joblib')")
+            predictions_py.append("dataframe = pd.read_csv('validation.csv')")
+            predictions_py.append("xs = dataframe["+str(x_cols)+"]")
+            predictions_py.append("predictions = model.predict(xs)")
+            predictions_py.append("print(predictions)")
+            sc.createCode("predictions.py",predictions_py)
 
             webdataminingtool.sessions['filename']= filename
             webdataminingtool.sessions['y'] = y 
@@ -133,11 +199,15 @@ class LogisticX:
             webdataminingtool.sessions['Confusion matrix'] = list(confusion)
             webdataminingtool.sessions['Score'] = model.score(x_test,y_test)
             webdataminingtool.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
-
-            compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
             webdataminingtool.sessions['Real test values'] = list(compare.Actual.head(10))
             webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head(10))
             webdataminingtool.sessions['Python'] = "".join(code)
+            webdataminingtool.sessions['Python validation'] = "".join(test)
+            webdataminingtool.sessions['Model'] = "logistic.joblib"
+            webdataminingtool.sessions['train.csv'] = "train.csv"
+            webdataminingtool.sessions['validation.csv'] = "validation.csv"
+            webdataminingtool.sessions['train.py'] = "train.py"
+            webdataminingtool.sessions['predictions.py'] = "predictions.py"
 
 
             code_lines = []

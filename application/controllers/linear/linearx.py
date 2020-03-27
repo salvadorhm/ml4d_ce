@@ -122,8 +122,6 @@ class LinearX:
             code = []
             code.append("import pandas as pd")
             code.append("\n")
-            code.append("from sklearn.metrics import classification_report, confusion_matrix")
-            code.append("\n")
             code.append("from sklearn.model_selection import train_test_split")
             code.append("\n")
             code.append("from sklearn.linear_model import LinearRegression")
@@ -154,7 +152,6 @@ class LinearX:
             train_py.append("__email__ = 'salvadorhm@gmail.com'")
             train_py.append("__version__ = '"+webdataminingtool.app_version+"'")
             train_py.append("import pandas as pd")
-            train_py.append("from sklearn.metrics import classification_report, confusion_matrix")
             train_py.append("from sklearn.model_selection import train_test_split")
             train_py.append("from sklearn.linear_model import LinearRegression")
             train_py.append("from joblib import dump")

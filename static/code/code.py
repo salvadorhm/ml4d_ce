@@ -12,117 +12,168 @@ dataframe = pd.read_csv('train.csv')
 dataframe.describe()
 # Dataframe
 dataframe
-# Decision Tree classifier
-import csv
-import pandas as pd
-from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
-from sklearn.model_selection import train_test_split
-from joblib import dump, load
-from sklearn.tree import DecisionTreeClassifier
-dataframe = pd.read_csv('train.csv')
-df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
-df_y = dataframe['Wine Type']
+# Preparacion del dataframe
+df_x = dataframe[['Pclass', 'SibSp', 'Parch', 'Fare']]
+df_y = dataframe['Survived']
+# x
+df_x
+# y
+df_y
+# Dataframe de entrenamiento y de prueba
 x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
-model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None, random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, class_weight=None, presort='deprecated', ccp_alpha=0.0)
+# Model de regresion lineal
+model = LogisticRegression()
+# Entrenamiento del model
 model.fit(x_train,y_train)
-dump(model,'tree.joblib')
+# Prueba del modelo
 predictions = model.predict(x_test)
-# Classification report
-print(classification_report(y_test, predictions))
+# Evaluacion del modelo
+# Coefficients
+classification_report(y_test, predictions)
 # Confusion matrix
 confusion_matrix(y_test, predictions)
 # Score
 model.score(x_test,y_test)
 # Accuracy score
 accuracy_score(y_test, predictions)
-# Data compare
-data_compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
-# Compare
-data_compare
-# Load fit model and predict
-import csv
-import pandas as pd
-from joblib import dump, load
-model = load('tree.joblib')
-dataframe_test = pd.read_csv('validation.csv')
-xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
-ys = dataframe_test['Wine Type']
-predictions = model.predict(xs)
-data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})
-data_compare_test
-# RandomForest Classifier
-import csv
-import pandas as pd
-from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
-from sklearn.model_selection import train_test_split
-from joblib import dump, load
-from sklearn.ensemble import RandomForestClassifier
-dataframe = pd.read_csv('train.csv')
-df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
-df_y = dataframe['Wine Type']
+# Comparacion de los resultados
+compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Valores de prueba
+compare.Actual.head(10)
+# Valores predichos
+compare.Predicted.head(10)
+# Bar plot
+plt.bar(range(10),y_test.head(10))
+plt.bar(range(10),predictions[0:10])
+# Preparacion del dataframe
+df_x = dataframe[['Pclass', 'SibSp', 'Parch', 'Fare']]
+df_y = dataframe['Survived']
+# x
+df_x
+# y
+df_y
+# Dataframe de entrenamiento y de prueba
 x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
-model = RandomForestClassifier(n_estimators=50,criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
+# Model de regresion lineal
+model = LogisticRegression()
+# Entrenamiento del model
 model.fit(x_train,y_train)
-dump(model,'randomf.joblib')
+# Prueba del modelo
 predictions = model.predict(x_test)
-# Classification report
-print(classification_report(y_test, predictions))
+# Evaluacion del modelo
+# Coefficients
+classification_report(y_test, predictions)
 # Confusion matrix
 confusion_matrix(y_test, predictions)
 # Score
 model.score(x_test,y_test)
 # Accuracy score
 accuracy_score(y_test, predictions)
-# Data compare
-data_compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
-# Compare
-data_compare
-# Load fit model and predict
-import csv
-import pandas as pd
-from joblib import dump, load
-model = load('randomf.joblib')
-dataframe_test = pd.read_csv('validation.csv')
-xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
-ys = dataframe_test['Wine Type']
-predictions = model.predict(xs)
-data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})
-data_compare_test
-# Suport Vector Machine Classifier
-import csv
-import pandas as pd
-from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
-from sklearn.model_selection import train_test_split
-from joblib import dump, load
-from sklearn.svm import SVC
-dataframe = pd.read_csv('train.csv')
-df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
-df_y = dataframe['Wine Type']
+# Comparacion de los resultados
+compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Valores de prueba
+compare.Actual.head(10)
+# Valores predichos
+compare.Predicted.head(10)
+# Bar plot
+plt.bar(range(10),y_test.head(10))
+plt.bar(range(10),predictions[0:10])
+# Preparacion del dataframe
+df_x = dataframe[['Pclass', 'SibSp', 'Parch', 'Fare']]
+df_y = dataframe['Survived']
+# x
+df_x
+# y
+df_y
+# Dataframe de entrenamiento y de prueba
 x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
-model = SVC(C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=True, max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None)
+# Model de regresion lineal
+model = LogisticRegression()
+# Entrenamiento del model
 model.fit(x_train,y_train)
-dump(model,'svc.joblib')
+# Prueba del modelo
 predictions = model.predict(x_test)
-# Classification report
-print(classification_report(y_test, predictions))
+# Evaluacion del modelo
+# Coefficients
+classification_report(y_test, predictions)
 # Confusion matrix
 confusion_matrix(y_test, predictions)
 # Score
 model.score(x_test,y_test)
 # Accuracy score
 accuracy_score(y_test, predictions)
-# Data compare
-data_compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
-# Compare
-data_compare
-# Load fit model and predict
-import csv
-import pandas as pd
-from joblib import dump, load
-model = load('svc.joblib')
-dataframe_test = pd.read_csv('validation.csv')
-xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
-ys = dataframe_test['Wine Type']
-predictions = model.predict(xs)
-data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})
-data_compare_test
+# Comparacion de los resultados
+compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Valores de prueba
+compare.Actual.head(10)
+# Valores predichos
+compare.Predicted.head(10)
+# Bar plot
+plt.bar(range(10),y_test.head(10))
+plt.bar(range(10),predictions[0:10])
+# Preparacion del dataframe
+df_x = dataframe[['Pclass', 'SibSp', 'Parch', 'Fare']]
+df_y = dataframe['Survived']
+# x
+df_x
+# y
+df_y
+# Dataframe de entrenamiento y de prueba
+x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
+# Model de regresion lineal
+model = LogisticRegression()
+# Entrenamiento del model
+model.fit(x_train,y_train)
+# Prueba del modelo
+predictions = model.predict(x_test)
+# Evaluacion del modelo
+# Coefficients
+classification_report(y_test, predictions)
+# Confusion matrix
+confusion_matrix(y_test, predictions)
+# Score
+model.score(x_test,y_test)
+# Accuracy score
+accuracy_score(y_test, predictions)
+# Comparacion de los resultados
+compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Valores de prueba
+compare.Actual.head(10)
+# Valores predichos
+compare.Predicted.head(10)
+# Bar plot
+plt.bar(range(10),y_test.head(10))
+plt.bar(range(10),predictions[0:10])
+# Preparacion del dataframe
+df_x = dataframe[['Pclass', 'SibSp', 'Parch', 'Fare']]
+df_y = dataframe['Survived']
+# x
+df_x
+# y
+df_y
+# Dataframe de entrenamiento y de prueba
+x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
+# Model de regresion lineal
+model = LogisticRegression()
+# Entrenamiento del model
+model.fit(x_train,y_train)
+# Prueba del modelo
+predictions = model.predict(x_test)
+# Evaluacion del modelo
+# Coefficients
+classification_report(y_test, predictions)
+# Confusion matrix
+confusion_matrix(y_test, predictions)
+# Score
+model.score(x_test,y_test)
+# Accuracy score
+accuracy_score(y_test, predictions)
+# Comparacion de los resultados
+compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Valores de prueba
+compare.Actual.head(10)
+# Valores predichos
+compare.Predicted.head(10)
+# Bar plot
+plt.bar(range(10),y_test.head(10))
+plt.bar(range(10),predictions[0:10])
