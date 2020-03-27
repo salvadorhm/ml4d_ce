@@ -12,20 +12,20 @@ dataframe = pd.read_csv('train.csv')
 dataframe.describe()
 # Dataframe
 dataframe
-# KNeighbors Classifier
+# Decision Tree classifier
 import csv
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
 from sklearn.model_selection import train_test_split
 from joblib import dump, load
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 dataframe = pd.read_csv('train.csv')
 df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
 df_y = dataframe['Wine Type']
 x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
-model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
+model = DecisionTreeClassifier(criterion='gini', splitter='best', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features=None, random_state=None, max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, class_weight=None, presort='deprecated', ccp_alpha=0.0)
 model.fit(x_train,y_train)
-dump(model,'knn.joblib')
+dump(model,'tree.joblib')
 predictions = model.predict(x_test)
 # Classification report
 print(classification_report(y_test, predictions))
@@ -43,27 +43,27 @@ data_compare
 import csv
 import pandas as pd
 from joblib import dump, load
-model = load('knn.joblib')
+model = load('tree.joblib')
 dataframe_test = pd.read_csv('validation.csv')
 xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
 ys = dataframe_test['Wine Type']
 predictions = model.predict(xs)
 data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})
 data_compare_test
-# KNeighbors Classifier
+# RandomForest Classifier
 import csv
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
 from sklearn.model_selection import train_test_split
 from joblib import dump, load
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import RandomForestClassifier
 dataframe = pd.read_csv('train.csv')
 df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
 df_y = dataframe['Wine Type']
 x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
-model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
+model = RandomForestClassifier(n_estimators=50,criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
 model.fit(x_train,y_train)
-dump(model,'knn.joblib')
+dump(model,'randomf.joblib')
 predictions = model.predict(x_test)
 # Classification report
 print(classification_report(y_test, predictions))
@@ -81,27 +81,27 @@ data_compare
 import csv
 import pandas as pd
 from joblib import dump, load
-model = load('knn.joblib')
+model = load('randomf.joblib')
 dataframe_test = pd.read_csv('validation.csv')
 xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
 ys = dataframe_test['Wine Type']
 predictions = model.predict(xs)
 data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})
 data_compare_test
-# KNeighbors Classifier
+# Suport Vector Machine Classifier
 import csv
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
 from sklearn.model_selection import train_test_split
 from joblib import dump, load
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC
 dataframe = pd.read_csv('train.csv')
 df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
 df_y = dataframe['Wine Type']
 x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
-model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
+model = SVC(C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=True, max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None)
 model.fit(x_train,y_train)
-dump(model,'knn.joblib')
+dump(model,'svc.joblib')
 predictions = model.predict(x_test)
 # Classification report
 print(classification_report(y_test, predictions))
@@ -119,7 +119,7 @@ data_compare
 import csv
 import pandas as pd
 from joblib import dump, load
-model = load('knn.joblib')
+model = load('svc.joblib')
 dataframe_test = pd.read_csv('validation.csv')
 xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
 ys = dataframe_test['Wine Type']

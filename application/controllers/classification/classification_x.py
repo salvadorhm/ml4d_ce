@@ -312,9 +312,9 @@ class ClassificationX():
             webdataminingtool.classification['Real test values'] = list(data_compare.Actual.head(10))
             webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
             webdataminingtool.classification['Python'] = "".join(code)
-            webdataminingtool.classification['train.csv'] = "train.csv"
             webdataminingtool.classification['Python validation'] = "".join(test)
             webdataminingtool.classification['Model'] = method+".joblib"
+            webdataminingtool.classification['train.csv'] = "train.csv"
             webdataminingtool.classification['validation.csv'] = "validation.csv"
             webdataminingtool.classification['train.py'] = "train.py"
             webdataminingtool.classification['predictions.py'] = "predictions.py"
