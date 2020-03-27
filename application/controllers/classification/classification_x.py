@@ -260,7 +260,7 @@ class ClassificationX():
             train_py.append(method_model)
             train_py.append("model.fit(x_train,y_train)")
             train_py.append("# Dump train model to joblib")
-            train_py.append("dump(model," + method + ".joblib)")
+            train_py.append("dump(model,'" + method + ".joblib')")
             train_py.append("# Make predictions")
             train_py.append("predictions = model.predict(x_test)")
             train_py.append("classification_report(y_test, predictions)")
@@ -300,7 +300,7 @@ class ClassificationX():
             predictions_py.append("xs = dataframe["+str(x_cols)+"]")
             predictions_py.append("predictions = model.predict(xs)")
             predictions_py.append("print(predictions)")
-            sc.createCode("predictions_py",predictions_py)
+            sc.createCode("predictions.py",predictions_py)
 
             webdataminingtool.classification['filename']= filename
             webdataminingtool.classification['x']=list(x_cols)

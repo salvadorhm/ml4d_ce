@@ -12,161 +12,117 @@ dataframe = pd.read_csv('train.csv')
 dataframe.describe()
 # Dataframe
 dataframe
-# Histogram de y
-sn.distplot(dataframe[y])
-# Preparacion del dataframe
-df_x = dataframe[['x']]
-df_y = dataframe['y']
-# Normalizar dataframe
-df_nor_x = (df_x - df_x.mean())/df_x.std()
-# x
-df_nor_x
-# y
-df_nor_y = (df_y - df_y.mean())/df_y.std()
-df_nor_y
-# Dataframe de entrenamiento y de prueba
-x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
-# Model de regresion lineal
-model = LinearRegression()
-# Entrenamiento del model
+# KNeighbors Classifier
+import csv
+import pandas as pd
+from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
+from sklearn.model_selection import train_test_split
+from joblib import dump, load
+from sklearn.neighbors import KNeighborsClassifier
+dataframe = pd.read_csv('train.csv')
+df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
+df_y = dataframe['Wine Type']
+x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
+model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
 model.fit(x_train,y_train)
-# Prueba del modelo
+dump(model,'knn.joblib')
 predictions = model.predict(x_test)
-# Evaluacion del modelo
-# Coefficients
-model.coef_
-# Independent term
-model.intercept_
-# Mean squared error
-mean_squared_error(y_test, predictions)
-# Mean absolute error
-mean_absolute_error(y_test, predictions)
-# Variance
-r2_score(y_test, predictions)
-# Comparacion de los resultados
-compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
-# Valores de prueba
-compare.Actual.head(10)
-# Valores predichos
-compare.Predicted.head(10)
-# Grafica scatter
-plt.scatter(y_test,predictions)
-# Grafica de distribucion
-sn.distplot(y_test - predictions)
-# Preparacion del dataframe
-df_x = dataframe[['x']]
-df_y = dataframe['y']
-# Normalizar dataframe
-df_nor_x = (df_x - df_x.mean())/df_x.std()
-# x
-df_nor_x
-# y
-df_nor_y = (df_y - df_y.mean())/df_y.std()
-df_nor_y
-# Dataframe de entrenamiento y de prueba
-x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
-# Model de regresion lineal
-model = LinearRegression()
-# Entrenamiento del model
+# Classification report
+print(classification_report(y_test, predictions))
+# Confusion matrix
+confusion_matrix(y_test, predictions)
+# Score
+model.score(x_test,y_test)
+# Accuracy score
+accuracy_score(y_test, predictions)
+# Data compare
+data_compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Compare
+data_compare
+# Load fit model and predict
+import csv
+import pandas as pd
+from joblib import dump, load
+model = load('knn.joblib')
+dataframe_test = pd.read_csv('validation.csv')
+xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
+ys = dataframe_test['Wine Type']
+predictions = model.predict(xs)
+data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})
+data_compare_test
+# KNeighbors Classifier
+import csv
+import pandas as pd
+from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
+from sklearn.model_selection import train_test_split
+from joblib import dump, load
+from sklearn.neighbors import KNeighborsClassifier
+dataframe = pd.read_csv('train.csv')
+df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
+df_y = dataframe['Wine Type']
+x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
+model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
 model.fit(x_train,y_train)
-# Prueba del modelo
+dump(model,'knn.joblib')
 predictions = model.predict(x_test)
-# Evaluacion del modelo
-# Coefficients
-model.coef_
-# Independent term
-model.intercept_
-# Mean squared error
-mean_squared_error(y_test, predictions)
-# Mean absolute error
-mean_absolute_error(y_test, predictions)
-# Variance
-r2_score(y_test, predictions)
-# Comparacion de los resultados
-compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
-# Valores de prueba
-compare.Actual.head(10)
-# Valores predichos
-compare.Predicted.head(10)
-# Grafica scatter
-plt.scatter(y_test,predictions)
-# Grafica de distribucion
-sn.distplot(y_test - predictions)
-# Preparacion del dataframe
-df_x = dataframe[['x']]
-df_y = dataframe['y']
-# Normalizar dataframe
-df_nor_x = (df_x - df_x.mean())/df_x.std()
-# x
-df_nor_x
-# y
-df_nor_y = (df_y - df_y.mean())/df_y.std()
-df_nor_y
-# Dataframe de entrenamiento y de prueba
-x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
-# Model de regresion lineal
-model = LinearRegression()
-# Entrenamiento del model
+# Classification report
+print(classification_report(y_test, predictions))
+# Confusion matrix
+confusion_matrix(y_test, predictions)
+# Score
+model.score(x_test,y_test)
+# Accuracy score
+accuracy_score(y_test, predictions)
+# Data compare
+data_compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Compare
+data_compare
+# Load fit model and predict
+import csv
+import pandas as pd
+from joblib import dump, load
+model = load('knn.joblib')
+dataframe_test = pd.read_csv('validation.csv')
+xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
+ys = dataframe_test['Wine Type']
+predictions = model.predict(xs)
+data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})
+data_compare_test
+# KNeighbors Classifier
+import csv
+import pandas as pd
+from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
+from sklearn.model_selection import train_test_split
+from joblib import dump, load
+from sklearn.neighbors import KNeighborsClassifier
+dataframe = pd.read_csv('train.csv')
+df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
+df_y = dataframe['Wine Type']
+x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
+model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)
 model.fit(x_train,y_train)
-# Prueba del modelo
+dump(model,'knn.joblib')
 predictions = model.predict(x_test)
-# Evaluacion del modelo
-# Coefficients
-model.coef_
-# Independent term
-model.intercept_
-# Mean squared error
-mean_squared_error(y_test, predictions)
-# Mean absolute error
-mean_absolute_error(y_test, predictions)
-# Variance
-r2_score(y_test, predictions)
-# Comparacion de los resultados
-compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
-# Valores de prueba
-compare.Actual.head(10)
-# Valores predichos
-compare.Predicted.head(10)
-# Grafica scatter
-plt.scatter(y_test,predictions)
-# Grafica de distribucion
-sn.distplot(y_test - predictions)
-# Preparacion del dataframe
-df_x = dataframe[['x']]
-df_y = dataframe['y']
-# Normalizar dataframe
-df_nor_x = (df_x - df_x.mean())/df_x.std()
-# x
-df_nor_x
-# y
-df_nor_y = (df_y - df_y.mean())/df_y.std()
-df_nor_y
-# Dataframe de entrenamiento y de prueba
-x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
-# Model de regresion lineal
-model = LinearRegression()
-# Entrenamiento del model
-model.fit(x_train,y_train)
-# Prueba del modelo
-predictions = model.predict(x_test)
-# Evaluacion del modelo
-# Coefficients
-model.coef_
-# Independent term
-model.intercept_
-# Mean squared error
-mean_squared_error(y_test, predictions)
-# Mean absolute error
-mean_absolute_error(y_test, predictions)
-# Variance
-r2_score(y_test, predictions)
-# Comparacion de los resultados
-compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
-# Valores de prueba
-compare.Actual.head(10)
-# Valores predichos
-compare.Predicted.head(10)
-# Grafica scatter
-plt.scatter(y_test,predictions)
-# Grafica de distribucion
-sn.distplot(y_test - predictions)
+# Classification report
+print(classification_report(y_test, predictions))
+# Confusion matrix
+confusion_matrix(y_test, predictions)
+# Score
+model.score(x_test,y_test)
+# Accuracy score
+accuracy_score(y_test, predictions)
+# Data compare
+data_compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Compare
+data_compare
+# Load fit model and predict
+import csv
+import pandas as pd
+from joblib import dump, load
+model = load('knn.joblib')
+dataframe_test = pd.read_csv('validation.csv')
+xs = dataframe_test[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
+ys = dataframe_test['Wine Type']
+predictions = model.predict(xs)
+data_compare_test = pd.DataFrame({'Actual':ys, 'Predicted':predictions})
+data_compare_test
