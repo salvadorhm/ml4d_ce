@@ -177,3 +177,5 @@ compare.Predicted.head(10)
 # Bar plot
 plt.bar(range(10),y_test.head(10))
 plt.bar(range(10),predictions[0:10])
+# Describe 'Survived
+dataframe['Survived'].describe()
