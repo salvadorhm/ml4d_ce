@@ -1,7 +1,16 @@
 $def with(describe,correlation,field)
 <h1>Describe $field <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1> 
+
+<a href="/countplot/$field" class="btn btn-primary" role="button">Countplot</a>
+$if correlation != None:
+    <a href="/histogram/$field" class="btn btn-primary" role="button">Histogram</a>
+
+<br>
+<br>
+
+<div class="table-responsive">
 <table class="table table-hover scroll">
-    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+    <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
             <th>Name</th>
             <th>Value</th>
@@ -12,10 +21,13 @@ $def with(describe,correlation,field)
             <td>$describe[row]</td>
         </tr>
 </table>
+</div>
+
 $if correlation != None:
     <h1>Correlation</h1>
+    <div class="table-responsive">
     <table class="table table-hover scroll">
-        <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+        <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
             <tr>
                 <th>Name</th>
                 <th>Value</th>
@@ -29,8 +41,4 @@ $if correlation != None:
                     <td>$correlation[row]</td>
             </tr>
     </table>
-
-<a href="/countplot/$field" class="btn btn-info" role="button">Countplot</a>
-$if correlation != None:
-    <a href="/histogram/$field" class="btn btn-info" role="button">Histogram</a>
-
+    </div>

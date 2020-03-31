@@ -1,8 +1,9 @@
 $def with(result)
 <h2>Linear regression: Result <button class="btn btn-primary" onclick="goBack()">Go Back</button></h2>
 
+<div class="table-responsive">
 <table class="table table-hover scroll">
-    <thead class="thead-dark sticky-top" style="height: 300px ; overflow-y: scroll;">
+    <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
             <th>Name</th>
             <th>Value</th>
@@ -34,6 +35,7 @@ $def with(result)
             <td>$result[row]</td>
         </tr>
 </table>
+</div>
 
 <img src="/static/images/lineal.png" class="img-fluid" alt="Linear regression">
 
