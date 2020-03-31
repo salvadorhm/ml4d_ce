@@ -1,21 +1,55 @@
-$def with(message, app_version)
-
-$if message != None:
-    <div class="alert alert-danger">
-        <strong>Warning: </strong> $message
-    </div>
+$def with(app_version)
+<h1>ML4D v $app_version</h1>
+<br>
 
 <div class="card">
-    <div class="card-header  bg-primary text-white">ML4D v $app_version</div>
+    <div class="card-header  bg-primary text-white">Notes about online demo</div>
     <div class="card-body">
-        <h5 class="card-title">Upload CSV file</h5>
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <input type="file" class="form-control-file" id="csv_file" name="csv_file" />
-            </div>
-            <div class="form-group">
-                <button id="send" name="send" class="btn btn-primary">Upload</button>
-            </div>
-        </form>
+      <ul>
+        <li>All csv uploaded are public, so be careful.</li>
+        <li>The online version is continuously debugged, and all files are deleted.</li>
+        <li>You can download the source code in <a href="/about">GitHub</a> for run in localhost.</li>
+        <li>The server is a low resourses machine only for demo.</li>
+      </ul>
+        
     </div>
 </div>
+
+<div class="card">
+    <div class="card-header  bg-primary text-white">Functions v $app_version</div>
+    <div class="card-body">
+      <ul>
+        <li>Load CSV file</li>
+        <li>Statistics</li>
+        <li>Clean dataset</li>
+        <li>Plots</li>
+          <ul>
+            <li>Heatmap null</li>
+            <li>Boxplot</li>
+            <li>Countplot</li>
+            <li>Histogram</li>
+          </ul>
+        <li>Donwloads</li>
+          <ul>
+            <li>Jupyter notebook</li>
+            <li>Train.csv 90% original dataset</li>
+            <li>Validataion.csv 10% original dataset</li>
+          </ul>
+        <li>Regression</li>
+          <ul>
+            <li>Linear</li>
+            <li>Logistic</li>
+          </ul>
+        <li>Classification</li>
+          <ul>
+            <li>KNeighbors</li>
+            <li>Decision Tree</li>
+            <li>RandomForest</li>
+            <li>Support Vector Machine</li>
+          </ul>
+        <li>Python code for train or predict, for develop software</li>
+      </ul>
+    </div>
+</div>
+
+
