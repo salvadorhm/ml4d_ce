@@ -110,6 +110,8 @@ class LogisticX:
 
 
             code = []
+            code.append("import sklearn")
+            code.append("\n")
             code.append("import pandas as pd")
             code.append("\n")
             code.append("from sklearn.model_selection import train_test_split")
@@ -140,6 +142,7 @@ class LogisticX:
             train_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             train_py.append("__email__ = 'salvadorhm@gmail.com'")
             train_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            train_py.append("import sklearn")
             train_py.append("import pandas as pd")
             train_py.append("from sklearn.model_selection import train_test_split")
             train_py.append("from sklearn.linear_model import LogisticRegression")
@@ -159,7 +162,7 @@ class LogisticX:
             test = []
             test.append("# Load model and predict")
             test.append("\n")
-            test.append("import csv")
+            test.append("import sklearn")
             test.append("\n")
             test.append("import pandas as pd")
             test.append("\n")
@@ -182,7 +185,7 @@ class LogisticX:
             predictions_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             predictions_py.append("__email__ = 'salvadorhm@gmail.com'")
             predictions_py.append("__version__ = '"+webdataminingtool.app_version+"'")
-            predictions_py.append("import csv")
+            predictions_py.append("import sklearn")
             predictions_py.append("import pandas as pd")
             predictions_py.append("from joblib import load")
             predictions_py.append("model = load('logistic.joblib')")

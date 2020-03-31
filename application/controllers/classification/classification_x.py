@@ -207,7 +207,7 @@ class ClassificationX():
             
 
             code = []
-            code.append("import csv")
+            code.append("import sklearn")
             code.append("\n")
             code.append("import pandas as pd")
             code.append("\n")
@@ -247,7 +247,7 @@ class ClassificationX():
             train_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             train_py.append("__email__ = 'salvadorhm@gmail.com'")
             train_py.append("__version__ = '"+webdataminingtool.app_version+"'")
-            train_py.append("import csv")
+            train_py.append("import sklearn")
             train_py.append("import pandas as pd")
             train_py.append(("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score"))
             train_py.append("from sklearn.model_selection import train_test_split")
@@ -271,7 +271,7 @@ class ClassificationX():
             test = []
             test.append("# Load model and predict")
             test.append("\n")
-            test.append("import csv")
+            test.append("import sklearn")
             test.append("\n")
             test.append("import pandas as pd")
             test.append("\n")
@@ -292,7 +292,7 @@ class ClassificationX():
             predictions_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             predictions_py.append("__email__ = 'salvadorhm@gmail.com'")
             predictions_py.append("__version__ = '"+webdataminingtool.app_version+"'")
-            predictions_py.append("import csv")
+            predictions_py.append("import sklearn")
             predictions_py.append("import pandas as pd")
             predictions_py.append("from joblib import load")
             predictions_py.append("model = load('"+method+".joblib')")
@@ -361,7 +361,7 @@ class ClassificationX():
             '''
             notebook = []
             notebook.append("# " + title)
-            notebook.append("import csv")
+            notebook.append("import sklearn")
             notebook.append("import pandas as pd")
             notebook.append("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score")
             notebook.append("from sklearn.model_selection import train_test_split")
