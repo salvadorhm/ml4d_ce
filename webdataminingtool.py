@@ -60,6 +60,7 @@ urls = (
     '/rename/(.+)','application.controllers.clean.rename.Rename',
     '/impute/(.+)','application.controllers.clean.impute.Impute',
     '/replace/(.+)','application.controllers.clean.replace.Replace',
+    '/replace_char/(.+)','application.controllers.clean.replace_char.ReplaceChar',
     '/change_type/(.+)','application.controllers.clean.change_type.ChangeType',
 
     '/field/(.+)','application.controllers.field.field.Field',

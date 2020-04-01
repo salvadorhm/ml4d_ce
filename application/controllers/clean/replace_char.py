@@ -8,7 +8,7 @@ sc = SaveCode()
 
 render = web.template.render('application/views/clean', base="../master")
 
-class Replace:
+class ReplaceChar:
 
     file = 'static/csv/train.csv'  # define el archivo donde se almacenan los datos
 
@@ -46,7 +46,7 @@ class Replace:
                 mode = dataframe[column].mode()[0]
                 mean = dataframe[column].mean()
                 median = dataframe[column].median()
-            return render.replace(column,nulls,dtypes,unique,mode,mean,median)
+            return render.replace_char(column,nulls,dtypes,unique,mode,mean,median)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
@@ -58,12 +58,12 @@ class Replace:
             actual = form['actual']
             new = form['new']
             dataframe = pd.read_csv(self.file)
-            dataframe[column].replace({actual : new}, inplace=True, regex=True)
+            dataframe[column]=dataframe[column].str.replace(actual,new)
             dataframe.to_csv('static/csv/train.csv', sep=',',index=False)
 
             code_lines = []
             code_lines.append("# Remplazando '" +  actual + "' por '" + new + "' en la columna '" + column +"'")
-            code_lines.append("dataframe['" + column + "'].replace({'" + actual +"':'" + new +"'}, inplace=True, regex=True)")
+            code_lines.append("dataframe['"+column+"']=dataframe['"+column+"'].str.replace('"+actual+"','"+new+"')")
             sc.append(code_lines)
             raise web.seeother('/detail') 
         except Exception as e:
