@@ -48,7 +48,7 @@ class HeatmapCorr:
             images.append(image_name)
             ax.figure.savefig(image_name)
             fig = ax.get_figure()
-            plt.close('all')
+            # plt.close('all')
 
             code_lines = []
             code_lines.append("# Heatmap corr")

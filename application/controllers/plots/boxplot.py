@@ -45,7 +45,7 @@ class BoxPlot:
             images.append(image_name)
             nor.figure.savefig(image_name)
             fig = nor.get_figure()
-            plt.close('all')
+            # plt.close('all')
 
             code_lines = []
             code_lines.append("# Boxplot")

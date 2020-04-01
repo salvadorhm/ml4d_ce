@@ -22,6 +22,10 @@ class Detail:
             cols = list(dataframe)
             nulls = list(dataframe.isnull().sum())
             dtypes = list(dataframe.dtypes)
+            n = 0
+            for i in nulls:
+                if i != 0:
+                    n += i
             unique = []
             mode = []
             mean = []
@@ -41,7 +45,7 @@ class Detail:
                     mean.append(dataframe[cols[i]].mean())
                     median.append(dataframe[cols[i]].median())
                 
-            return render.detail(cols,nulls,dtypes,unique,mode,mean,median)
+            return render.detail(cols,nulls,dtypes,unique,mode,mean,median,n)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

@@ -1,28 +1,23 @@
 $def with(cols,types,nulls,correlation)
-<h1>Logistic regression: independent term X <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
-
 <form action="" method="post" enctype="multipart/form-data">
+<h1>Logistic regression: independent term X <button class="btn btn-primary" onclick="goBack()">Go Back</button> <button id="send" name="send" class="btn btn-primary">Select X</button></h1>
     <div class="table-responsive">
     <table class="table table-hover scroll">
         <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
             <tr>
-                <th>Columns</th>
+                <th>No</th>
+                <th><input type="checkbox" onClick="toggle(this)"> Columns</th>
                 <th>Types</th>
                 <th>Correlation</th>
                 <th>Nulls</th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td><input type="checkbox" onClick="toggle(this)"> Select all <button id="send" name="send" class="btn btn-primary">Select X</button></td>
-                <td></td>
-                <td></td>
-            </tr>
-
             $ no = 0
             $for i in range(len(cols)):
                 $if types[i] != "object" and nulls[i] == 0:
                     <tr>
+                        <td>$no</td>
                         <td><input type="checkbox" id="column" name="column" value="$cols[i]"> $cols[i]</td>
                         <td>$types[i]</td>
                         $if correlation[i] > 0.5:
@@ -31,7 +26,7 @@ $def with(cols,types,nulls,correlation)
                             <td>$correlation[i]</td>
                         <td>$nulls[i]</td>
                     </tr>
-            $ no+=1
+                $ no+=1
         </tbody>
     </table>
     </div>

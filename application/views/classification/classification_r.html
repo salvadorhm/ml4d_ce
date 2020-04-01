@@ -2,7 +2,7 @@ $def with(method, result)
 <h1>$method: Result <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
 
 <div class="table-responsive">
-<table class="table table-hover scroll">
+<table  class="table table-hover scroll">
     <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
             <th>Name</th>
@@ -11,7 +11,7 @@ $def with(method, result)
     $for row in result:
         <tr>
             <td>$row</td>
-        $if row == "Report" or row == "Python" or row == "Python validation":
+        $if "Report" in row or "Python" in row or "Python validation" in row:
             <td>
             <pre>
             <code>
@@ -19,27 +19,27 @@ $def with(method, result)
             </code>
             </pre>
             </td>
-        $elif row == "confusion_plot":
+        $elif "confusion_plot" in row:
             <td>
                 <img src="/static/images/confusion_plot.png" class="img-fluid" alt="confusion_matrix">
             </td>
-        $elif row == "roc_plot" and result[row] == True:
+        $elif "roc_plot" in row and result[row] == True:
             <td>
                 <img src="/static/images/roc_plot.png" class="img-fluid" alt="roc">
             </td>
-        $elif row == "optimization_plot" and result[row] == True:
+        $elif "Optimization_plot" in row and result[row] == True:
             <td>
                 <img src="/static/images/optimization_plot.png" class="img-fluid" alt="roc">
             </td>
-        $elif row == "Model":
+        $elif "Model" in row:
             <td>
                 <a href="static/models/$result[row]" target="blank">Download model: $result[row]</a>
             </td>
-        $elif row == "train.csv" or row == "validation.csv":
+        $elif "train.csv" in row or "validation.csv" in row:
             <td>
                 <a href="static/csv/$result[row]" target="blank">Download: $result[row]</a>
             </td>
-        $elif row == "predictions.py" or row == "train.py":
+        $elif "predictions.py" in row or "train.py" in row:
             <td>
                 <a href="static/code/$result[row]" target="blank">Download: $result[row]</a>
             </td>

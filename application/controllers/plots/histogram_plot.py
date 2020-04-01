@@ -53,7 +53,7 @@ class HistogramPlot:
                     i += 1
                     images.append(image_name)
                     nor.figure.savefig(image_name)
-                    plt.close('all')
+                    # plt.close('all')
                 except Exception as e:
                     print(e.args[0])
 

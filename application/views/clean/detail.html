@@ -1,7 +1,7 @@
-$def with(cols,nulls,dtypes,unique,mode,mean,median)
+$def with(cols,nulls,dtypes,unique,mode,mean,median,n)
 <h1>Dataset clean</h1>
 <div class="table-responsive">
-<table class="table table-hover scroll" border=1>
+<table id="example"class="table table-hover scroll" border=0>
     <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
     <tr>
         <th>No.</th>
@@ -10,11 +10,10 @@ $def with(cols,nulls,dtypes,unique,mode,mean,median)
         <th>Drop</th>
         <th>Dummies</th>
         <th>Rename</th>
-        <th>Dtype</th>
         <th>Impute</th>
         <th>Replace</th>
         <th>Replace char</th>
-        <th>Nulls</th>
+        <th>Nulls - $n</th>
         <th>Unique</th>
         <th>Mode</th>
         <th>Mean</th>
@@ -26,11 +25,10 @@ $def with(cols,nulls,dtypes,unique,mode,mean,median)
         <tr>
             <td>$no</td>
             <td><a href="/field/$cols[i]">$cols[i]</a></td>
-            <td>$dtypes[i]</td>
+            <td><a href="/change_type/$cols[i]">$dtypes[i]</a></td>
             <td><a href="/drop/$cols[i]">Drop</a></td>
             <td><a href="/dummies/$cols[i]">Dummies</a></td>
             <td><a href="/rename/$cols[i]">Rename</a></td>
-            <td><a href="/change_type/$cols[i]">Dtype</a></td>
             <td><a href="/impute/$cols[i]">Impute</a></td>
             <td><a href="/replace/$cols[i]">Replace</a></td>
             <td><a href="/replace_char/$cols[i]">Replace char</a></td>

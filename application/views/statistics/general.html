@@ -1,9 +1,9 @@
-$def with(cols,values, duplicates,nulls,dtypes)
+$def with(cols,values, duplicates,nulls,dtypes,n)
 <h1>Dataset information</h1>
 
 <div class="table-responsive">
-<table class="table table-hover scroll" border=1>
-    <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
+<table id="example" class="table table-hover scroll" style="width:100%" border=0>
+    <thead class="bg-primary text-white sticky-top" style="height: 250px ; overflow-y: scroll;">
         <tr>
             <th>No.</th>
             <th>Columns</th>
@@ -11,7 +11,7 @@ $def with(cols,values, duplicates,nulls,dtypes)
             <th>Duplicates</th>
             <th>Countplot</th>
             <th>Histogram</th>
-            <th>Nulls</th>
+            <th>Null - $n</th>
             <th>Head values</th>
         </tr>
     </thead>
@@ -40,3 +40,5 @@ $def with(cols,values, duplicates,nulls,dtypes)
     </tbody>
 </table>
 </div>
+<br>
+<br>

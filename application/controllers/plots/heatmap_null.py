@@ -31,7 +31,7 @@ class HeatmapNull:
             image_name = "static/images/heatmap_null.png"
             images.append(image_name)
             nor.figure.savefig(image_name)
-            plt.close('all')
+            # plt.close('all')
 
             code_lines = []
             code_lines.append("# Heatmap nulls")

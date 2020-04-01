@@ -2,20 +2,21 @@ $def with(columns)
 <form action="" method="post" enctype="multipart/form-data">
 <h1>Histogram <button class="btn btn-primary" onclick="goBack()">Go Back</button> <button id="send" name="send" class="btn btn-primary">Histogram plot</button></h1>
     <div class="table-responsive">
-        <table class="table table-hover scroll">
+        <table id="example" class="table table-hover scroll">
             <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
                 <tr>
+                    <th style="width: 10%">No</th>
                     <th>Columns</th>
                 </tr>
             </thead>
+            $ no = 0
             <tbody>
+            $for i in range(len(columns)):
                 <tr>
-                    <td><input type="checkbox" onClick="toggle(this)"> Select all </td>
+                    <td>$no</td>
+                    <td><input type="checkbox" id="column" name="column" value="$columns[i]"> $columns[i]</td>
                 </tr>
-                $for i in range(len(columns)):
-                    <tr>
-                        <td><input type="checkbox" id="column" name="column" value="$columns[i]"> $columns[i]</td>
-                    </tr>
+                $ no+=1
             </tbody>
         </table>
     </div>

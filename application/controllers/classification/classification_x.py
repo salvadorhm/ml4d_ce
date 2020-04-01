@@ -76,8 +76,8 @@ class ClassificationX():
 
             form = web.input(column = [''])
             x_cols = form.column
-            webdataminingtool.classification['x']=list(x_cols)
-            webdataminingtool.classification['y']= y
+            # webdataminingtool.classification['x']=list(x_cols)
+            # webdataminingtool.classification['y']= y
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -302,22 +302,24 @@ class ClassificationX():
             predictions_py.append("print(predictions)")
             sc.createCode("predictions.py",predictions_py)
 
-            webdataminingtool.classification['filename']= filename
-            webdataminingtool.classification['x']=list(x_cols)
-            webdataminingtool.classification['y']= y
-            webdataminingtool.classification['Report'] = report
-            webdataminingtool.classification['Confusion matrix'] = list(confusion)
-            webdataminingtool.classification['Score'] = model.score(x_test,y_test)
-            webdataminingtool.classification['Accuracy score'] = accuracy_score(y_test, predictions)
-            webdataminingtool.classification['Real test values'] = list(data_compare.Actual.head(10))
-            webdataminingtool.classification['Predicted values'] = list(data_compare.Predicted.head(10))
-            webdataminingtool.classification['Python'] = "".join(code)
-            webdataminingtool.classification['Python validation'] = "".join(test)
-            webdataminingtool.classification['Model'] = method+".joblib"
-            webdataminingtool.classification['train.csv'] = "train.csv"
-            webdataminingtool.classification['validation.csv'] = "validation.csv"
-            webdataminingtool.classification['train.py'] = "train.py"
-            webdataminingtool.classification['predictions.py'] = "predictions.py"
+            webdataminingtool.classification = {}
+            webdataminingtool.classification['title'] = title
+            webdataminingtool.classification['00.- filename']= filename
+            webdataminingtool.classification['01.- x']=list(x_cols)
+            webdataminingtool.classification['02.- y']= y
+            webdataminingtool.classification['03.- Report'] = report
+            webdataminingtool.classification['04.- Confusion matrix'] = list(confusion)
+            webdataminingtool.classification['05.- Score'] = model.score(x_test,y_test)
+            webdataminingtool.classification['06.- Accuracy score'] = accuracy_score(y_test, predictions)
+            webdataminingtool.classification['07.- Real test values'] = list(data_compare.Actual.head(10))
+            webdataminingtool.classification['08.- Predicted values'] = list(data_compare.Predicted.head(10))
+            webdataminingtool.classification['09.- Python'] = "".join(code)
+            webdataminingtool.classification['10.- Python validation'] = "".join(test)
+            webdataminingtool.classification['11.- Model'] = method+".joblib"
+            webdataminingtool.classification['12.- train.csv'] = "train.csv"
+            webdataminingtool.classification['13.- validation.csv'] = "validation.csv"
+            webdataminingtool.classification['14.- train.py'] = "train.py"
+            webdataminingtool.classification['15.- predictions.py'] = "predictions.py"
 
             figure()
             width=10
