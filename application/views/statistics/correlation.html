@@ -2,23 +2,24 @@ $def with(correlation)
 <h1>Correlation</h1>
 
 <div class="table-responsive">
-<table class="table table-hover scroll" border=1>
-    <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
-        <tr>
-            <th>Name</th>
-            $for r in correlation:
+    <table class="table table-hover scroll" border=1>
+        <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
+            <tr>
+                <th>Name</th>
+                $for r in correlation:
                 <th>$r</th>
-        </tr>
-    </thead>
-    $for row in correlation:
+            </tr>
+        </thead>
+        $for row in correlation:
         <tr>
             <td>$row</td>
             $for r in correlation[row]:
                 $if correlation[row][r] > 0.5:
-                    <td><p class="text-danger">$correlation[row][r]</p></td>
-                $else:
-                    <td>$correlation[row][r]</td>
+                <td>
+                    <p class="text-danger">$correlation[row][r]</p>
+                </td>
+            $else:
+                <td>$correlation[row][r]</td>
         </tr>
-</table>
+    </table>
 </div>
-

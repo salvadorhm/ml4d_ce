@@ -32,6 +32,7 @@ class BoxPlot:
     def POST(self):
         try:
             dataframe = pd.read_csv(self.file)
+            images = []
             form = web.input()
             x_col = form.x
             y_col = form.y
@@ -41,6 +42,7 @@ class BoxPlot:
             figure(figsize=(width,height))
             nor = sn.boxplot(x=x_col, y=y_col, data= dataframe)
             image_name = "static/images/boxplot.png"
+            images.append(image_name)
             nor.figure.savefig(image_name)
             fig = nor.get_figure()
             #plt.close(fig)
@@ -50,7 +52,7 @@ class BoxPlot:
             code_lines.append("sn.boxplot(x='"+ x_col +"', y='"+ y_col + "', data= dataframe)")
             sc.append(code_lines)
 
-            return render.plots("Boxplot",image_name)
+            return render.plots("Boxplot",images)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

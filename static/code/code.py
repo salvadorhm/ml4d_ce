@@ -12,19 +12,56 @@ dataframe = pd.read_csv('train.csv')
 dataframe.describe()
 # Dataframe
 dataframe
-# Correlation
-dataframe.corr()
-# Describe
-dataframe.describe()
-# Describe
-dataframe.describe()
-# Correlation
-dataframe.corr()
-# Heatmap nulls
-sn.heatmap(dataframe.isnull())
-# Heatmap nulls
-sn.heatmap(dataframe.isnull())
-# Describe
-dataframe.describe()
-# Heatmap nulls
-sn.heatmap(dataframe.isnull())
+# Heatmap corr
+correlation = dataframe.corr()
+sn.heatmap(correlation,annot=True)
+# Histogram de price
+sn.distplot(dataframe[price])
+# Histogram de lotsize
+sn.distplot(dataframe[lotsize])
+# Histogram de stories
+sn.distplot(dataframe[stories])
+# Heatmap corr
+correlation = dataframe.corr()
+sn.heatmap(correlation,annot=True)
+# Histogram de price
+sn.distplot(dataframe[price])
+# Preparacion del dataframe
+df_x = dataframe[['lotsize', 'bedrooms', 'bathrms', 'stories', 'garagepl']]
+df_y = dataframe['price']
+# Normalizar dataframe
+df_nor_x = (df_x - df_x.mean())/df_x.std()
+# x
+df_nor_x
+# y
+df_nor_y = (df_y - df_y.mean())/df_y.std()
+df_nor_y
+# Dataframe de entrenamiento y de prueba
+x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
+# Model de regresion lineal
+model = LinearRegression()
+# Entrenamiento del model
+model.fit(x_train,y_train)
+# Prueba del modelo
+predictions = model.predict(x_test)
+# Evaluacion del modelo
+# Coefficients
+model.coef_
+# Independent term
+model.intercept_
+# Mean squared error
+mean_squared_error(y_test, predictions)
+# Mean absolute error
+mean_absolute_error(y_test, predictions)
+# Variance
+r2_score(y_test, predictions)
+# Comparacion de los resultados
+compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
+# Valores de prueba
+compare.Actual.head(10)
+# Valores predichos
+compare.Predicted.head(10)
+# Grafica scatter
+plt.scatter(y_test,predictions)
+# Grafica de distribucion
+sn.distplot(y_test - predictions)

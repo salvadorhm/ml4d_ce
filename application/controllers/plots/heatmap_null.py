@@ -20,6 +20,7 @@ class HeatmapNull:
 
     def GET(self):
         try:
+            images=[]
             dataframe = pd.read_csv(self.file)
             figure()
             width=20
@@ -27,6 +28,7 @@ class HeatmapNull:
             figure(figsize=(width,height))
             nor = sn.heatmap(dataframe.isnull())
             image_name = "static/images/heatmap_null.png"
+            images.append(image_name)
             nor.figure.savefig(image_name)
 
             code_lines = []
@@ -34,7 +36,7 @@ class HeatmapNull:
             code_lines.append("sn.heatmap(dataframe.isnull())")
             sc.append(code_lines)
 
-            return render.plots("Heatmap null", image_name)
+            return render.plots("Heatmap null", images)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

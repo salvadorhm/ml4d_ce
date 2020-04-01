@@ -3,6 +3,8 @@ import csv  # CSV parser
 import json  # json parser
 import pandas as pd
 import numpy as np
+import seaborn as sn
+
 
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
@@ -21,7 +23,6 @@ class Correlation:
             dataframe = pd.read_csv(self.file)
             result = dataframe.corr()
             correlation = result.to_dict()
-
             code_lines = []
             code_lines.append("# Correlation")
             code_lines.append("dataframe.corr()")

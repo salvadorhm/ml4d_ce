@@ -31,6 +31,7 @@ class CountPlot2:
 
     def POST(self):
         try:
+            images=[]
             dataframe = pd.read_csv(self.file)
             # form = web.input(column = [''])
             form = web.input()
@@ -42,6 +43,7 @@ class CountPlot2:
             figure(figsize=(width,height))
             nor = sn.countplot(x=x_col, hue=hue_col, data= dataframe)
             image_name = "static/images/countplot2.png"
+            images.append(image_name)
             nor.figure.savefig(image_name)
             fig = nor.get_figure()
             #plt.close(fig)
@@ -51,7 +53,7 @@ class CountPlot2:
             code_lines.append("sn.countplot(x='"+ x_col +"', hue='"+ hue_col + "', data= dataframe)")
             sc.append(code_lines)
 
-            return render.plots("Countplot",image_name)
+            return render.plots("Countplot",images)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
