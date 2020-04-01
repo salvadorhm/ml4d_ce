@@ -34,7 +34,12 @@ $def with(cols,nulls,dtypes,unique,mode,mean,median)
             <td><a href="/impute/$cols[i]">Impute</a></td>
             <td><a href="/replace/$cols[i]">Replace</a></td>
             <td><a href="/replace_char/$cols[i]">Replace char</a></td>
-            <td>$nulls[i]</td>
+            $if nulls[i] > 0:
+                <td bgcolor="#FF0000">
+                    <p class="text-white">$nulls[i]</p>
+                </td>
+            $else:
+                <td>$nulls[i]</td>
             <td>$unique[i]</td>
             <td>$mode[i]</td>
             <td>$mean[i]</td>

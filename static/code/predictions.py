@@ -6,6 +6,6 @@ import pandas as pd
 from joblib import load
 model = load('linear.joblib')
 dataframe = pd.read_csv('validation.csv')
-xs = dataframe[['lotsize', 'bedrooms', 'bathrms', 'stories', 'garagepl']]
+xs = dataframe[['room', 'place']]
 predictions = model.predict(xs)
 print(predictions)
