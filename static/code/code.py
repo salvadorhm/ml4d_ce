@@ -288,3 +288,69 @@ dataframe['bedrooms'].describe()
 dataframe['static/icon/favicon.png'].isnull().sum()
 # Describe columna 'static/icon/favicon.png'
 dataframe['static/icon/favicon.png'].describe()
+# Revisando si tiene NaN la columna 'Unnamed: 0'
+dataframe['Unnamed: 0'].isnull().sum()
+# Describe columna 'Unnamed: 0'
+dataframe['Unnamed: 0'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].isnull().sum()
+# Describe columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].isnull().sum()
+# Describe columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].describe()
+# Revisando si tiene NaN la columna 'Unnamed: 0'
+dataframe['Unnamed: 0'].isnull().sum()
+# Describe columna 'Unnamed: 0'
+dataframe['Unnamed: 0'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].isnull().sum()
+# Describe columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].describe()
+# Revisando si tiene NaN la columna 'Unnamed: 0'
+dataframe['Unnamed: 0'].isnull().sum()
+# Describe columna 'Unnamed: 0'
+dataframe['Unnamed: 0'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].isnull().sum()
+# Describe columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].describe()
+# Renombar la columna 'Unnamed: 0'
+dataframe.rename(columns={'Unnamed: 0':'sin_nombre'}, inplace=True)
+# Describe 'sin_nombre
+dataframe['sin_nombre'].describe()
+# Describe 'sin_nombre
+dataframe['sin_nombre'].describe()
+# Revisando si tiene NaN la columna 'sin_nombre'
+dataframe['sin_nombre'].isnull().sum()
+# Describe columna 'sin_nombre'
+dataframe['sin_nombre'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].isnull().sum()
+# Describe columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].describe()
+# Revisando si tiene NaN la columna 'airco_no'
+dataframe['airco_no'].isnull().sum()
+# Describe columna 'airco_no'
+dataframe['airco_no'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].isnull().sum()
+# Describe columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].describe()
+# Drop
+dataframe.drop(['airco_no'],axis=1,inplace=True)
+# Revisando si tiene NaN la columna 'airco_yes'
+dataframe['airco_yes'].isnull().sum()
+# Describe columna 'airco_yes'
+dataframe['airco_yes'].describe()
+# Revisando si tiene NaN la columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].isnull().sum()
+# Describe columna 'static/icon/favicon.png'
+dataframe['static/icon/favicon.png'].describe()
+# Renombar la columna 'airco_yes'
+dataframe.rename(columns={'airco_yes':'airco'}, inplace=True)
+# Describe 'airco
+dataframe['airco'].describe()
+# Histogram de airco
+sn.distplot(dataframe[airco])

@@ -57,6 +57,7 @@ urls = (
     '/detail', 'application.controllers.clean.detail.Detail',
     '/drop/(.+)','application.controllers.clean.drop.Drop',
     '/dummies/(.+)','application.controllers.clean.dummies.Dummies',
+    '/rename/(.+)','application.controllers.clean.rename.Rename',
     '/impute/(.+)','application.controllers.clean.impute.Impute',
     '/replace/(.+)','application.controllers.clean.replace.Replace',
 
