@@ -1,5 +1,32 @@
-$def with(column)
+$def with(column,nulls,dtypes,unique,mode,mean,median)
 <h1>$column to dummie <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
+
+<div class="table-responsive">
+    <table class="table table-hover scroll">
+        <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
+            <tr>
+                <th>Column</th>
+                <th>Dtypes</th>
+                <th>Nulls</th>
+                <th>Unique values</th>
+                <th>Mode</th>
+                <th>Mean</th>
+                <th>Median</th>
+            </tr>
+        </thead>
+    
+        <tr>
+            <td>$column</td>
+            <td>$dtypes</td>
+            <td>$nulls</td>
+            <td>$unique</td>
+            <td>$mode</td>
+            <td>$mean</td>
+            <td>$median</td>
+        </tr>
+    </table>
+    </div>
+
 <form action="" method="post" enctype="multipart/form-data">
     <h3>Dummie column: $column?</h3>
     <input type="hidden" name="column" id="column" value="$column">

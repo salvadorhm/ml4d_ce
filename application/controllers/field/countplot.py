@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 # import statsmodels.api as sm
 # import scipy.stats as st
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure, show
 import seaborn as sn
 # from sklearn.metrics import confusion_matrix
@@ -35,6 +35,7 @@ class CountPlot:
             image_name = "static/images/countplot.png"
             print(image_name)
             ax.figure.savefig(image_name)
+            # plt.close('all')
 
             code_lines = []
             code_lines.append("# Countplot")

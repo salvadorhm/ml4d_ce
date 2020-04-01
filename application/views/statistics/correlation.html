@@ -7,7 +7,7 @@ $def with(correlation)
             <tr>
                 <th>Name</th>
                 $for r in correlation:
-                <th>$r</th>
+                    <th>$r</th>
             </tr>
         </thead>
         $for row in correlation:
@@ -15,11 +15,11 @@ $def with(correlation)
             <td>$row</td>
             $for r in correlation[row]:
                 $if correlation[row][r] > 0.5:
-                <td>
-                    <p class="text-danger">$correlation[row][r]</p>
-                </td>
-            $else:
-                <td>$correlation[row][r]</td>
+                    <td>
+                        <p class="text-danger">$correlation[row][r]</p>
+                    </td>
+                $else:
+                    <td>$correlation[row][r]</td>
         </tr>
     </table>
 </div>

@@ -3,6 +3,7 @@ import webdataminingtool
 import pandas as pd
 import numpy as np
 from matplotlib.pyplot import figure, show
+import matplotlib.pyplot as plt
 import seaborn as sn
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
@@ -47,6 +48,7 @@ class HeatmapCorr:
             images.append(image_name)
             ax.figure.savefig(image_name)
             fig = ax.get_figure()
+            plt.close('all')
 
             code_lines = []
             code_lines.append("# Heatmap corr")

@@ -4,6 +4,7 @@ import json  # json parser
 import pandas as pd
 import numpy as np
 from matplotlib.pyplot import figure, show
+import matplotlib.pyplot as plt
 import seaborn as sn
 
 from application.controllers.save_code import SaveCode
@@ -29,6 +30,7 @@ class Histogram:
             nor = sn.distplot(dataframe[column])
             image_name = "static/images/normal.png"
             nor.figure.savefig(image_name)
+            # plt.close('all')
 
             code_lines = []
             code_lines.append("# Histogram de " + column)
