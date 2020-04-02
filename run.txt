@@ -1,0 +1,5 @@
+import pandas as pd
+df = pd.read_csv("static/csv/train.csv")
+df['mul'] = df.x0 * df.x1
+df.to_csv('static/csv/train.csv', sep=',',index=False)
+print("fin")

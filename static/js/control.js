@@ -1,3 +1,6 @@
 $(document).ready(function() {
-    $('#example').DataTable();
+    $('#dataframe').DataTable( {
+        "scrollY": true,
+        "scrollX": true
+    } );
 } );

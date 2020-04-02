@@ -1,9 +1,8 @@
 $def with(describe)
 <h1>Describe dataset</h1>
 
-<div class="table-responsive">
-<table id="example" class="table table-hover scroll" border=0>
-    <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
+<table id="dataframe" class="table table-striped table-bordered table-hover scroll" style="width:100%">
+    <thead class="bg-primary text-white">
         <tr>
             <th>Name</th>
             $for r in describe:
@@ -19,4 +18,3 @@ $def with(describe)
                 <td>$describe[row][r]</td>
         </tr>
 </table>
-</div>
