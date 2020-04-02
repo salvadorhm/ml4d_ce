@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -31,7 +31,7 @@ class KnnX():
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
 
             columns = []
             types = []
@@ -57,13 +57,13 @@ class KnnX():
     def POST(self):
         try:
             try:
-                filename = webdataminingtool.file['filename']
+                filename = ml4d.file['filename']
             except Exception as e:
                 filename = "train.csv"
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
-            webdataminingtool.sessions['x']=list(x_cols)
+            ml4d.sessions['x']=list(x_cols)
 
             dataframe = pd.read_csv(self.file)
 
@@ -163,19 +163,19 @@ class KnnX():
             # image_name = "static/images/roc.png"
             # plt.savefig(image_name)
 
-            webdataminingtool.sessions['filename']= filename
-            webdataminingtool.sessions['y'] = y 
-            webdataminingtool.sessions['x'] = list(x_cols)
-            webdataminingtool.sessions["N_neighbors"] = n
-            webdataminingtool.sessions['Report'] = report
-            webdataminingtool.sessions['Confusion matrix'] = list(confusion)
-            webdataminingtool.sessions['Score'] = model.score(x_test,y_test)
-            webdataminingtool.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.sessions['filename']= filename
+            ml4d.sessions['y'] = y 
+            ml4d.sessions['x'] = list(x_cols)
+            ml4d.sessions["N_neighbors"] = n
+            ml4d.sessions['Report'] = report
+            ml4d.sessions['Confusion matrix'] = list(confusion)
+            ml4d.sessions['Score'] = model.score(x_test,y_test)
+            ml4d.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
 
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-            webdataminingtool.sessions['Real test values'] = list(compare.Actual.head(10))
-            webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head(10))
-            webdataminingtool.sessions['Python'] = ''.join(code)
+            ml4d.sessions['Real test values'] = list(compare.Actual.head(10))
+            ml4d.sessions['Predicted values'] = list(compare.Predicted.head(10))
+            ml4d.sessions['Python'] = ''.join(code)
 
 
             # code_lines = []

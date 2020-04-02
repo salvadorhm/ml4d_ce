@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -28,8 +28,8 @@ class LinearY:
         try:
             form = web.input()
             y = form.column
-            webdataminingtool.sessions = {}
-            webdataminingtool.sessions['y']=y
+            ml4d.sessions = {}
+            ml4d.sessions['y']=y
             raise web.seeother('/linearx')
         except Exception as e:
             print(e.args)

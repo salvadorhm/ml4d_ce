@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import pandas as pd
 import numpy as np
@@ -28,12 +28,12 @@ class CompareY:
         try:
             form = web.input()
             y = form.column
-            webdataminingtool.sessions = {}
-            webdataminingtool.knn = {}
-            webdataminingtool.tree = {}
-            webdataminingtool.randomf = {}
-            webdataminingtool.svc = {}
-            webdataminingtool.sessions['y'] = y
+            ml4d.sessions = {}
+            ml4d.knn = {}
+            ml4d.tree = {}
+            ml4d.randomf = {}
+            ml4d.svc = {}
+            ml4d.sessions['y'] = y
             raise web.seeother('/compare_x')
         except Exception as e:
             print(e.args)

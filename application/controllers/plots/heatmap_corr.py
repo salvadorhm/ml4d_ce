@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import pandas as pd
 import numpy as np
 from matplotlib.pyplot import figure, show

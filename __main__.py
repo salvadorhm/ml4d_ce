@@ -1,2 +1,2 @@
-from webdataminingtool import main
+from ml4d import main
 main()

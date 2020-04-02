@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 
 render = web.template.render('application/views/compare', base="../master")
@@ -11,10 +11,10 @@ class CompareR:
 
     def GET(self):
         try:
-            knn = webdataminingtool.knn
-            tree = webdataminingtool.tree
-            randomf = webdataminingtool.randomf
-            svc = webdataminingtool.svc
+            knn = ml4d.knn
+            tree = ml4d.tree
+            randomf = ml4d.randomf
+            svc = ml4d.svc
 
             return render.compare_r(knn, tree, randomf, svc)
         except Exception as e:

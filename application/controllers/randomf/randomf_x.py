@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -40,7 +40,7 @@ class RandomfX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
 
             columns = []
             types = []
@@ -66,13 +66,13 @@ class RandomfX:
     def POST(self):
         try:
             try:
-                filename = webdataminingtool.file['filename']
+                filename = ml4d.file['filename']
             except Exception as e:
                 filename = "train.csv"
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
-            webdataminingtool.sessions['x']=list(x_cols)
+            ml4d.sessions['x']=list(x_cols)
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -187,21 +187,21 @@ class RandomfX:
             total_cols = len(x_cols)
             total_cols_20 = int(abs(total_cols * 0.20))
 
-            webdataminingtool.randomf= {}
-            webdataminingtool.randomf['filename']= filename
-            webdataminingtool.randomf['y'] = y 
-            webdataminingtool.randomf['x'] = list(x_cols)
-            webdataminingtool.randomf['x_train.describe()['+str(x_cols[0])+"]"] = x_train.describe().to_dict()[x_cols[0]]
-            webdataminingtool.randomf['Report'] = report
-            webdataminingtool.randomf['Confusion matrix'] = list(confusion)
-            webdataminingtool.randomf['Score'] = model.score(x_test,y_test)
-            webdataminingtool.randomf['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.randomf= {}
+            ml4d.randomf['filename']= filename
+            ml4d.randomf['y'] = y 
+            ml4d.randomf['x'] = list(x_cols)
+            ml4d.randomf['x_train.describe()['+str(x_cols[0])+"]"] = x_train.describe().to_dict()[x_cols[0]]
+            ml4d.randomf['Report'] = report
+            ml4d.randomf['Confusion matrix'] = list(confusion)
+            ml4d.randomf['Score'] = model.score(x_test,y_test)
+            ml4d.randomf['Accuracy score'] = accuracy_score(y_test, predictions)
 
-            webdataminingtool.randomf['Real test values'] = list(compare.Actual.head(10))
-            webdataminingtool.randomf['Predicted values'] = list(compare.Predicted.head(10))
-            webdataminingtool.randomf['Python'] = ''.join(code)
-            webdataminingtool.randomf['Features'] = list(results.features)[0:total_cols_20]
-            webdataminingtool.randomf['Importance'] = list(results.importance)[0:total_cols_20]
+            ml4d.randomf['Real test values'] = list(compare.Actual.head(10))
+            ml4d.randomf['Predicted values'] = list(compare.Predicted.head(10))
+            ml4d.randomf['Python'] = ''.join(code)
+            ml4d.randomf['Features'] = list(results.features)[0:total_cols_20]
+            ml4d.randomf['Importance'] = list(results.importance)[0:total_cols_20]
 
 
             '''
@@ -324,21 +324,21 @@ class RandomfX:
             total_cols = len(x_cols)
             total_cols_20 = int(abs(total_cols * 0.20))
 
-            webdataminingtool.randomf_nor = {}
-            webdataminingtool.randomf_nor['filename']= filename
-            webdataminingtool.randomf_nor['y'] = y 
-            webdataminingtool.randomf_nor['x'] = list(x_cols)
-            # webdataminingtool.randomf_nor['x_train.describe()['+str(x_cols[0])+"]"] = pd.DataFrame(x_train).describe().to_dict()[x_cols[0]]
-            webdataminingtool.randomf_nor['Report'] = report
-            webdataminingtool.randomf_nor['Confusion matrix'] = list(confusion)
-            webdataminingtool.randomf_nor['Score'] = model.score(x_test,y_test)
-            webdataminingtool.randomf_nor['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.randomf_nor = {}
+            ml4d.randomf_nor['filename']= filename
+            ml4d.randomf_nor['y'] = y 
+            ml4d.randomf_nor['x'] = list(x_cols)
+            # ml4d.randomf_nor['x_train.describe()['+str(x_cols[0])+"]"] = pd.DataFrame(x_train).describe().to_dict()[x_cols[0]]
+            ml4d.randomf_nor['Report'] = report
+            ml4d.randomf_nor['Confusion matrix'] = list(confusion)
+            ml4d.randomf_nor['Score'] = model.score(x_test,y_test)
+            ml4d.randomf_nor['Accuracy score'] = accuracy_score(y_test, predictions)
 
-            webdataminingtool.randomf_nor['Real test values'] = list(compare.Actual.head(10))
-            webdataminingtool.randomf_nor['Predicted values'] = list(compare.Predicted.head(10))
-            webdataminingtool.randomf_nor['Python'] = ''.join(code)
-            webdataminingtool.randomf_nor['Features max 20%'] = list(results.features)[0:total_cols_20]
-            webdataminingtool.randomf_nor['Importance max 20%'] = list(results.importance)[0:total_cols_20]
+            ml4d.randomf_nor['Real test values'] = list(compare.Actual.head(10))
+            ml4d.randomf_nor['Predicted values'] = list(compare.Predicted.head(10))
+            ml4d.randomf_nor['Python'] = ''.join(code)
+            ml4d.randomf_nor['Features max 20%'] = list(results.features)[0:total_cols_20]
+            ml4d.randomf_nor['Importance max 20%'] = list(results.importance)[0:total_cols_20]
 
             '''
             ----------------------------------------------------------------------------------------
@@ -502,21 +502,21 @@ class RandomfX:
             total_cols = len(x_cols)
             total_cols_20 = int(abs(total_cols * 0.20))
 
-            webdataminingtool.randomf_pca = {}
-            webdataminingtool.randomf_pca['filename']= filename
-            webdataminingtool.randomf_pca['y'] = y 
-            webdataminingtool.randomf_nor['x'] = list(x_cols)
-            # webdataminingtool.randomf_nor['x_train.describe()['+str(x_cols[0])+"]"] = pd.DataFrame(x_train).describe().to_dict()[x_cols[0]]
-            webdataminingtool.randomf_pca['Report'] = report
-            webdataminingtool.randomf_pca['Confusion matrix'] = list(confusion)
-            webdataminingtool.randomf_pca['Score'] = model.score(x_test,y_test)
-            webdataminingtool.randomf_pca['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.randomf_pca = {}
+            ml4d.randomf_pca['filename']= filename
+            ml4d.randomf_pca['y'] = y 
+            ml4d.randomf_nor['x'] = list(x_cols)
+            # ml4d.randomf_nor['x_train.describe()['+str(x_cols[0])+"]"] = pd.DataFrame(x_train).describe().to_dict()[x_cols[0]]
+            ml4d.randomf_pca['Report'] = report
+            ml4d.randomf_pca['Confusion matrix'] = list(confusion)
+            ml4d.randomf_pca['Score'] = model.score(x_test,y_test)
+            ml4d.randomf_pca['Accuracy score'] = accuracy_score(y_test, predictions)
 
-            webdataminingtool.randomf_pca['Real test values'] = list(compare.Actual.head(10))
-            webdataminingtool.randomf_pca['Predicted values'] = list(compare.Predicted.head(10))
-            webdataminingtool.randomf_pca['Python'] = ''.join(code)
-            webdataminingtool.randomf_pca['Features max 20%'] = list(results.features)[0:total_cols_20]
-            webdataminingtool.randomf_pca['Importance max 20%'] = list(results.importance)[0:total_cols_20]
+            ml4d.randomf_pca['Real test values'] = list(compare.Actual.head(10))
+            ml4d.randomf_pca['Predicted values'] = list(compare.Predicted.head(10))
+            ml4d.randomf_pca['Python'] = ''.join(code)
+            ml4d.randomf_pca['Features max 20%'] = list(results.features)[0:total_cols_20]
+            ml4d.randomf_pca['Importance max 20%'] = list(results.importance)[0:total_cols_20]
 
             raise web.seeother('/randomf_r')
         except Exception as e:

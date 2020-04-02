@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.71"  # version de la webapp
+app_version = "0.72"  # version de la webapp
 
 urls = (
     '/','application.controllers.main.index.Index',
@@ -68,7 +68,7 @@ urls = (
     '/histogram/(.+)','application.controllers.field.histogram.Histogram',
 
 )
-webdataminingtool = web.application(urls, globals())
+ml4d = web.application(urls, globals())
 
 sessions ={"status":"online","url":"localhost:8080"}
 
@@ -76,7 +76,7 @@ def main():
     web.config.debug = False
     print(sessions)
     print(os.path.dirname(os.path.abspath(__file__)))
-    webdataminingtool.run()
+    ml4d.run()
 
 if __name__ == "__main__":
     main()

@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 
 render = web.template.render('application/views/logistic', base="../master")
@@ -11,7 +11,7 @@ class LogisticR:
 
     def GET(self):
         try:
-            return render.logisticr(webdataminingtool.sessions)
+            return render.logisticr(ml4d.sessions)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

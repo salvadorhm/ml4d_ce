@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import pandas as pd
 import numpy as np
@@ -36,18 +36,18 @@ class ClassificationY:
         try:
             form = web.input()
             y = form.column
-            webdataminingtool.classification = {}
+            ml4d.classification = {}
             if method == "svc":
-                webdataminingtool.classification['title'] = "Suport Vector Machine Classifier"
+                ml4d.classification['title'] = "Suport Vector Machine Classifier"
             elif method == "tree":
-                webdataminingtool.classification['title'] = "Decision Tree classifier"
+                ml4d.classification['title'] = "Decision Tree classifier"
             elif method == "randomf":
-                webdataminingtool.classification['title'] = "RandomForest Classifier"
+                ml4d.classification['title'] = "RandomForest Classifier"
             elif method == "knn":
-                webdataminingtool.classification['title'] = "KNeighbors classifier"
+                ml4d.classification['title'] = "KNeighbors classifier"
 
-            webdataminingtool.classification['method'] = method
-            webdataminingtool.classification['y'] = y
+            ml4d.classification['method'] = method
+            ml4d.classification['y'] = y
             raise web.seeother('/classification_x')
         except Exception as e:
             print(e.args)

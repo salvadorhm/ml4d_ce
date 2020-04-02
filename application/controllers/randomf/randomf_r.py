@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 
 render = web.template.render('application/views/randomf', base="../master")
@@ -11,9 +11,9 @@ class RandomfR:
 
     def GET(self):
         try:
-            result = webdataminingtool.randomf
-            result_nor = webdataminingtool.randomf_nor
-            result_pca = webdataminingtool.randomf_pca
+            result = ml4d.randomf
+            result_nor = ml4d.randomf_nor
+            result_pca = ml4d.randomf_pca
 
             return render.randomf_r(result, result_nor, result_pca)
         except Exception as e:

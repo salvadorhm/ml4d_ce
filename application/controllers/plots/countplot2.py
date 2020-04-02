@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import pandas as pd
 import numpy as np
@@ -21,7 +21,7 @@ class CountPlot2:
 
     def GET(self):
         try:
-            webdataminingtool.sessions = {}
+            ml4d.sessions = {}
             dataframe = pd.read_csv(self.file)
             columns = list(dataframe)
             return render.countplot2(columns)

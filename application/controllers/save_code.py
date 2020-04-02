@@ -1,5 +1,5 @@
 import web
-import webdataminingtool
+import ml4d
 
 render = web.template.render('application/views/main', base="../master")
 

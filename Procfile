@@ -1,1 +1,1 @@
-web: python webdataminingtool.py $PORT
+web: python ml4d.py $PORT

@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 
 render = web.template.render('application/views/classification', base="../master")
@@ -11,8 +11,8 @@ class ClassificationR:
 
     def GET(self):
         try:
-            title = webdataminingtool.classification['title']
-            result = webdataminingtool.classification
+            title = ml4d.classification['title']
+            result = ml4d.classification
             return render.classification_r(title, result)
         except Exception as e:
             print(e.args)

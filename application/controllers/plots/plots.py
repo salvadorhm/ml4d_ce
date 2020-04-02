@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 
 
 render = web.template.render('application/views/plots', base="../master")

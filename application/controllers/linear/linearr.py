@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 # import json  # json parser
 # import pandas as pd
@@ -21,7 +21,7 @@ class LinearR:
 
     def GET(self):
         try:
-            return render.linearr(webdataminingtool.sessions)
+            return render.linearr(ml4d.sessions)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

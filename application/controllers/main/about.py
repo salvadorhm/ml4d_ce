@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool 
+import ml4d 
 
 render = web.template.render('application/views/main', base="../master")
 
@@ -10,7 +10,7 @@ class About:
 
     def GET(self):
         try:
-            app_version = webdataminingtool.app_version
+            app_version = ml4d.app_version
             return render.about(app_version)
         except Exception as e:
             print(e.args)

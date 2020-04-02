@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool  # Application
+import ml4d  # Application
 import shutil # Maneja archivos y directorios.
 import cgi,os # Ejecuta un programa en el servidor y despliega su resultado hacia el cliente.
 import cgitb # Proporciona un controlador especial para scripts de Python. 
@@ -23,7 +23,7 @@ class Upload:
     def GET(self,**k):
         try:
             message = None
-            app_version = webdataminingtool.app_version
+            app_version = ml4d.app_version
             return render.upload(message, app_version)
         except Exception as e:
             print(e.args)
@@ -44,7 +44,7 @@ class Upload:
             filename = filepath.split('/')[-1] # splits the and chooses the last part (the filename with extension)
             if os.path.splitext(filepath)[1] == ".csv":  # Extención del archivo
                 fn = os.path.basename(form.csv_file.filename)
-                webdataminingtool.file = {'filename':fn}
+                ml4d.file = {'filename':fn}
                 file = open('static/uploads/'+fn,'wb').write(form.csv_file.file.read(50000000)) # tamaño del archivo
                 new_filename = "train.csv"
                 shutil.copy('static/uploads/'+fn, filedir + new_filename)

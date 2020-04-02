@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -31,7 +31,7 @@ class LinearX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
 
             columns = []
             types = []
@@ -52,14 +52,14 @@ class LinearX:
     def POST(self):
         try:
             try:
-                filename = webdataminingtool.file['filename']
+                filename = ml4d.file['filename']
             except Exception as e:
                 filename = "train.csv"
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
             form = web.input(column = [''])
             # columns = form.column
             x_cols = form.column
-            webdataminingtool.sessions['x']=list(x_cols)
+            ml4d.sessions['x']=list(x_cols)
             dataframe = pd.read_csv(self.file)
             # columns.append(y)
             # df = dataframe[columns]
@@ -152,7 +152,7 @@ class LinearX:
             train_py = []
             train_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             train_py.append("__email__ = 'salvadorhm@gmail.com'")
-            train_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            train_py.append("__version__ = '"+ml4d.app_version+"'")
             train_py.append("import sklearn")
             train_py.append("import pandas as pd")
             train_py.append("from sklearn.model_selection import train_test_split")
@@ -195,7 +195,7 @@ class LinearX:
             predictions_py = []
             predictions_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             predictions_py.append("__email__ = 'salvadorhm@gmail.com'")
-            predictions_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            predictions_py.append("__version__ = '"+ml4d.app_version+"'")
             predictions_py.append("import sklearn")
             predictions_py.append("import pandas as pd")
             predictions_py.append("from joblib import load")
@@ -206,23 +206,23 @@ class LinearX:
             predictions_py.append("print(predictions)")
             sc.createCode("predictions.py",predictions_py)
 
-            webdataminingtool.sessions['filename']= filename
-            webdataminingtool.sessions['y'] = y 
-            webdataminingtool.sessions['x'] = list(x_cols)
-            webdataminingtool.sessions['Coefficients'] = str(model.coef_)
-            webdataminingtool.sessions['Independent term'] = model.intercept_
-            webdataminingtool.sessions['Mean squared error'] = mean_squared_error(y_test, predictions)
-            webdataminingtool.sessions['Mean absolute error'] = mean_absolute_error(y_test, predictions)
-            webdataminingtool.sessions['Variance'] = r2_score(y_test, predictions)
-            webdataminingtool.sessions['Actual test values'] = list(compare.Actual.head())
-            webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head())
-            webdataminingtool.sessions['Python'] = "".join(code)
-            webdataminingtool.sessions['Python validation'] = "".join(test)
-            webdataminingtool.sessions['Model'] = "linear.joblib"
-            webdataminingtool.sessions['train.csv'] = "train.csv"
-            webdataminingtool.sessions['validation.csv'] = "validation.csv"
-            webdataminingtool.sessions['train.py'] = "train.py"
-            webdataminingtool.sessions['predictions.py'] = "predictions.py"
+            ml4d.sessions['filename']= filename
+            ml4d.sessions['y'] = y 
+            ml4d.sessions['x'] = list(x_cols)
+            ml4d.sessions['Coefficients'] = str(model.coef_)
+            ml4d.sessions['Independent term'] = model.intercept_
+            ml4d.sessions['Mean squared error'] = mean_squared_error(y_test, predictions)
+            ml4d.sessions['Mean absolute error'] = mean_absolute_error(y_test, predictions)
+            ml4d.sessions['Variance'] = r2_score(y_test, predictions)
+            ml4d.sessions['Actual test values'] = list(compare.Actual.head())
+            ml4d.sessions['Predicted values'] = list(compare.Predicted.head())
+            ml4d.sessions['Python'] = "".join(code)
+            ml4d.sessions['Python validation'] = "".join(test)
+            ml4d.sessions['Model'] = "linear.joblib"
+            ml4d.sessions['train.csv'] = "train.csv"
+            ml4d.sessions['validation.csv'] = "validation.csv"
+            ml4d.sessions['train.py'] = "train.py"
+            ml4d.sessions['predictions.py'] = "predictions.py"
 
 
             code_lines = []

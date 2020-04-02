@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -39,7 +39,7 @@ class CompareX():
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
             
             columns = []
             types = []
@@ -65,14 +65,14 @@ class CompareX():
     def POST(self):
         try:
             try:
-                filename = webdataminingtool.file['filename']
+                filename = ml4d.file['filename']
             except Exception as e:
                 filename = "train.csv"
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
-            webdataminingtool.sessions['x']=list(x_cols)
-            webdataminingtool.sessions['y']= y
+            ml4d.sessions['x']=list(x_cols)
+            ml4d.sessions['y']= y
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -137,19 +137,19 @@ class CompareX():
             code.append("confusion_matrix(y_test, predictions)")
 
       
-            webdataminingtool.knn['filename']= filename
-            webdataminingtool.knn['x']=list(x_cols)
-            webdataminingtool.knn['y']= y
-            webdataminingtool.knn['Report'] = report
-            webdataminingtool.knn['Confusion matrix'] = list(confusion)
-            webdataminingtool.knn['Score'] = knn.score(x_test,y_test)
-            webdataminingtool.knn['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.knn['filename']= filename
+            ml4d.knn['x']=list(x_cols)
+            ml4d.knn['y']= y
+            ml4d.knn['Report'] = report
+            ml4d.knn['Confusion matrix'] = list(confusion)
+            ml4d.knn['Score'] = knn.score(x_test,y_test)
+            ml4d.knn['Accuracy score'] = accuracy_score(y_test, predictions)
 
             data_result = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
-            webdataminingtool.knn['Real test values'] = list(data_result.Actual.head(10))
-            webdataminingtool.knn['Predicted values'] = list(data_result.Predicted.head(10))
-            webdataminingtool.knn['Python'] = "".join(code)
-            webdataminingtool.knn['Confusion matrix plot']= True
+            ml4d.knn['Real test values'] = list(data_result.Actual.head(10))
+            ml4d.knn['Predicted values'] = list(data_result.Predicted.head(10))
+            ml4d.knn['Python'] = "".join(code)
+            ml4d.knn['Confusion matrix plot']= True
 
             '''
             ---------------------------------------------------------------------------
@@ -206,17 +206,17 @@ class CompareX():
             code.append("\n")
             code.append("confusion_matrix(y_test, predictions)")
 
-            webdataminingtool.tree['filename']= filename
-            webdataminingtool.tree['x']=list(x_cols)
-            webdataminingtool.tree['y']= y
-            webdataminingtool.tree['Report'] = report
-            webdataminingtool.tree['Confusion matrix'] = list(confusion)
-            webdataminingtool.tree['Score'] = tree.score(x_test,y_test)
-            webdataminingtool.tree['Accuracy score'] = accuracy_score(y_test, predictions)
-            webdataminingtool.tree['Real test values'] = list(data_compare.Actual.head(10))
-            webdataminingtool.tree['Predicted values'] = list(data_compare.Predicted.head(10))
-            webdataminingtool.tree['Python'] = "".join(code)
-            webdataminingtool.tree['Confusion matrix plot']= True
+            ml4d.tree['filename']= filename
+            ml4d.tree['x']=list(x_cols)
+            ml4d.tree['y']= y
+            ml4d.tree['Report'] = report
+            ml4d.tree['Confusion matrix'] = list(confusion)
+            ml4d.tree['Score'] = tree.score(x_test,y_test)
+            ml4d.tree['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.tree['Real test values'] = list(data_compare.Actual.head(10))
+            ml4d.tree['Predicted values'] = list(data_compare.Predicted.head(10))
+            ml4d.tree['Python'] = "".join(code)
+            ml4d.tree['Confusion matrix plot']= True
 
             '''
             ---------------------------------------------------------------------------
@@ -278,18 +278,18 @@ class CompareX():
             code.append("\n")
             code.append("confusion_matrix(y_test, predictions)")
 
-            webdataminingtool.randomf['filename']= filename
-            webdataminingtool.randomf['x']=list(x_cols)
-            webdataminingtool.randomf['y']= y
-            webdataminingtool.randomf['N_estimators'] = 80
-            webdataminingtool.randomf['Report'] = report
-            webdataminingtool.randomf['Confusion matrix'] = list(confusion)
-            webdataminingtool.randomf['Score'] = randomf.score(x_test,y_test)
-            webdataminingtool.randomf['Accuracy score'] = accuracy_score(y_test, predictions)
-            webdataminingtool.randomf['Real test values'] = list(data_compare.Actual.head(10))
-            webdataminingtool.randomf['Predicted values'] = list(data_compare.Predicted.head(10))
-            webdataminingtool.randomf['Python'] = "".join(code)
-            webdataminingtool.randomf['Confusion matrix plot']= True
+            ml4d.randomf['filename']= filename
+            ml4d.randomf['x']=list(x_cols)
+            ml4d.randomf['y']= y
+            ml4d.randomf['N_estimators'] = 80
+            ml4d.randomf['Report'] = report
+            ml4d.randomf['Confusion matrix'] = list(confusion)
+            ml4d.randomf['Score'] = randomf.score(x_test,y_test)
+            ml4d.randomf['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.randomf['Real test values'] = list(data_compare.Actual.head(10))
+            ml4d.randomf['Predicted values'] = list(data_compare.Predicted.head(10))
+            ml4d.randomf['Python'] = "".join(code)
+            ml4d.randomf['Confusion matrix plot']= True
 
 
             '''
@@ -347,18 +347,18 @@ class CompareX():
             code.append("\n")
             code.append("confusion_matrix(y_test, predictions)")
 
-            webdataminingtool.svc['filename']= filename
-            webdataminingtool.svc['x']=list(x_cols)
-            webdataminingtool.svc['y']= y
-            webdataminingtool.svc['Gamma'] = "auto"
-            webdataminingtool.svc['Report'] = report
-            webdataminingtool.svc['Confusion matrix'] = list(confusion)
-            webdataminingtool.svc['Score'] = svc.score(x_test,y_test)
-            webdataminingtool.svc['Accuracy score'] = accuracy_score(y_test, predictions)
-            webdataminingtool.svc['Real test values'] = list(data_compare.Actual.head(10))
-            webdataminingtool.svc['Predicted values'] = list(data_compare.Predicted.head(10))
-            webdataminingtool.svc['Python'] = "".join(code)
-            webdataminingtool.svc['Confusion matrix plot']= True
+            ml4d.svc['filename']= filename
+            ml4d.svc['x']=list(x_cols)
+            ml4d.svc['y']= y
+            ml4d.svc['Gamma'] = "auto"
+            ml4d.svc['Report'] = report
+            ml4d.svc['Confusion matrix'] = list(confusion)
+            ml4d.svc['Score'] = svc.score(x_test,y_test)
+            ml4d.svc['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.svc['Real test values'] = list(data_compare.Actual.head(10))
+            ml4d.svc['Predicted values'] = list(data_compare.Predicted.head(10))
+            ml4d.svc['Python'] = "".join(code)
+            ml4d.svc['Confusion matrix plot']= True
 
             raise web.seeother('/compare_r')
         except Exception as e:

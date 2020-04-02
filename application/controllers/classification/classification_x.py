@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import pandas as pd
 import numpy as np
@@ -39,9 +39,9 @@ class ClassificationX():
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = webdataminingtool.classification['y']
-            method = webdataminingtool.classification['method']
-            title = webdataminingtool.classification['title']
+            y = ml4d.classification['y']
+            method = ml4d.classification['method']
+            title = ml4d.classification['title']
             
             columns = []
             types = []
@@ -68,16 +68,16 @@ class ClassificationX():
     def POST(self):
         try:
             try:
-                filename = webdataminingtool.file['filename']
+                filename = ml4d.file['filename']
             except Exception as e:
                 filename = "train.csv"
-            y = webdataminingtool.classification['y']
-            method = webdataminingtool.classification['method']
+            y = ml4d.classification['y']
+            method = ml4d.classification['method']
 
             form = web.input(column = [''])
             x_cols = form.column
-            # webdataminingtool.classification['x']=list(x_cols)
-            # webdataminingtool.classification['y']= y
+            # ml4d.classification['x']=list(x_cols)
+            # ml4d.classification['y']= y
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -112,7 +112,7 @@ class ClassificationX():
                 title = "KNeighbors Classifier"
                 library = "from sklearn.neighbors import KNeighborsClassifier"
                 method_model ="model = KNeighborsClassifier(n_neighbors=5, weights='uniform', algorithm='auto', leaf_size=30, p=2, metric='minkowski', metric_params=None, n_jobs=None)"
-                # webdataminingtool.classification['n_neighbors']= 5
+                # ml4d.classification['n_neighbors']= 5
 
 
                 # values = range(1,100)
@@ -127,7 +127,7 @@ class ClassificationX():
                 # plt.title("Optimization test")
                 # image_name = "static/images/optimization_plot.png"
                 # plt.savefig(image_name)
-                # webdataminingtool.classification['optimization_plot']= True
+                # ml4d.classification['optimization_plot']= True
 
             elif method == "tree":
                 '''
@@ -167,7 +167,7 @@ class ClassificationX():
                 title = "RandomForest Classifier"
                 library = "from sklearn.ensemble import RandomForestClassifier"
                 method_model ="model = RandomForestClassifier(n_estimators=50,criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)"
-                # webdataminingtool.classification['n_estimators']= n
+                # ml4d.classification['n_estimators']= n
 
                 # values = range(1,100)
                 # figure()
@@ -180,7 +180,7 @@ class ClassificationX():
                 # plt.title("Optimization test")
                 # image_name = "static/images/optimization_plot.png"
                 # plt.savefig(image_name)
-                # webdataminingtool.classification['optimization_plot']= True
+                # ml4d.classification['optimization_plot']= True
 
 
                 
@@ -246,7 +246,7 @@ class ClassificationX():
             train_py = []
             train_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             train_py.append("__email__ = 'salvadorhm@gmail.com'")
-            train_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            train_py.append("__version__ = '"+ml4d.app_version+"'")
             train_py.append("import sklearn")
             train_py.append("import pandas as pd")
             train_py.append(("from sklearn.metrics import classification_report, confusion_matrix,accuracy_score"))
@@ -291,7 +291,7 @@ class ClassificationX():
             predictions_py = []
             predictions_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             predictions_py.append("__email__ = 'salvadorhm@gmail.com'")
-            predictions_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            predictions_py.append("__version__ = '"+ml4d.app_version+"'")
             predictions_py.append("import sklearn")
             predictions_py.append("import pandas as pd")
             predictions_py.append("from joblib import load")
@@ -302,24 +302,24 @@ class ClassificationX():
             predictions_py.append("print(predictions)")
             sc.createCode("predictions.py",predictions_py)
 
-            webdataminingtool.classification = {}
-            webdataminingtool.classification['title'] = title
-            webdataminingtool.classification['00.- filename']= filename
-            webdataminingtool.classification['01.- x']=list(x_cols)
-            webdataminingtool.classification['02.- y']= y
-            webdataminingtool.classification['03.- Report'] = report
-            webdataminingtool.classification['04.- Confusion matrix'] = list(confusion)
-            webdataminingtool.classification['05.- Score'] = model.score(x_test,y_test)
-            webdataminingtool.classification['06.- Accuracy score'] = accuracy_score(y_test, predictions)
-            webdataminingtool.classification['07.- Real test values'] = list(data_compare.Actual.head(10))
-            webdataminingtool.classification['08.- Predicted values'] = list(data_compare.Predicted.head(10))
-            webdataminingtool.classification['09.- Python'] = "".join(code)
-            webdataminingtool.classification['10.- Python validation'] = "".join(test)
-            webdataminingtool.classification['11.- Model'] = method+".joblib"
-            webdataminingtool.classification['12.- train.csv'] = "train.csv"
-            webdataminingtool.classification['13.- validation.csv'] = "validation.csv"
-            webdataminingtool.classification['14.- train.py'] = "train.py"
-            webdataminingtool.classification['15.- predictions.py'] = "predictions.py"
+            ml4d.classification = {}
+            ml4d.classification['title'] = title
+            ml4d.classification['00.- filename']= filename
+            ml4d.classification['01.- x']=list(x_cols)
+            ml4d.classification['02.- y']= y
+            ml4d.classification['03.- Report'] = report
+            ml4d.classification['04.- Confusion matrix'] = list(confusion)
+            ml4d.classification['05.- Score'] = model.score(x_test,y_test)
+            ml4d.classification['06.- Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.classification['07.- Real test values'] = list(data_compare.Actual.head(10))
+            ml4d.classification['08.- Predicted values'] = list(data_compare.Predicted.head(10))
+            ml4d.classification['09.- Python'] = "".join(code)
+            ml4d.classification['10.- Python validation'] = "".join(test)
+            ml4d.classification['11.- Model'] = method+".joblib"
+            ml4d.classification['12.- train.csv'] = "train.csv"
+            ml4d.classification['13.- validation.csv'] = "validation.csv"
+            ml4d.classification['14.- train.py'] = "train.py"
+            ml4d.classification['15.- predictions.py'] = "predictions.py"
 
             figure()
             width=10
@@ -335,7 +335,7 @@ class ClassificationX():
             sn.heatmap(conf_matrix, annot=True,  fmt='d',cmap="YlGnBu")
             image_name = "static/images/confusion_plot.png"
             plt.savefig(image_name)
-            webdataminingtool.classification['confusion_plot'] = True
+            ml4d.classification['confusion_plot'] = True
 
           
             if len(labels) <= 2 and dataframe[y].dtypes != 'object':
@@ -354,9 +354,9 @@ class ClassificationX():
                 plt.legend()
                 image_name = "static/images/roc_plot.png"
                 plt.savefig(image_name)
-                webdataminingtool.classification['roc_plot'] = True
+                ml4d.classification['roc_plot'] = True
             else:
-                webdataminingtool.classification['roc_plot'] = False
+                ml4d.classification['roc_plot'] = False
 
             '''
             Update notebook

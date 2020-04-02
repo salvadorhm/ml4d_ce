@@ -1,5 +1,5 @@
 import web  # pip install web.py
-import webdataminingtool
+import ml4d
 import csv  # CSV parser
 import json  # json parser
 import pandas as pd
@@ -33,7 +33,7 @@ class LogisticX:
         try:
             dataframe = pd.read_csv(self.file)
             cols = list(dataframe)
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
 
             columns = []
             types = []
@@ -54,13 +54,13 @@ class LogisticX:
     def POST(self):
         try:
             try:
-                filename = webdataminingtool.file['filename']
+                filename = ml4d.file['filename']
             except Exception as e:
                 filename = "train.csv"
-            y = webdataminingtool.sessions['y']
+            y = ml4d.sessions['y']
             form = web.input(column = [''])
             x_cols = form.column
-            webdataminingtool.sessions['x']=list(x_cols)
+            ml4d.sessions['x']=list(x_cols)
             dataframe = pd.read_csv(self.file)
 
             df_x = dataframe[x_cols]
@@ -141,7 +141,7 @@ class LogisticX:
             train_py = []
             train_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             train_py.append("__email__ = 'salvadorhm@gmail.com'")
-            train_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            train_py.append("__version__ = '"+ml4d.app_version+"'")
             train_py.append("import sklearn")
             train_py.append("import pandas as pd")
             train_py.append("from sklearn.model_selection import train_test_split")
@@ -184,7 +184,7 @@ class LogisticX:
             predictions_py = []
             predictions_py.append("__author__ = 'Salvador Hernandez Mendoza'")
             predictions_py.append("__email__ = 'salvadorhm@gmail.com'")
-            predictions_py.append("__version__ = '"+webdataminingtool.app_version+"'")
+            predictions_py.append("__version__ = '"+ml4d.app_version+"'")
             predictions_py.append("import sklearn")
             predictions_py.append("import pandas as pd")
             predictions_py.append("from joblib import load")
@@ -195,22 +195,22 @@ class LogisticX:
             predictions_py.append("print(predictions)")
             sc.createCode("predictions.py",predictions_py)
 
-            webdataminingtool.sessions['filename']= filename
-            webdataminingtool.sessions['y'] = y 
-            webdataminingtool.sessions['x'] = list(x_cols)
-            webdataminingtool.sessions['Report'] = report
-            webdataminingtool.sessions['Confusion matrix'] = list(confusion)
-            webdataminingtool.sessions['Score'] = model.score(x_test,y_test)
-            webdataminingtool.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
-            webdataminingtool.sessions['Real test values'] = list(compare.Actual.head(10))
-            webdataminingtool.sessions['Predicted values'] = list(compare.Predicted.head(10))
-            webdataminingtool.sessions['Python'] = "".join(code)
-            webdataminingtool.sessions['Python validation'] = "".join(test)
-            webdataminingtool.sessions['Model'] = "logistic.joblib"
-            webdataminingtool.sessions['train.csv'] = "train.csv"
-            webdataminingtool.sessions['validation.csv'] = "validation.csv"
-            webdataminingtool.sessions['train.py'] = "train.py"
-            webdataminingtool.sessions['predictions.py'] = "predictions.py"
+            ml4d.sessions['filename']= filename
+            ml4d.sessions['y'] = y 
+            ml4d.sessions['x'] = list(x_cols)
+            ml4d.sessions['Report'] = report
+            ml4d.sessions['Confusion matrix'] = list(confusion)
+            ml4d.sessions['Score'] = model.score(x_test,y_test)
+            ml4d.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.sessions['Real test values'] = list(compare.Actual.head(10))
+            ml4d.sessions['Predicted values'] = list(compare.Predicted.head(10))
+            ml4d.sessions['Python'] = "".join(code)
+            ml4d.sessions['Python validation'] = "".join(test)
+            ml4d.sessions['Model'] = "logistic.joblib"
+            ml4d.sessions['train.csv'] = "train.csv"
+            ml4d.sessions['validation.csv'] = "validation.csv"
+            ml4d.sessions['train.py'] = "train.py"
+            ml4d.sessions['predictions.py'] = "predictions.py"
 
 
             code_lines = []
