@@ -29,7 +29,27 @@ class Notebook:
                         code.append(row)
                 nb.cells.append(new_code_cell(code))
             nbformat.write(nb, 'static/code/notebook.ipynb')
-            return render.notebook(reader)
+
+            '''
+            Code
+            '''
+            jupyter = []
+            code = []
+            with open("static/code/code.py") as f:
+                reader = f.readlines()
+                block = False
+                for row in reader:
+                    if row.startswith("#",0):
+                        if len(code)>0:
+                            jupyter.append(code)
+                            jupyter.append(row)
+                            code = []
+                        else:
+                            jupyter.append(row)
+                    elif row.startswith("#",0) == False:
+                        code.append(row)
+                jupyter.append(code)
+            return render.notebook(jupyter)
             # return reader
         except Exception as e:
             print(e.args)

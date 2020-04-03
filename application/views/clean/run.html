@@ -1,7 +1,7 @@
 $def with(cols,nulls,dtypes)
 <h1>Run code <button class="btn btn-primary" onclick="goBack()">Go Back</button></h1>
-
-<table id="dataframe" class="table table-striped table-bordered table-hover scroll" style="width:100%">
+<div class="table-responsive">
+<table class="table table-striped table-bordered table-hover scroll" style="width:100%">
   <thead class="bg-primary text-white">
   <tr>
     $for col in cols:
@@ -15,13 +15,14 @@ $def with(cols,nulls,dtypes)
     </tr>
   </tbody>
 </table>
-
+</div>
+<br>
 <div class="card">
     <div class="card-header">Run code</div>
       <div class="card-body">
         <form action="" method="post" enctype="multipart/form-data">
           <label for="code">Code</label>
-<textarea class="form-control" id="code" name="code" cols="50" rows="5">
+<textarea class="form-control" id="code" name="code" cols="50" rows="10">
 # Note: df is the DataFrame
 # Example_
 # import math

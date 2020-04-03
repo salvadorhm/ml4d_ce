@@ -18,9 +18,6 @@ class Replace:
     def GET(self, column):
         try:
             dataframe = pd.read_csv(self.file)
-            # dataframe.drop(['Prospect ID'],axis=1,inplace=True)
-            # dataframe.drop(['Lead Number'],axis=1,inplace=True)
-            # dataframe.to_csv('static/csv/train.csv', sep=',',index=False)
             nulls = dataframe[column].isnull().sum()
             dtypes = dataframe[column].dtypes
             unique = dataframe[column].unique().tolist()

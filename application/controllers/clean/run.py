@@ -34,7 +34,9 @@ class Run:
             form = web.input() # get form data
             code = form['code']
             mmm = []
+            
             mmm.append("import pandas as pd")
+            
             mmm.append("df = pd.read_csv('static/csv/train.csv')")
             mmm.append(code)
             mmm.append("df.to_csv('static/csv/train.csv', sep=',',index=False)")
@@ -42,11 +44,14 @@ class Run:
             x = subprocess.call("ipython "+" static/code/run.txt", shell=True)
             message = None
             if x == 0:
-                message = "Run succesfuly"
+                message = "Run code succesfull!!!"
             else:
                 message = "Error in code"
-            return render.error(message)
-            # raise web.seeother('/detail') 
+            code_lines = []
+            code_lines.append("df = pd.read_csv('static/csv/train.csv')")
+            code_lines.append(code)
+            sc.append(code_lines)
+            return render.result(message)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])

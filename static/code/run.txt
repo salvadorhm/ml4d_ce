@@ -1,6 +1,8 @@
 import pandas as pd
 df = pd.read_csv('static/csv/train.csv')
-import math
-df['distancia_0'] = df[['x0','x1','y0','y1']].apply(lambda row: math.sqrt((row['x1'] - row['x0'])**2 + (row['y1'] - row['y0'])**2) , axis=1)
+# Note: df is the DataFrame
+# Example_
+# import math
+df['new_col'] = df[['col_0','col_1']].apply(lambda row: math.sqrt(row['col_0'] - row['col_1']), axis=1)
 
 df.to_csv('static/csv/train.csv', sep=',',index=False)

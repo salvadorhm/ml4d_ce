@@ -12,13 +12,7 @@ $def with(method, result)
         <tr>
             <td>$row</td>
         $if "Report" in row or "Python" in row or "Python validation" in row:
-            <td>
-            <pre>
-            <code>
-            $result[row]
-            </code>
-            </pre>
-            </td>
+            <td><pre><code>$result[row]</code></pre></td>
         $elif "confusion_plot" in row:
             <td>
                 <img src="/static/images/confusion_plot.png" class="img-fluid" alt="confusion_matrix">

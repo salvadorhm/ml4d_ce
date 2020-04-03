@@ -18,13 +18,6 @@ class Rename:
     def GET(self, column):
         try:
             dataframe = pd.read_csv(self.file)
-            code_lines = []
-            code_lines.append("# Revisando si tiene NaN la columna '"+column+"'")
-            code_lines.append("dataframe['"+column+"'].isnull().sum()")
-            code_lines.append("# Describe columna '"+column+"'")
-            code_lines.append("dataframe['" + column + "'].describe()" )
-            sc.append(code_lines)
-
             nulls = dataframe[column].isnull().sum()
             dtypes = dataframe[column].dtypes
             unique = dataframe[column].unique().tolist()

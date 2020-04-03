@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.72"  # version de la webapp
+app_version = "0.73"  # version de la webapp
 
 urls = (
     '/','application.controllers.main.index.Index',

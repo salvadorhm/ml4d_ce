@@ -1,10 +1,22 @@
-$def with(reader)
+$def with(code)
 <h1>Jupyter notebook</h1>
 
 <a href="static/code/notebook.ipynb">Download jupyter notebook</a>
-<pre>
-    <code>
-        $for row in reader:
-            $row
-    </code>
-</pre>
+
+<div class="table-responsive">
+    <table id="example" class="table table-hover scroll">
+        <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
+            <tr>
+                <th>Code</th>
+            </tr>
+        </thead>
+        $for row in code:
+            <tr>
+            $if "#" in row:
+                <td>$row</td>
+            $else:
+                <td><pre><code>
+                $for l in row:
+                    $l
+                </code></pre></td>
+            </tr>

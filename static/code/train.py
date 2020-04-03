@@ -1,6 +1,6 @@
 __author__ = 'Salvador Hernandez Mendoza'
 __email__ = 'salvadorhm@gmail.com'
-__version__ = '0.72'
+__version__ = '0.73'
 import sklearn
 import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
