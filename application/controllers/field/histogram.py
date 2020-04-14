@@ -27,7 +27,7 @@ class Histogram:
             dataframe = pd.read_csv(self.file)
 
             df = dataframe[column]
-            fig = px.histogram(df, x=column)
+            fig = px.histogram(df, x=column, histnorm='probability density')
             fig.write_html("static/images/histogram.html")
 
             # figure()

@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import seaborn as sn
 import matplotlib.mlab as mlab
 from matplotlib.pyplot import figure, show
+import plotly.express as px
 
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
@@ -44,6 +45,8 @@ class HistogramPlot:
             i = 0 # avoid bad file names
             for column in columns:
                 try:
+                    
+
                     figure()
                     width=10
                     height=4

@@ -3,6 +3,7 @@ import csv  # CSV parser
 import json  # json parser
 import pandas as pd
 import numpy as np
+import plotly.express as px
 # import statsmodels.api as sm
 # import scipy.stats as st
 import matplotlib.pyplot as plt
@@ -27,15 +28,20 @@ class CountPlot:
     def GET(self, column):
         try:
             dataframe = pd.read_csv(self.file)
-            figure()
-            width=40
-            height=16
-            figure(figsize=(width,height))
-            ax = sn.countplot(data=dataframe, y=column)
-            image_name = "static/images/countplot.png"
-            print(image_name)
-            ax.figure.savefig(image_name)
-            # plt.close('all')
+
+            df = dataframe[column]
+            fig = px.histogram(df, x=column)
+            fig.write_html("static/images/countplot.html")
+
+            # figure()
+            # width=40
+            # height=16
+            # figure(figsize=(width,height))
+            # ax = sn.countplot(data=dataframe, y=column)
+            # image_name = "static/images/countplot.png"
+            # print(image_name)
+            # ax.figure.savefig(image_name)
+            # # plt.close('all')
 
             code_lines = []
             code_lines.append("# Countplot")
