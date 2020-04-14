@@ -12,42 +12,53 @@ dataframe = pd.read_csv('train.csv')
 dataframe.describe()
 # Dataframe
 dataframe
-# Preparacion del dataframe
-df_x = dataframe[['Avg. Area Income', 'Avg. Area House Age', 'Avg. Area Number of Rooms', 'Avg. Area Number of Bedrooms', 'Area Population']]
-df_y = dataframe['Price']
-# Normalizar dataframe
-df_nor_x = (df_x - df_x.mean())/df_x.std()
-# x
-df_nor_x
-# y
-df_nor_y = (df_y - df_y.mean())/df_y.std()
-df_nor_y
-# Dataframe de entrenamiento y de prueba
-x_train, x_test, y_train, y_test = train_test_split(df_nor_x,df_nor_y,test_size=0.3,random_state=42)
-# Model de regresion lineal
-model = LinearRegression()
-# Entrenamiento del model
-model.fit(x_train,y_train)
-# Prueba del modelo
-predictions = model.predict(x_test)
-# Evaluacion del modelo
-# Coefficients
-model.coef_
-# Independent term
-model.intercept_
-# Mean squared error
-mean_squared_error(y_test, predictions)
-# Mean absolute error
-mean_absolute_error(y_test, predictions)
-# Variance
-r2_score(y_test, predictions)
-# Comparacion de los resultados
-compare = pd.DataFrame({'Actual':y_test, 'Predicted':predictions})
-# Valores de prueba
-compare.Actual.head(10)
-# Valores predichos
-compare.Predicted.head(10)
-# Grafica scatter
-plt.scatter(y_test,predictions)
-# Grafica de distribucion
-sn.distplot(y_test - predictions)
+# Histogram de ORIGEN
+sn.distplot(dataframe[ORIGEN])
+# Histogram de ENTIDAD_RES
+sn.distplot(dataframe[ENTIDAD_RES])
+# Histogram de ORIGEN
+sn.distplot(dataframe[ORIGEN])
+# Histogram de OTRO_CASO
+sn.distplot(dataframe[OTRO_CASO])
+# Histogram de RENAL_CRONICA
+sn.distplot(dataframe[RENAL_CRONICA])
+# Histogram de SEXO
+sn.distplot(dataframe[SEXO])
+# Histogram de MUNICIPIO_RES
+sn.distplot(dataframe[MUNICIPIO_RES])
+# Histogram de MIGRANTE
+sn.distplot(dataframe[MIGRANTE])
+# Histogram de PAIS_NACIONALIDAD
+sn.distplot(dataframe[PAIS_NACIONALIDAD])
+# Histogram de FECHA_ACTUALIZACION
+sn.distplot(dataframe[FECHA_ACTUALIZACION])
+# Histogram de PAIS_NACIONALIDAD
+sn.distplot(dataframe[PAIS_NACIONALIDAD])
+# Countplot
+sn.countplot(data=dataframe, y='MUNICIPIO_RES')
+# Histogram de ORIGEN
+sn.distplot(dataframe[ORIGEN])
+# Countplot
+sn.countplot(data=dataframe, y='SECTOR')
+# Histogram de SECTOR
+sn.distplot(dataframe[SECTOR])
+# Histogram de ENTIDAD_RES
+sn.distplot(dataframe[ENTIDAD_RES])
+# Countplot
+sn.countplot(data=dataframe, y='MUNICIPIO_RES')
+# Histogram de MUNICIPIO_RES
+sn.distplot(dataframe[MUNICIPIO_RES])
+# Histogram de ORIGEN
+sn.distplot(dataframe[ORIGEN])
+# Histogram de SEXO
+sn.distplot(dataframe[SEXO])
+# Histogram de FECHA_INGRESO
+sn.distplot(dataframe[FECHA_INGRESO])
+# Histogram de PAIS_ORIGEN
+sn.distplot(dataframe[PAIS_ORIGEN])
+# Histogram de ENTIDAD_NAC
+sn.distplot(dataframe[ENTIDAD_NAC])
+# Histogram de EDAD
+sn.distplot(dataframe[EDAD])
+# Heatmap nulls
+sn.heatmap(dataframe.isnull())

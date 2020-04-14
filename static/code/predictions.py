@@ -6,6 +6,6 @@ import pandas as pd
 from joblib import load
 model = load('linear.joblib')
 dataframe = pd.read_csv('validation.csv')
-xs = dataframe[['Avg. Area Income', 'Avg. Area House Age', 'Avg. Area Number of Rooms', 'Avg. Area Number of Bedrooms', 'Area Population']]
+xs = dataframe[['Avg. Area House Age']]
 predictions = model.predict(xs)
 print(predictions)

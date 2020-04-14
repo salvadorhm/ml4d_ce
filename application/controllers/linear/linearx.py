@@ -16,6 +16,9 @@ from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 from sklearn.model_selection import train_test_split
 from joblib import dump, load
 from application.controllers.save_code import SaveCode
+
+import plotly.express as px
+
 sc = SaveCode()
 
 render = web.template.render('application/views/linear/', base="../master")
@@ -81,28 +84,51 @@ class LinearX:
 
             predictions = model.predict(x_test)
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
+            
+
+            df = y_test - predictions
+            fig = px.histogram(df, x=ml4d.sessions['y'])
+            fig.write_html("static/images/histogram.html")
 
             if len(list(x_test)) == 1:
-                print("graficar")
-                figure()
-                width=20
-                height=8
-                figure(figsize=(width,height))
-                # TODO grafica lineal simple, una sola x
-                ax = plt.scatter(y_test,predictions)
-                plt.plot(y_test,predictions,"r")
-                image_name = "static/images/lineal.png"
-                ax.figure.savefig(image_name)
-                # fig = ax.get_figure()
-                #plt.close(fig)
+                # print("graficar")
+                # figure()
+                # width=20
+                # height=8
+                # figure(figsize=(width,height))
+                # # TODO grafica lineal simple, una sola x
+                # ax = plt.scatter(x_test, y_test)
+                # plt.plot(x_test,predictions,color='red')
+                # image_name = "static/images/lineal.png"
+                # ax.figure.savefig(image_name)
+                # # fig = ax.get_figure()
+                # #plt.close(fig)
+                xs = []
+                ys = []
+                ps = []
+                print(ml4d.sessions['x'])
+                for i in x_test[ml4d.sessions['x'][0]]:
+                    xs.append(i)
+                for i in y_test:
+                    ys.append(i)
+                for i in predictions:
+                    ps.append(i)
+
+                fig = px.scatter(x=xs, y=ys)
+                fig.write_html("static/images/linear.html")
             else:
+                x = []
+                n = 0
+                for i in y_test:
+                    x.append(n)
+                    n+=1
                 figure()
                 width=20
                 height=8
                 figure(figsize=(width,height))
                 # TODO grafica lineal simple, una sola x
-                ax = plt.scatter(y_test,predictions)
-                # plt.plot(x_test,predictions,"r")
+                ax = plt.scatter(x, y_test)
+                plt.scatter(x,predictions,color='red')
                 image_name = "static/images/lineal.png"
                 ax.figure.savefig(image_name)
                 # fig = ax.get_figure()
@@ -216,11 +242,11 @@ class LinearX:
             ml4d.sessions['Variance'] = r2_score(y_test, predictions)
             ml4d.sessions['Actual test values'] = list(compare.Actual.head())
             ml4d.sessions['Predicted values'] = list(compare.Predicted.head())
-            ml4d.sessions['Python'] = "".join(code)
-            ml4d.sessions['Python validation'] = "".join(test)
+            ml4d.sessions['Python train'] = "".join(code)
+            ml4d.sessions['Python predictions'] = "".join(test)
             ml4d.sessions['Model'] = "linear.joblib"
             ml4d.sessions['train.csv'] = "train.csv"
-            ml4d.sessions['validation.csv'] = "validation.csv"
+            # ml4d.sessions['validation.csv'] = "validation.csv"
             ml4d.sessions['train.py'] = "train.py"
             ml4d.sessions['predictions.py'] = "predictions.py"
 

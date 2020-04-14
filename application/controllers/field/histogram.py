@@ -6,6 +6,8 @@ import numpy as np
 from matplotlib.pyplot import figure, show
 import matplotlib.pyplot as plt
 import seaborn as sn
+import plotly.express as px
+
 
 from application.controllers.save_code import SaveCode
 sc = SaveCode()
@@ -23,14 +25,19 @@ class Histogram:
     def GET(self, column):
         try:
             dataframe = pd.read_csv(self.file)
-            figure()
-            width=40
-            height=16
-            figure(figsize=(width,height))
-            nor = sn.distplot(dataframe[column])
-            image_name = "static/images/normal.png"
-            nor.figure.savefig(image_name)
-            # plt.close('all')
+
+            df = dataframe[column]
+            fig = px.histogram(df, x=column)
+            fig.write_html("static/images/histogram.html")
+
+            # figure()
+            # width=40
+            # height=16
+            # figure(figsize=(width,height))
+            # nor = sn.distplot(dataframe[column])
+            # image_name = "static/images/normal.png"
+            # nor.figure.savefig(image_name)
+            # # plt.close('all')
 
             code_lines = []
             code_lines.append("# Histogram de " + column)
