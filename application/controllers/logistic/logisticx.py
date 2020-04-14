@@ -81,16 +81,16 @@ class LogisticX:
             compare = pd.DataFrame({"Actual":y_test, "Predicted":predictions})
 
 
-            print(report)
-            figure()
-            width=20
-            height=8
-            figure(figsize=(width,height))
-            plt.bar(range(10),y_test.head(10))
-            plt.bar(range(10),predictions[0:10])
+            # print(report)
+            # figure()
+            # width=20
+            # height=8
+            # figure(figsize=(width,height))
+            # plt.bar(range(10),y_test.head(10))
+            # plt.bar(range(10),predictions[0:10])
             
-            image_name = "static/images/logistic.png"
-            plt.savefig(image_name)
+            # image_name = "static/images/logistic.png"
+            # plt.savefig(image_name)
 
 
             figure()
@@ -204,11 +204,11 @@ class LogisticX:
             ml4d.sessions['Accuracy score'] = accuracy_score(y_test, predictions)
             ml4d.sessions['Real test values'] = list(compare.Actual.head(10))
             ml4d.sessions['Predicted values'] = list(compare.Predicted.head(10))
-            ml4d.sessions['Python'] = "".join(code)
-            ml4d.sessions['Python validation'] = "".join(test)
+            ml4d.sessions['Python train'] = "".join(code)
+            ml4d.sessions['Python predictions'] = "".join(test)
             ml4d.sessions['Model'] = "logistic.joblib"
             ml4d.sessions['train.csv'] = "train.csv"
-            ml4d.sessions['validation.csv'] = "validation.csv"
+            # ml4d.sessions['validation.csv'] = "validation.csv"
             ml4d.sessions['train.py'] = "train.py"
             ml4d.sessions['predictions.py'] = "predictions.py"
 

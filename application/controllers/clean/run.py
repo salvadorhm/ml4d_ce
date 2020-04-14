@@ -36,7 +36,6 @@ class Run:
             mmm = []
             
             mmm.append("import pandas as pd")
-            
             mmm.append("df = pd.read_csv('static/csv/train.csv')")
             mmm.append(code)
             mmm.append("df.to_csv('static/csv/train.csv', sep=',',index=False)")
@@ -48,7 +47,7 @@ class Run:
             else:
                 message = "Error in code"
             code_lines = []
-            code_lines.append("df = pd.read_csv('static/csv/train.csv')")
+            code_lines.append("# Run code")
             code_lines.append(code)
             sc.append(code_lines)
             return render.result(message)

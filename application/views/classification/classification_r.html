@@ -5,11 +5,15 @@ $def with(method, result)
 <table  class="table table-hover scroll">
     <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
         <tr>
+            <th>No.</th>
             <th>Name</th>
             <th>Value</th>
     </thead>
+    $ no = 0
     $for row in result:
         <tr>
+            <td>$no</td>
+            $ no += 1
             <td>$row</td>
         $if "Report" in row or "Python" in row or "Python validation" in row:
             <td><pre><code>$result[row]</code></pre></td>

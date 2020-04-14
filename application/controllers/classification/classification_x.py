@@ -304,22 +304,22 @@ class ClassificationX():
 
             ml4d.classification = {}
             ml4d.classification['title'] = title
-            ml4d.classification['00.- filename']= filename
-            ml4d.classification['01.- x']=list(x_cols)
-            ml4d.classification['02.- y']= y
-            ml4d.classification['03.- Report'] = report
-            ml4d.classification['04.- Confusion matrix'] = list(confusion)
-            ml4d.classification['05.- Score'] = model.score(x_test,y_test)
-            ml4d.classification['06.- Accuracy score'] = accuracy_score(y_test, predictions)
-            ml4d.classification['07.- Real test values'] = list(data_compare.Actual.head(10))
-            ml4d.classification['08.- Predicted values'] = list(data_compare.Predicted.head(10))
-            ml4d.classification['09.- Python'] = "".join(code)
-            ml4d.classification['10.- Python validation'] = "".join(test)
-            ml4d.classification['11.- Model'] = method+".joblib"
-            ml4d.classification['12.- train.csv'] = "train.csv"
-            ml4d.classification['13.- validation.csv'] = "validation.csv"
-            ml4d.classification['14.- train.py'] = "train.py"
-            ml4d.classification['15.- predictions.py'] = "predictions.py"
+            ml4d.classification['filename']= filename
+            ml4d.classification['x']=list(x_cols)
+            ml4d.classification['y']= y
+            ml4d.classification['Report'] = report
+            ml4d.classification['Confusion matrix'] = list(confusion)
+            ml4d.classification['Score'] = model.score(x_test,y_test)
+            ml4d.classification['Accuracy score'] = accuracy_score(y_test, predictions)
+            ml4d.classification['Real test values'] = list(data_compare.Actual.head(10))
+            ml4d.classification['Predicted values'] = list(data_compare.Predicted.head(10))
+            ml4d.classification['Python train'] = "".join(code)
+            ml4d.classification['Python predictions'] = "".join(test)
+            ml4d.classification['Model'] = method+".joblib"
+            ml4d.classification['train.csv'] = "train.csv"
+            # ml4d.classification['13.- validation.csv'] = "validation.csv"
+            ml4d.classification['train.py'] = "train.py"
+            ml4d.classification['predictions.py'] = "predictions.py"
 
             figure()
             width=10
@@ -405,13 +405,13 @@ class ClassificationX():
             '''
             Usando el modelo
             '''
-            model = load("static/models/"+method+".joblib")
-            dataframe_test = pd.read_csv("static/csv/validation.csv")
-            xs = dataframe_test[x_cols]
-            ys = dataframe_test[y]
-            predictions = model.predict(xs)
-            data_compare_test = pd.DataFrame({"Actual":ys, "Predicted":predictions})
-            print(data_compare_test)
+            # model = load("static/models/"+method+".joblib")
+            # dataframe_test = pd.read_csv("static/csv/validation.csv")
+            # xs = dataframe_test[x_cols]
+            # ys = dataframe_test[y]
+            # predictions = model.predict(xs)
+            # data_compare_test = pd.DataFrame({"Actual":ys, "Predicted":predictions})
+            # print(data_compare_test)
 
             raise web.seeother('/classification_r')
         except Exception as e:

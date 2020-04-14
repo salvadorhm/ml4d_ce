@@ -4,14 +4,21 @@ $def with(cols,nulls,dtypes)
 <table class="table table-striped table-bordered table-hover scroll" style="width:100%">
   <thead class="bg-primary text-white">
   <tr>
-    $for col in cols:
-      <th>$col</th>
+    <th>Column</th>
+    $for row in cols:
+      <th>$row</th>
   </tr>
   </thead>
   <tbody>
     <tr>
-      $for dtype in dtypes:
-        <td>$dtype</td>
+      <td>Dtype</td>
+      $for row in dtypes:
+        <td>$row</td>
+    </tr>
+    <tr>
+      <td>Nulls</td>
+      $for row in nulls:
+        <td>$row</td>
     </tr>
   </tbody>
 </table>

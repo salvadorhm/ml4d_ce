@@ -3,20 +3,24 @@ $def with(code)
 
 <a href="static/code/notebook.ipynb">Download jupyter notebook</a>
 
-<div class="table-responsive">
-    <table id="example" class="table table-hover scroll">
-        <thead class="bg-primary text-white sticky-top" style="height: 300px ; overflow-y: scroll;">
-            <tr>
-                <th>Code</th>
-            </tr>
-        </thead>
-        $for row in code:
-            <tr>
-            $if "#" in row:
-                <td>$row</td>
-            $else:
-                <td><pre><code>
-                $for l in row:
-                    $l
-                </code></pre></td>
-            </tr>
+<table id="dataframe" class="table table-striped table-bordered table-hover scroll" style="width:100%">
+    <thead class="bg-primary text-white">
+        <tr>
+            <th>No.</th>
+            <th>Code</th>
+        </tr>
+    </thead>
+    $ no = 0
+
+    $for row in code:
+        <tr>
+            <td>$no</td>
+        $if "#" in row:
+            <td>$row</td>
+        $else:
+            <td><pre><code>
+            $for l in row:
+                $l
+            </code></pre></td>
+        </tr>
+        $ no += 1
