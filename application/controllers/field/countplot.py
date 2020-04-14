@@ -28,8 +28,8 @@ class CountPlot:
         try:
             dataframe = pd.read_csv(self.file)
             figure()
-            width=20
-            height=8
+            width=40
+            height=16
             figure(figsize=(width,height))
             ax = sn.countplot(data=dataframe, y=column)
             image_name = "static/images/countplot.png"

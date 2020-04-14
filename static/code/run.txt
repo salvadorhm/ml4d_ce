@@ -1,8 +1,10 @@
 import pandas as pd
 df = pd.read_csv('static/csv/train.csv')
-# Note: df is the DataFrame
-# Example_
-# import math
-df['new_col'] = df[['col_0','col_1']].apply(lambda row: math.sqrt(row['col_0'] - row['col_1']), axis=1)
+def function(row):
+   if row == 1:
+       return "H"
+   else:
+       return "M"
+df['sex_data'] = df.apply(lambda x: function(x['SEXO']), axis=1)
 
 df.to_csv('static/csv/train.csv', sep=',',index=False)

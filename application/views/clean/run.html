@@ -24,9 +24,14 @@ $def with(cols,nulls,dtypes)
           <label for="code">Code</label>
 <textarea class="form-control" id="code" name="code" cols="50" rows="10">
 # Note: df is the DataFrame
-# Example_
-# import math
-# df['new_col'] = df[['col_0','col_1']].apply(lambda row: math.sqrt(row['col_0'] - row['col_1']), axis=1)
+# Example: create a new column
+#def function(col_1, col_2):
+#   if col_1 > col_2:
+#       return 0
+#   else:
+#       return 1
+
+#df['new_col'] = df.apply(lambda row: function(row['col_1'],row['col_2']), axis=1)
 </textarea> 
 <br>
           <button id="dummie" name="dummie" class="btn btn-primary">Run</button>
