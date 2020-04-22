@@ -4,8 +4,8 @@ __version__ = '0.75'
 import sklearn
 import pandas as pd
 from joblib import load
-model = load('svc.joblib')
+model = load('randomf.joblib')
 dataframe = pd.read_csv('validation.csv')
-xs = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
+xs = dataframe[['Alcohol', 'Malic acid']]
 predictions = model.predict(xs)
 print(predictions)

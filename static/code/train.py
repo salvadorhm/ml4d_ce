@@ -6,15 +6,15 @@ import pandas as pd
 from sklearn.metrics import classification_report, confusion_matrix,accuracy_score
 from sklearn.model_selection import train_test_split
 from joblib import dump
-from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
 dataframe = pd.read_csv('train.csv')
-df_x = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
+df_x = dataframe[['Alcohol', 'Malic acid']]
 df_y = dataframe['Wine Type']
 x_train, x_test, y_train, y_test = train_test_split(df_x,df_y,test_size=0.3,random_state=42)
-model = SVC(C=1.0, kernel='rbf', degree=3, gamma='scale', coef0=0.0, shrinking=True, probability=False, tol=0.001, cache_size=200, class_weight=None, verbose=True, max_iter=-1, decision_function_shape='ovr', break_ties=False, random_state=None)
+model = RandomForestClassifier(n_estimators=50,criterion='gini', max_depth=None, min_samples_split=2, min_samples_leaf=1, min_weight_fraction_leaf=0.0, max_features='auto', max_leaf_nodes=None, min_impurity_decrease=0.0, min_impurity_split=None, bootstrap=True, oob_score=False, n_jobs=None, random_state=None, verbose=1, warm_start=False, class_weight=None, ccp_alpha=0.0, max_samples=None)
 model.fit(x_train,y_train)
 # Dump train model to joblib
-dump(model,'svc.joblib')
+dump(model,'randomf.joblib')
 # Make predictions
 predictions = model.predict(x_test)
 classification_report(y_test, predictions)
