@@ -1,7 +1,7 @@
 import web  # pip install web.py
 import os
 
-app_version = "0.75"  # version de la webapp
+app_version = "0.76"  # version de la webapp
 
 urls = (
     '/','application.controllers.main.index.Index',
@@ -69,6 +69,7 @@ urls = (
     '/histogram/(.+)','application.controllers.field.histogram.Histogram',
 
     '/deploy','application.controllers.deploy.deploy.Deploy',
+    '/api/?','application.api.model.api.API',
 
 )
 ml4d = web.application(urls, globals())
