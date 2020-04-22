@@ -76,6 +76,7 @@ class ClassificationX():
 
             form = web.input(column = [''])
             x_cols = form.column
+            ml4d.classification['cols'] = x_cols
             # ml4d.classification['x']=list(x_cols)
             # ml4d.classification['y']= y
             dataframe = pd.read_csv(self.file)
@@ -197,6 +198,7 @@ class ClassificationX():
 
 
             model.fit(x_train,y_train)
+            # dump(model, "static/models/model.joblib") 
             dump(model, "static/models/"+method+".joblib") 
             predictions = model.predict(x_test)
             report = classification_report(y_test, predictions)
@@ -320,6 +322,10 @@ class ClassificationX():
             # ml4d.classification['13.- validation.csv'] = "validation.csv"
             ml4d.classification['train.py'] = "train.py"
             ml4d.classification['predictions.py'] = "predictions.py"
+
+            ml4d.deploy = {}
+            ml4d.deploy['model'] = method+".joblib"
+            ml4d.deploy['cols'] = x_cols
 
             figure()
             width=10

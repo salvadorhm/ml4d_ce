@@ -1,11 +1,11 @@
 __author__ = 'Salvador Hernandez Mendoza'
 __email__ = 'salvadorhm@gmail.com'
-__version__ = '0.74'
+__version__ = '0.75'
 import sklearn
 import pandas as pd
 from joblib import load
-model = load('linear.joblib')
+model = load('svc.joblib')
 dataframe = pd.read_csv('validation.csv')
-xs = dataframe[['Avg. Area House Age']]
+xs = dataframe[['Alcohol', 'Malic acid', 'Ash', 'Alcalinity of ash', 'Magnesium', 'Total phenols', 'Flavanoids', 'Nonflavanoid phenols', 'Proanthocyanins', 'Color intensity', 'Hue', 'OD280/OD315 of diluted wines', 'Proline']]
 predictions = model.predict(xs)
 print(predictions)
