@@ -31,7 +31,7 @@ nbformat==5.0.4
 
 ### Versión v0.77
 
-1. Deploy y API percistente una vez que se entrena algún modelo.
+1. Deploy y API persistente una vez que se entrena algún modelo.
 2. Menú actualizado.
 
 ### Versión v0.76
