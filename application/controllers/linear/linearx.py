@@ -250,9 +250,9 @@ class LinearX:
             ml4d.sessions['train.py'] = "train.py"
             ml4d.sessions['predictions.py'] = "predictions.py"
 
-            ml4d.deploy = {}
-            ml4d.deploy['model'] = "linear.joblib"
-            ml4d.deploy['cols'] = x_cols
+            # crea los datos para el deploy y la api
+            sc.createCols(x_cols)
+            sc.createModel("linear.joblib")
 
 
             code_lines = []

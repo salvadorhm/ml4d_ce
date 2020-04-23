@@ -2,6 +2,8 @@ import web  # pip install web.py
 import ml4d
 import pandas as pd
 from joblib import load
+from application.controllers.save_code import SaveCode
+sc = SaveCode()
 
 render = web.template.render('application/views/deploy', base="../master")
 
@@ -14,11 +16,14 @@ class Deploy():
 
     def GET(self):
         try:
-            model = ml4d.deploy['model']
-            cols = ml4d.deploy['cols']
+
             prediction = None
-            self.results = []
-            return render.deploy(cols, prediction)
+            cols = sc.readCols()
+            model = sc.readModel()
+            if cols == None or model == None:
+                return render.error("Not model trained, first train a model")
+            else:
+                return render.deploy(cols, prediction)
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
@@ -27,8 +32,8 @@ class Deploy():
         try:
             data = []
             form = web.input()
-            m = ml4d.deploy['model']
-            cols = ml4d.deploy['cols']
+            m = sc.readModel()
+            cols = sc.readCols()
             t = []
             input = {}
             for c in cols:

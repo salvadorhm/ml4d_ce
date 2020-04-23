@@ -1,12 +1,21 @@
-# Webapp para minería de datos
+# Machine Learning for developers "ML4D"
 
-## Webapp versión
+## Versión actual
 
-versión 0.1.0
+version 0.77
 
 ## Descripción
 
-Herramienta de apoyo para realizar minería de datos basada en:
+Herramienta web para realizar Machine learning que permite:
+
+1. Subir un arhivo de tipo csv.
+2. Ver estadística básica del dataset.
+3. Transformar el archivo (Renombrar, Imputar, etc.).
+4. Aplicar modelos de regresión y clasificación al dataset.
+5. Realizar un deploy para realizar predicciones directamente en la herramienta.
+6. Realizar el deploy de un API REST para realizar predicciones con formato JSON.
+
+## Librerías
 
 web.py==0.40
 pandas==1.0.1
@@ -18,31 +27,30 @@ seaborn==0.10.0
 sklearn==0.0
 nbformat==5.0.4
 
-## Changelog 
+## Cambios en las versiones
 
-### Versión 0.3.1
+### Versión v0.77
 
-1. Menú moviles
+1. Deploy y API percistente una vez que se entrena algún modelo
 
-### Versión 0.2.0
+### Versión v0.76
 
-1. Descarga el dataset
-2. UX con Bootstrap
+1. Deploy y API para un modelo entrenado
+   
+### Versión v0.69
 
-### Versión 0.1.0
-
-1. Dataset en csv default
-2. Númera las columnas
-3. Quita columnas
-4. Listado de columnas
-5. Columnas duplicadas
-6. Número de valores nan
-7. Gráfica countplot por cada columna
-8. 5 primeros valores por columna
-9. Imputa valores a los Nan
-10. Reemplaza valores
-11. Muesta la moda de cada columna
-12. Muestra la mediana de cada columna
-13. Muesta la media de cada columna
-16. Acerca de
-17. Protección de static/
+2. Dataset en csv default
+3. Númera las columnas
+4. Quita columnas
+5. Listado de columnas
+6. Columnas duplicadas
+7. Número de valores NaN
+8. Gráfica countplot por cada columna
+9.  5 primeros valores por columna
+10. Imputa valores a los Nan
+11. Reemplaza valores
+12. Muestra la moda de cada columna
+13. Muestra la mediana de cada columna
+14. Muestra la media de cada columna
+15. Acerca de
+16. Protección de static/

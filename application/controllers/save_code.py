@@ -41,3 +41,41 @@ class SaveCode:
         except Exception as e:
             print(e.args)
             return render.error(e.args[0])
+
+    def createCols(self,cols):
+        try:
+            file=open('static/deploy/cols.txt','w')
+            for col in cols:
+                file.write(col+"\n")
+            file.close()
+        except Exception as e:
+            print(e.args)
+            return render.error(e.args[0])
+
+    def createModel(self,model):
+        try:
+            file=open('static/deploy/model.txt','w')
+            file.write(model)
+            file.close()
+        except Exception as e:
+            print(e.args)
+            return render.error(e.args[0])
+
+    def readCols(self):
+        try:
+            cols = []
+            file = open('static/deploy/cols.txt','r')
+            for line in file:
+                cols.append(line.strip('\n'))
+            return cols
+        except Exception as e:
+            print(e.args)
+            return None
+
+    def readModel(self):
+        try:
+            file = open('static/deploy/model.txt','r')
+            return file.read()
+        except Exception as e:
+            print(e.args)
+            return None
