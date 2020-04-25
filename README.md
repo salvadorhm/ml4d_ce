@@ -29,6 +29,11 @@ nbformat==5.0.4
 
 ## Cambios en las versiones
 
+
+### Versión v0.78
+
+1. REST API - POST con formato JSON
+
 ### Versión v0.77
 
 1. Deploy y API persistente una vez que se entrena algún modelo.

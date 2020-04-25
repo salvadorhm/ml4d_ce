@@ -4,8 +4,8 @@ __version__ = '0.77'
 import sklearn
 import pandas as pd
 from joblib import load
-model = load('randomf.joblib')
+model = load('linear.joblib')
 dataframe = pd.read_csv('validation.csv')
-xs = dataframe[['Alcohol', 'Ash']]
+xs = dataframe[['x']]
 predictions = model.predict(xs)
 print(predictions)
