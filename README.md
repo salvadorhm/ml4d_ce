@@ -17,15 +17,15 @@ Herramienta web para realizar Machine learning que permite:
 
 ## Librerías
 
-web.py==0.40
-pandas==1.0.1
-numpy==1.18.1
-statsmodels==0.11.1
-scipy==1.4.1
-matplotlib==3.1.3
-seaborn==0.10.0
-sklearn==0.0
-nbformat==5.0.4
+* web.py==0.40
+* pandas==1.0.1
+* numpy==1.18.1
+* statsmodels==0.11.1
+* scipy==1.4.1
+* matplotlib==3.1.3
+* seaborn==0.10.0
+* sklearn==0.0
+* nbformat==5.0.4
 
 ## Cambios en las versiones
 
